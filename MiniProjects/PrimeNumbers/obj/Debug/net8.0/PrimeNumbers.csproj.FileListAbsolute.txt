@@ -1,0 +1,5 @@
+C:\Users\gemba\Documents\GitHub\MiniProjects\MiniProjects\PrimeNumbers\obj\Debug\net8.0\PrimeNumbers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gemba\Documents\GitHub\MiniProjects\MiniProjects\PrimeNumbers\obj\Debug\net8.0\PrimeNumbers.AssemblyInfoInputs.cache
+C:\Users\gemba\Documents\GitHub\MiniProjects\MiniProjects\PrimeNumbers\obj\Debug\net8.0\PrimeNumbers.AssemblyInfo.cs
+C:\Users\gemba\Documents\GitHub\MiniProjects\MiniProjects\PrimeNumbers\obj\Debug\net8.0\PrimeNumbers.csproj.CoreCompileInputs.cache
+C:\Users\gemba\Documents\GitHub\MiniProjects\MiniProjects\PrimeNumbers\obj\Debug\net8.0\PrimeNumbers.sourcelink.json
