@@ -76,6 +76,7 @@ bld/
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
@@ -132,6 +133,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+*.vs/*
 
 # Chutzpah Test files
 _Chutzpah*
