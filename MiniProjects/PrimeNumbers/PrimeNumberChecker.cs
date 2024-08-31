@@ -9,8 +9,6 @@ namespace PrimeNumbers
 {
     class Program
     {
-
-
         static void Main()
         {
 
@@ -32,6 +30,8 @@ namespace PrimeNumbers
 
 
             }
+
+            Console.ReadKey();
         }
 
         private static void RunProgram()

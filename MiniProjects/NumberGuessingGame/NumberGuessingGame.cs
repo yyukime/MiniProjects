@@ -15,6 +15,10 @@ namespace NumberGuessingGame
             {
                 try
                 {
+                    // -> user gives custom range
+                    // -> play again
+                    // -> output what the actual guess would have been
+                    
                     RunProgram();
                     break;
                 }
@@ -23,6 +27,9 @@ namespace NumberGuessingGame
                     Console.Clear();
                 }
             }
+
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
 
         static void RunProgram()
