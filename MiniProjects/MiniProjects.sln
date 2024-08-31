@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeNumbers", "PrimeNumbers\PrimeNumbers.csproj", "{63FBE4EA-03BD-49DA-92D3-FC2914E874E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeNumbers", "PrimeNumbers\PrimeNumbers.csproj", "{63FBE4EA-03BD-49DA-92D3-FC2914E874E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberGuessingGame", "NumberGuessingGame\NumberGuessingGame.csproj", "{874D9979-999E-4B4F-B455-3F51423509FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{63FBE4EA-03BD-49DA-92D3-FC2914E874E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63FBE4EA-03BD-49DA-92D3-FC2914E874E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63FBE4EA-03BD-49DA-92D3-FC2914E874E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{874D9979-999E-4B4F-B455-3F51423509FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874D9979-999E-4B4F-B455-3F51423509FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874D9979-999E-4B4F-B455-3F51423509FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874D9979-999E-4B4F-B455-3F51423509FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

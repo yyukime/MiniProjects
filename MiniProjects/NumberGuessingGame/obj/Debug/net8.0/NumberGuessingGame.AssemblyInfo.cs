@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("PrimeNumbers")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("NumberGuessingGame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2effaeeb8a01c0d426e6d8d32eb5c6ea5fd61896")]
-[assembly: System.Reflection.AssemblyProductAttribute("PrimeNumbers")]
-[assembly: System.Reflection.AssemblyTitleAttribute("PrimeNumbers")]
+[assembly: System.Reflection.AssemblyProductAttribute("NumberGuessingGame")]
+[assembly: System.Reflection.AssemblyTitleAttribute("NumberGuessingGame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Von der MSBuild WriteCodeFragment-Klasse generiert.
