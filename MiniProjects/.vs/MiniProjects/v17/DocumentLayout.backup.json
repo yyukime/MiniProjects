@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\gemba\\Documents\\GitHub\\MiniProjects\\MiniProjects\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{874D9979-999E-4B4F-B455-3F51423509FF}|NumberGuessingGame\\NumberGuessingGame.csproj|c:\\users\\gemba\\documents\\github\\miniprojects\\miniprojects\\numberguessinggame\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{874D9979-999E-4B4F-B455-3F51423509FF}|NumberGuessingGame\\NumberGuessingGame.csproj|solutionrelative:numberguessinggame\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{874D9979-999E-4B4F-B455-3F51423509FF}|NumberGuessingGame\\NumberGuessingGame.csproj|c:\\users\\gemba\\documents\\github\\miniprojects\\miniprojects\\numberguessinggame\\numberguessinggame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{874D9979-999E-4B4F-B455-3F51423509FF}|NumberGuessingGame\\NumberGuessingGame.csproj|solutionrelative:numberguessinggame\\numberguessinggame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{63FBE4EA-03BD-49DA-92D3-FC2914E874E4}|PrimeNumbers\\PrimeNumbers.csproj|c:\\users\\gemba\\documents\\github\\miniprojects\\miniprojects\\primenumbers\\primenumbers.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{63FBE4EA-03BD-49DA-92D3-FC2914E874E4}|PrimeNumbers\\PrimeNumbers.csproj|solutionrelative:primenumbers\\primenumbers.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{63FBE4EA-03BD-49DA-92D3-FC2914E874E4}|PrimeNumbers\\PrimeNumbers.csproj|c:\\users\\gemba\\documents\\github\\miniprojects\\miniprojects\\primenumbers\\primenumberchecker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63FBE4EA-03BD-49DA-92D3-FC2914E874E4}|PrimeNumbers\\PrimeNumbers.csproj|solutionrelative:primenumbers\\primenumberchecker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PrimeNumbers",
-              "DocumentMoniker": "C:\\Users\\gemba\\Documents\\GitHub\\MiniProjects\\MiniProjects\\PrimeNumbers\\PrimeNumbers.csproj",
-              "RelativeDocumentMoniker": "PrimeNumbers\\PrimeNumbers.csproj",
-              "ToolTip": "C:\\Users\\gemba\\Documents\\GitHub\\MiniProjects\\MiniProjects\\PrimeNumbers\\PrimeNumbers.csproj",
-              "RelativeToolTip": "PrimeNumbers\\PrimeNumbers.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-08-31T11:16:11.243Z",
+              "DocumentIndex": 0,
+              "Title": "NumberGuessingGame.cs",
+              "DocumentMoniker": "C:\\Users\\gemba\\Documents\\GitHub\\MiniProjects\\MiniProjects\\NumberGuessingGame\\NumberGuessingGame.cs",
+              "RelativeDocumentMoniker": "NumberGuessingGame\\NumberGuessingGame.cs",
+              "ToolTip": "C:\\Users\\gemba\\Documents\\GitHub\\MiniProjects\\MiniProjects\\NumberGuessingGame\\NumberGuessingGame.cs*",
+              "RelativeToolTip": "NumberGuessingGame\\NumberGuessingGame.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-31T20:50:27.765Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\gemba\\Documents\\GitHub\\MiniProjects\\MiniProjects\\NumberGuessingGame\\Program.cs",
-              "RelativeDocumentMoniker": "NumberGuessingGame\\Program.cs",
-              "ToolTip": "C:\\Users\\gemba\\Documents\\GitHub\\MiniProjects\\MiniProjects\\NumberGuessingGame\\Program.cs*",
-              "RelativeToolTip": "NumberGuessingGame\\Program.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "PrimeNumberChecker.cs",
+              "DocumentMoniker": "C:\\Users\\gemba\\Documents\\GitHub\\MiniProjects\\MiniProjects\\PrimeNumbers\\PrimeNumberChecker.cs",
+              "RelativeDocumentMoniker": "PrimeNumbers\\PrimeNumberChecker.cs",
+              "ToolTip": "C:\\Users\\gemba\\Documents\\GitHub\\MiniProjects\\MiniProjects\\PrimeNumbers\\PrimeNumberChecker.cs",
+              "RelativeToolTip": "PrimeNumbers\\PrimeNumberChecker.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA1wDQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-31T10:55:59.325Z",
+              "WhenOpened": "2024-08-31T20:44:04.092Z",
               "EditorCaption": ""
             }
           ]
