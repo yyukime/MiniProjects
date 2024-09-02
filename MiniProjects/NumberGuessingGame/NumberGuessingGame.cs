@@ -10,14 +10,20 @@ namespace NumberGuessingGame
 
 
 
-    class Program
+
+    class Program 
     {
 
+      
 
-        static void Main(string[] args)
+
+
+         static void Main(string[] args)
         {
 
-            // Switch statement?? 
+            // Switch statement??
+            // ^ ichb indumm
+
 
 
 
@@ -47,21 +53,28 @@ namespace NumberGuessingGame
 
         public static void RunProgram()
         {
-            Console.WriteLine(" ");
+            Console.WriteLine(" "); // elegance 100 
+
+            Random randomNumber = new();
+            
 
             Console.WriteLine("Please define the input range by highest value:");
             int inputInt;
-            inputInt = int.Parse(Console.ReadLine());
-
+            inputInt = int.Parse(Console.ReadLine()!); // dont want to hurt csharp feelings with ! 
+            int rNumber = randomNumber.Next(inputInt);
             Console.WriteLine($"Try to guess a number between 1 and {inputInt}:");
+
             string? stringInput = Console.ReadLine();
             int intInput;
-            intInput = int.Parse(stringInput);
+            intInput = int.Parse(stringInput!); // can look better ? organize 
+                                          //^ I hate this
 
+
+            // nach 2 Stundne > mein auge zuckt von alleine
             if (TestInput(intInput))
             {
                 Console.WriteLine("You guessed correctly");
-                Console.WriteLine("///");
+                Console.WriteLine();
                 Console.WriteLine("Press 1 to play again");
                 Console.WriteLine("Press any other key to exit");
                 ConsoleKeyInfo playAgainKeyInfo = Console.ReadKey();
@@ -79,8 +92,11 @@ namespace NumberGuessingGame
             }
             else
             {
-                Console.WriteLine("Wrong!");
-
+                
+                Console.Clear();
+                Console.WriteLine("You guessed: " + intInput); // ugly
+                Console.WriteLine($"The correct input was {rNumber}"); // want organization: using class
+                Console.WriteLine();
                 Console.WriteLine("Press 1 to play again");
                 Console.WriteLine("Press any other key to exit");
                 ConsoleKeyInfo playAgainKeyInfo = Console.ReadKey();
@@ -88,6 +104,7 @@ namespace NumberGuessingGame
 
                 if (playAgainKey == ConsoleKey.D1)
                 {
+                    Console.Clear();
                     RunProgram();
                 }
                 else
@@ -98,17 +115,11 @@ namespace NumberGuessingGame
             }
 
 
+
             bool TestInput(int number)
             {
-
-                Random randomNumber = new();
-                int rNumber = randomNumber.Next(inputInt);
                 if (number == rNumber) return true;
-
                 return false;
-
-
-
             }
 
 
@@ -117,15 +128,3 @@ namespace NumberGuessingGame
     }
 }
 
-// int[] RNGNumberRange = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, };
-//Random rngNumber = new(); rngNumber.Next(10);
-
-//logic:
-// generate a number 
-// turn user input into int
-// check if input matches pre generated number
-
-//program:
-// provide basic text and request user input
-// output result 
-// maybe add a "play again?" button
