@@ -11,21 +11,13 @@ namespace NumberGuessingGame
 
 
 
-    class Program 
+    class Program
     {
-
-      
-
-
-
-         static void Main(string[] args)
+        static void Main(string[] args)
         {
 
             // Switch statement??
             // ^ ichb indumm
-
-
-
 
             while (true)
             {
@@ -49,14 +41,12 @@ namespace NumberGuessingGame
             }
 
         }
-
-
         public static void RunProgram()
         {
             Console.WriteLine(" "); // elegance 100 
 
             Random randomNumber = new();
-            
+
 
             Console.WriteLine("Please define the input range by highest value:");
             int inputInt;
@@ -67,7 +57,7 @@ namespace NumberGuessingGame
             string? stringInput = Console.ReadLine();
             int intInput;
             intInput = int.Parse(stringInput!); // can look better ? organize 
-                                          //^ I hate this
+                                                //^ I hate this
 
 
             // nach 2 Stundne > mein auge zuckt von alleine
@@ -92,7 +82,7 @@ namespace NumberGuessingGame
             }
             else
             {
-                
+
                 Console.Clear();
                 Console.WriteLine("You guessed: " + intInput); // ugly
                 Console.WriteLine($"The correct input was {rNumber}"); // want organization: using class
@@ -113,16 +103,11 @@ namespace NumberGuessingGame
                     System.Environment.Exit(0);
                 }
             }
-
-
-
             bool TestInput(int number)
             {
                 if (number == rNumber) return true;
                 return false;
             }
-
-
         }
 
     }
