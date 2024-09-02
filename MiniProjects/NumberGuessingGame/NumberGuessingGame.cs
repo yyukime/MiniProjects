@@ -1,40 +1,58 @@
 using Microsoft.CSharp.RuntimeBinder;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Xml.Serialization;
 
 namespace NumberGuessingGame
 {
 
 
+
     class Program
     {
+
+
         static void Main(string[] args)
         {
+
+            // Switch statement?? 
+
+
+
             while (true)
             {
                 try
                 {
-                    // -> user gives custom range
+                    // -> user gives custom range ! 
                     // -> play again
                     // -> output what the actual guess would have been
-                    
+
                     RunProgram();
-                    break;
+
                 }
                 catch
                 {
                     Console.Clear();
+
                 }
+
+
             }
 
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
         }
 
-        static void RunProgram()
+
+        public static void RunProgram()
         {
-            Console.WriteLine("Try to guess a number between 1 and 10");
+            Console.WriteLine(" ");
+
+            Console.WriteLine("Please define the input range by highest value:");
+            int inputInt;
+            inputInt = int.Parse(Console.ReadLine());
+
+            Console.WriteLine($"Try to guess a number between 1 and {inputInt}:");
             string? stringInput = Console.ReadLine();
             int intInput;
             intInput = int.Parse(stringInput);
@@ -42,20 +60,59 @@ namespace NumberGuessingGame
             if (TestInput(intInput))
             {
                 Console.WriteLine("You guessed correctly");
+                Console.WriteLine("///");
+                Console.WriteLine("Press 1 to play again");
+                Console.WriteLine("Press any other key to exit");
+                ConsoleKeyInfo playAgainKeyInfo = Console.ReadKey();
+                ConsoleKey playAgainKey = playAgainKeyInfo.Key;
+
+                if (playAgainKey == ConsoleKey.D1)
+                {
+                    RunProgram();
+                }
+                else
+                {
+                    Console.Clear();
+                    System.Environment.Exit(0);
+                }
             }
             else
             {
-                Console.WriteLine("WRONG!");
+                Console.WriteLine("Wrong!");
+
+                Console.WriteLine("Press 1 to play again");
+                Console.WriteLine("Press any other key to exit");
+                ConsoleKeyInfo playAgainKeyInfo = Console.ReadKey();
+                ConsoleKey playAgainKey = playAgainKeyInfo.Key;
+
+                if (playAgainKey == ConsoleKey.D1)
+                {
+                    RunProgram();
+                }
+                else
+                {
+                    Console.Clear();
+                    System.Environment.Exit(0);
+                }
             }
 
-            static bool TestInput(int number)
+
+            bool TestInput(int number)
             {
-                Random randomNumber = new Random();
-                int rNumber = randomNumber.Next(10);
+
+                Random randomNumber = new();
+                int rNumber = randomNumber.Next(inputInt);
                 if (number == rNumber) return true;
+
                 return false;
+
+
+
             }
+
+
         }
+
     }
 }
 
