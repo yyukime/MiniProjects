@@ -8,9 +8,6 @@ using System.Xml.Serialization;
 namespace NumberGuessingGame
 {
 
-
-
-
     class Program
     {
         static void Main(string[] args)
@@ -112,4 +109,3 @@ namespace NumberGuessingGame
 
     }
 }
-
