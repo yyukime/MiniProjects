@@ -14,7 +14,6 @@ namespace Calc
         static public float inputInteger1;
         static public float inputInteger2;
         // static public ConsoleKeyInfo playAgainKeyInfo
-        
     }
     class Program : Fields
     {
@@ -22,11 +21,7 @@ namespace Calc
         {
             while (true)
             {
-
-                
                 ProgramMethod();
-                
-
                 try
                 {
                     ModeSelectionMethod();
@@ -37,22 +32,19 @@ namespace Calc
                 }              
             }
         }
-
         static void ModeSelectionMethod()
         {
-            
             modeSelection = int.Parse(Console.ReadLine()!); // dont be mean remove "!" 
-
             switch (modeSelection)
             {
                 case 1:
                     OperatorAdd();
                     break;
                 case 2:
-                    OperatorDivide();
+                    OperatorSubtract();
                     break;
                 case 3:
-                    OperatorSubtract();
+                    OperatorDivide();
                     break;
                 case 4:
                     OperatorMultiply();
@@ -66,18 +58,16 @@ namespace Calc
             // ConsoleKey plaAgainKey = playAgainKeyInfo.Key(); Non-invocable Member (...) cannot be used like a method 
             Console.ReadKey();
         }
-
         static void ProgramMethod()
         {
             Console.Clear();
             Console.WriteLine("Welcome to the Calculator");
             Console.WriteLine();
             Console.WriteLine("This Calculator features:");
-            Console.WriteLine("Addition(+) | Multiplication(*) | Division(/) | Subtraction (-) | Division Remainder (%)");
+            Console.WriteLine("Addition(+) | Subtraction (-) | Division(/) | Multiplication(*) | Division Remainder (%)");
             Console.WriteLine();
             Console.WriteLine("Select your preffered mode using Numbers 1-5");
         }
-
         static void OperatorAdd()
         {
             Console.Clear();
@@ -99,9 +89,7 @@ namespace Calc
                     Console.WriteLine("Press any key to try again");
                     Console.ReadKey();
                 }
-
             }
-
             while (true)
             {
                 try
@@ -119,38 +107,195 @@ namespace Calc
                     Console.WriteLine();
                     Console.WriteLine("Press any key to try again");
                     Console.ReadKey();
-
                 }
-
             }
-
             string result = Convert.ToString(inputInteger1 + inputInteger2);
             Console.WriteLine($"The result is {result}"); // should I use ("The result is" + result); ??
             // Console.ReadKey();
-
-
-
-
         }
         static void OperatorDivide()
         {
-
+            Console.Clear();
+            while (true)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("-Division-");
+                    Console.WriteLine();
+                    Console.WriteLine("Add your first Integer:");
+                    inputInteger1 = float.Parse(Console.ReadLine()!);
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Looks like your input was not a Number... ");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey();
+                }
+            }
+            while (true)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("-Division-");
+                    Console.WriteLine();
+                    Console.WriteLine("Add your second Integer:");
+                    inputInteger2 = float.Parse(Console.ReadLine()!);
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Looks like your input was not a Number... ");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey();
+                }
+            }
+            string result = Convert.ToString(inputInteger1 / inputInteger2);
+            Console.WriteLine($"The result is {result}"); // should I use ("The result is" + result); ??
+            // Console.ReadKey();
         }
         static void OperatorSubtract()
         {
+            Console.Clear();
+            while (true)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("-Subtraction-");
+                    Console.WriteLine();
+                    Console.WriteLine("Add your first Integer:");
+                    inputInteger1 = float.Parse(Console.ReadLine()!);
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Looks like your input was not a Number... ");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey();
+                }
+            }
 
-        }       
+            while (true)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("-Subtraction-");
+                    Console.WriteLine();
+                    Console.WriteLine("Add your second Integer:");
+                    inputInteger2 = float.Parse(Console.ReadLine()!);
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Looks like your input was not a Number... ");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey();
+
+                }
+            }
+            string result = Convert.ToString(inputInteger1 - inputInteger2);
+            Console.WriteLine($"The result is {result}"); // should I use ("The result is" + result); ??
+            // Console.ReadKey();
+        }
         static void OperatorMultiply()
         {
+            Console.Clear();
+            while (true)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("-Multiplikation-");
+                    Console.WriteLine();
+                    Console.WriteLine("Add your first Integer:");
+                    inputInteger1 = float.Parse(Console.ReadLine()!);
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Looks like your input was not a Number... ");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey();
+                }
+            }
+            while (true)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("-Multiplikation-");
+                    Console.WriteLine();
+                    Console.WriteLine("Add your second Integer:");
+                    inputInteger2 = float.Parse(Console.ReadLine()!);
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Looks like your input was not a Number... ");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey();
+                }
+            }
 
+            string result = Convert.ToString(inputInteger1 * inputInteger2);
+            Console.WriteLine($"The result is {result}"); // should I use ("The result is" + result); ??
+            // Console.ReadKey();
         }
         static void OperatorDivisionRemainder()
         {
-
+            Console.Clear();
+            while (true)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("-Division Remainder-");
+                    Console.WriteLine();
+                    Console.WriteLine("Add your first Integer:");
+                    inputInteger1 = float.Parse(Console.ReadLine()!);
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Looks like your input was not a Number... ");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey();
+                }
+            }
+            while (true)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("-Division Remainder-");
+                    Console.WriteLine();
+                    Console.WriteLine("Add your second Integer:");
+                    inputInteger2 = float.Parse(Console.ReadLine()!);
+                    break;
+                }
+                catch
+                {
+                    Console.WriteLine("Looks like your input was not a Number... ");
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to try again");
+                    Console.ReadKey();
+                }
+            }
+            string result = Convert.ToString(inputInteger1 % inputInteger2);
+            Console.WriteLine($"The result is {result}"); // should I use ("The result is" + result); ??
+            // Console.ReadKey();
         }
-
-        // static void Calculations()
-
     }
 }
 
