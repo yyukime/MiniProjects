@@ -1,5 +1,4 @@
 ﻿
-int input; // not sexy
 
 while (true)
 {
@@ -8,7 +7,7 @@ while (true)
 
         Console.Clear();
         Console.WriteLine("Enter a year to check if it is a leap year");
-        input = int.Parse(Console.ReadLine()!);
+        int input = int.Parse(Console.ReadLine()!);
 
         if (isLeapYear(input))
         {
