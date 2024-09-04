@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Primfaktorzerlegung", "Prim
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator NotShit", "Calculator NotShit\Calculator NotShit.csproj", "{9B08C199-782F-4590-879B-8A566683A81E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Verschachtelte Schleife", "Verschachtelte Schleife\Verschachtelte Schleife.csproj", "{54B2EBA8-B17F-472D-8F21-988B1D481BC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Verschachtelte Schleife", "Verschachtelte Schleife\Verschachtelte Schleife.csproj", "{54B2EBA8-B17F-472D-8F21-988B1D481BC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schaltjahr", "Schaltjahr\Schaltjahr.csproj", "{B260CCB9-8852-486B-8F3A-93F12E50B8A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{54B2EBA8-B17F-472D-8F21-988B1D481BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54B2EBA8-B17F-472D-8F21-988B1D481BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54B2EBA8-B17F-472D-8F21-988B1D481BC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B260CCB9-8852-486B-8F3A-93F12E50B8A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B260CCB9-8852-486B-8F3A-93F12E50B8A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B260CCB9-8852-486B-8F3A-93F12E50B8A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B260CCB9-8852-486B-8F3A-93F12E50B8A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

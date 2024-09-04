@@ -39,7 +39,7 @@ namespace PrimeNumbers
             Console.WriteLine("Input a number to check if it is a prime number:");
             string? stringInput = Console.ReadLine();
             int input;
-            input = int.Parse(stringInput);
+            input = int.Parse(stringInput!);
 
             if (Logic(input))
             {
