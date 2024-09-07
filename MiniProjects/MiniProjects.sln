@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquarium", "Aquarium\Aquari
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rennschnecke", "Rennschnecke\Rennschnecke.csproj", "{4E5FD2D9-906E-4E6E-8C3D-A43134396423}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking-Example", "Banking-Example\Banking-Example.csproj", "{86DB8D26-1536-41B8-9F4D-ACC9F6196599}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{4E5FD2D9-906E-4E6E-8C3D-A43134396423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E5FD2D9-906E-4E6E-8C3D-A43134396423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E5FD2D9-906E-4E6E-8C3D-A43134396423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86DB8D26-1536-41B8-9F4D-ACC9F6196599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86DB8D26-1536-41B8-9F4D-ACC9F6196599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86DB8D26-1536-41B8-9F4D-ACC9F6196599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86DB8D26-1536-41B8-9F4D-ACC9F6196599}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
