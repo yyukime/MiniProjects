@@ -15,64 +15,33 @@ class Rennschnecke
     public int MaxSpeed;
     // die Schnecke soll wissen welche Strecke sie zurückgelegt hat
 
-    public Rennschnecke() // need to call constructor
+    public Rennschnecke(int maxSpeed, string snail, string race)// need to call constructor
     {
-        Snail = "George";
-        Race = "Black";
-        MaxSpeed = 10;
+        Snail = snail;
+        Race = race;
+        MaxSpeed = maxSpeed;
         
     }
 
     void Kriechen()
     {
         Random randomDistance = new();
-        int randomDistanceInt = randomDistance.Next(MaxSpeed);
-        
+        int randomDistanceInt = randomDistance.Next(MaxSpeed);       
 
     }
     
-    public String toString()
+    public override string ToString()
     {
-        string SnailData = Snail, Race, MaxSpeed;
+        string SnailData = ($"Snailname: {Snail}, SnailRace: {Race}, SnailSpeed: {MaxSpeed}");
         return SnailData;
     }
+    
     static void Main(string[] args)
     {
-        Rennschnecke Schnecke1 = new Rennschnecke();
-        Console.WriteLine($"Snailname: {Schnecke1.Snail}, SnailRace: {Schnecke1.Race}, SnailSpeed: {Schnecke1.MaxSpeed}");
+        Rennschnecke Schnecke1 = new Rennschnecke(10, "george", "nacktschnecke");
+        Console.WriteLine();
+        Console.WriteLine(Schnecke1);
     }
-
-    
-
-}
-
-class Rennen : Rennschnecke
-{
-    public string NameRennen = "- Rennen der schnellsten Schnecken -";
-    public int AmountOfParticipants; // constructor
-    ArrayList ParticiPantArray = []; 
-    public int DistanceToPass;
-
-     Rennen()
-    {
-        AmountOfParticipants = 5;
-        DistanceToPass = 1500;
-        
-    }
-    
-
-    void addRennschnecken(Rennschnecke Schnecke1)
-    {
-        ParticiPantArray.Add(Schnecke1); // or like above?
-    }
-
-    public string toString()
-    {
-        string RennenData = NameRennen, AmountOfParticipants, ParticiPantArray, DistanceToPass;
-        return RennenData;
-    }
-
-   
 }
 
 
@@ -82,7 +51,10 @@ class Rennen : Rennschnecke
 
 
 
- 
+
+
+
+
 
 
 
