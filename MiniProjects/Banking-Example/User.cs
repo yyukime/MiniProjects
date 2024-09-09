@@ -18,9 +18,9 @@ public class User
         _password = password;
     }
 
-    public bool Login(string password)
+    public bool Login(string? loginPassword)
     {
-        return _password == password;
+        return _password == loginPassword;
     }
 
     public bool IsAdult()
@@ -39,12 +39,8 @@ public class User
         return true;
     }
 
-
     public override string ToString()
     {
-        string UserInformation = $"Name: {FirstName}, {LastName}, {Age} years old | Email: {Email}";
-        return UserInformation;
+        return $"Name: {FirstName}, {LastName}, {Age} years old, Email: {Email}";
     }
-
-
 }

@@ -65,7 +65,6 @@ public class BankAccount
 
     public override string ToString()
     {
-        string BankAccountInformation = $"Account Owner: {Owner}, IBAN: {IBAN}, Account Balance {Balance}";
-        return BankAccountInformation;  
+        return $"Account Owner: {Owner}, IBAN: {IBAN}, Account Balance {Balance}";
     }
 }

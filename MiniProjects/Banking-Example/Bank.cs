@@ -94,8 +94,13 @@ public class Bank
 
     public override string ToString()
     {
-        string BankInformation = ($"{Name}, BLZ: {BLZ}");
-        return BankInformation;
+        return $"Name: {Name}, BLZ: {BLZ}";
     }
 
+    public static string GenerateBlz()
+    {
+        const int maxBlz = 10_000_000;
+        var rand = new Random();
+        return rand.Next(maxBlz).ToString();
+    }
 }
