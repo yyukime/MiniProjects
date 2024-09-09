@@ -1,65 +1,246 @@
-﻿
-using BankingExample;
+﻿using BankingExample;
 
+List<Bank> loadedBanks = LoadBanks();
+List<User> loadedUsers = [];
 
-Bank Bank1 = new("Norisbank", "1233213");
-Bank Bank2 = new("ING", "232534432");
-Bank Bank3 = new("N26", "4831-204081923");
+User? selectedUser = null;
 
-User User1 = new("John", "Doe", "John.Doe@email.com", 18, "PasswordStrong123");
-
-// select bank
 // Login to bank (user)
+// select bank
 // select account
 // select action 
 // perform action 
 // restart
 // we dont have ToString > when ToString override > override for all classes? 
 
+// TODO: Check age for user creation 18+ etc.
+// TODO: Enter email txt
 
-while (true)
-{
-    Console.WriteLine(User1.ToString());
-    Ui();
+// TODO: example data initialization -> create banks and users, create accounts in banks etc.
 
-    try
-    {
-        int ConsoleRead = int.Parse(Console.ReadLine()!); // how to ? here? 
-        SelectBank(ConsoleRead);
+Ui();
 
-    }
-    catch
-    {
-        Console.Clear();
-    }
-    Console.ReadLine();
-}
+return;
 
 void Ui()
 {
-    Console.WriteLine("Welcome to the ATM");
-    Console.WriteLine();
-    Console.WriteLine();
-    Console.WriteLine("Press 1 for Norisbank");
-    Console.WriteLine("Press 2 for ING");
-    Console.WriteLine("Press 3 for N26");
-    Console.WriteLine("Please select a Bank:");
-}
-
-void SelectBank(int mode)
-{
-    Console.Clear();
-    switch (mode)
+    while (true)
     {
-        case 1:
-            Console.WriteLine($"Your selection: {Bank1.ToString()}"); // Why does {bank1} or {bank1.toString} not work? 
-            break;
-        case 2:
-            Console.WriteLine($"Your selection: {Bank2.ToString}");
-            break;
-        case 3:
-            Console.WriteLine($"Your selection: {Bank3.ToString}");
-            break;
+        Console.Clear();
+        PrintTitle();
+
+        // -> Create User
+        // -> Login to User
+        // -> Select Bank as User
+        //    -> Select Account for user
+        //        -> Account actions
+
+        Console.WriteLine("1. Create user");
+        Console.WriteLine("2. Login to user");
+        if (selectedUser is not null)
+        {
+            Console.WriteLine($"3. Select bank as ({selectedUser.FirstName} {selectedUser.LastName})");
+        }
+
+        Console.WriteLine("Select an option:");
+
+        var consoleKeyInfo = Console.ReadKey().KeyChar;
+
+        if (!int.TryParse(consoleKeyInfo.ToString(), out int selectedOption))
+        {
+            continue;
+        }
+
+        switch (selectedOption)
+        {
+            case 1:
+                User createdUser = CreateUser();
+                loadedUsers.Add(createdUser);
+                break;
+            case 2:
+                LoginToUser();
+                break;
+            case 3:
+                if (selectedUser is null)
+                {
+                    continue;
+                }
+
+                continue;
+            default:
+                continue;
+        }
     }
 }
 
+void PrintTitle()
+{
+    if (selectedUser is null)
+    {
+        Console.WriteLine("Welcome to the ATM");
+    }
+    else
+    {
+        Console.WriteLine($"Welcome to the ATM -> {selectedUser}");
+    }
+
+    Console.WriteLine();
+}
+
+void PrintBanks()
+{
+    for (int index = 0; index < loadedBanks.Count; index++)
+    {
+        var bank = loadedBanks[index];
+        Console.WriteLine($"{index}: {bank}");
+    }
+}
+
+User CreateUser()
+{
+    while (true)
+    {
+        Console.Clear();
+        PrintTitle();
+
+        Console.WriteLine("1. Create user");
+
+        Console.WriteLine("Enter first name:");
+        string? firstName = Console.ReadLine();
+
+        Console.WriteLine("Enter last name:");
+        string? lastName = Console.ReadLine();
+
+        Console.WriteLine("Enter last email:");
+        string? email = Console.ReadLine();
+
+        bool validAge = false;
+        int age = -1;
+        while (!validAge)
+        {
+            Console.WriteLine("Enter age:");
+            string? ageStr = Console.ReadLine();
+
+            validAge = int.TryParse(ageStr, out age);
+        }
+
+        Console.WriteLine("Create a password:");
+        string? password = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(firstName)
+            || string.IsNullOrWhiteSpace(lastName)
+            || string.IsNullOrWhiteSpace(email)
+            || string.IsNullOrWhiteSpace(password))
+        {
+            continue;
+        }
+
+        var newUser = new User(firstName, lastName, email, age, password);
+
+        Console.WriteLine($"Created user: {newUser}");
+        Console.WriteLine("Is this information correct? y/n");
+
+        var consoleKeyInfo = Console.ReadKey();
+        var keyChar = consoleKeyInfo.Key;
+
+        // if (Console.ReadKey().Key != ConsoleKey.Y)
+        if (keyChar != ConsoleKey.Y)
+        {
+            continue;
+        }
+
+        return newUser;
+    }
+}
+
+void LoginToUser()
+{
+    while (true)
+    {
+        selectedUser = null;
+        Console.Clear();
+        PrintTitle();
+
+        Console.WriteLine("User Login");
+        Console.WriteLine("Enter the email:");
+        var email = Console.ReadLine();
+
+        User? matchingUser = null;
+        foreach (var user in loadedUsers)
+        {
+            if (user.Email == email)
+            {
+                matchingUser = user;
+            }
+        }
+
+        // User? matchingUser = loadedUsers.FirstOrDefault(u => u.Email == email);
+
+        if (matchingUser is null)
+        {
+            continue;
+        }
+
+        Console.WriteLine("Enter the password:");
+        var password = Console.ReadLine();
+
+        if (!matchingUser.Login(password))
+        {
+            continue;
+        }
+
+        selectedUser = matchingUser;
+        return;
+    }
+}
+
+Bank SelectBank()
+{
+    while (true)
+    {
+        Console.Clear();
+        PrintTitle();
+        PrintBanks();
+        Console.WriteLine("Please select a Bank:");
+
+        string? readLine = Console.ReadLine();
+        if (readLine == null)
+        {
+            continue;
+        }
+
+        if (!int.TryParse(readLine, out int selectedBankIndex))
+        {
+            continue;
+        }
+
+        if (selectedBankIndex >= loadedBanks.Count || selectedBankIndex < 0)
+        {
+            continue;
+        }
+
+        return loadedBanks[selectedBankIndex];
+    }
+
+    // switch (mode)
+    // {
+    //     case 1:
+    //         Console.WriteLine($"Your selection: {bank1}"); // Why does {bank1} or {bank1.toString} not work? 
+    //         break;
+    //     case 2:
+    //         Console.WriteLine($"Your selection: {bank2}");
+    //         break;
+    //     case 3:
+    //         Console.WriteLine($"Your selection: {bank3}");
+    //         break;
+    // }
+}
+
+List<Bank> LoadBanks()
+{
+    Bank bank1 = new("Norisbank", Bank.GenerateBlz());
+    Bank bank2 = new("ING", Bank.GenerateBlz());
+    Bank bank3 = new("N26", Bank.GenerateBlz());
+
+    return [bank1, bank2, bank3];
+}
