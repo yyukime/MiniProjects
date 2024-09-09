@@ -2,10 +2,11 @@
 using BankingExample;
 
 
-Bank Bank1 = new("Norisbank", ", 1233213");
-Bank Bank2 = new("ING Diba", ", 232534432");
-Bank Bank3 = new("N26", ", 4831-204081923");
+Bank Bank1 = new("Norisbank", "1233213");
+Bank Bank2 = new("ING", "232534432");
+Bank Bank3 = new("N26", "4831-204081923");
 
+User User1 = new("John", "Doe", "John.Doe@email.com", 18, "PasswordStrong123");
 
 // select bank
 // Login to bank (user)
@@ -13,11 +14,12 @@ Bank Bank3 = new("N26", ", 4831-204081923");
 // select action 
 // perform action 
 // restart
-
+// we dont have ToString > when ToString override > override for all classes? 
 
 
 while (true)
 {
+    Console.WriteLine(User1.ToString());
     Ui();
 
     try
@@ -30,9 +32,7 @@ while (true)
     {
         Console.Clear();
     }
-
     Console.ReadLine();
-    
 }
 
 void Ui()
@@ -52,13 +52,14 @@ void SelectBank(int mode)
     switch (mode)
     {
         case 1:
-            Console.WriteLine("You have selected: Norisbank"); // Why does {bank1} or {bank1.toString} not work? 
+            Console.WriteLine($"Your selection: {Bank1.ToString()}"); // Why does {bank1} or {bank1.toString} not work? 
             break;
         case 2:
-            Console.WriteLine("You have selected: ING");
+            Console.WriteLine($"Your selection: {Bank2.ToString}");
             break;
         case 3:
-            Console.WriteLine("You have selected: N26");
+            Console.WriteLine($"Your selection: {Bank3.ToString}");
             break;
     }
 }
+

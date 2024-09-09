@@ -38,4 +38,13 @@ public class User
         _password = password;
         return true;
     }
+
+
+    public override string ToString()
+    {
+        string UserInformation = $"Name: {FirstName}, {LastName}, {Age} years old | Email: {Email}";
+        return UserInformation;
+    }
+
+
 }

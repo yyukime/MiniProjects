@@ -91,4 +91,11 @@ public class Bank
 
         return $"{BLZ}-{i1}-{i2}-{i3}";
     }
+
+    public override string ToString()
+    {
+        string BankInformation = ($"{Name}, BLZ: {BLZ}");
+        return BankInformation;
+    }
+
 }
