@@ -1,7 +1,10 @@
 ﻿using BankingExample;
+using System.Data;
+using System.Reflection.Metadata.Ecma335;
 
 List<Bank> loadedBanks = LoadBanks();
 List<User> loadedUsers = [];
+
 
 User? selectedUser = null;
 
@@ -13,7 +16,7 @@ User? selectedUser = null;
 // restart
 // we dont have ToString > when ToString override > override for all classes? 
 
-// TODO: Check age for user creation 18+ etc.
+// Check age for user creation 18+ etc. 
 // TODO: Enter email txt
 
 // TODO: example data initialization -> create banks and users, create accounts in banks etc.
@@ -111,17 +114,23 @@ User CreateUser()
         Console.WriteLine("Enter last name:");
         string? lastName = Console.ReadLine();
 
-        Console.WriteLine("Enter last email:");
+        Console.WriteLine("Enter E-Mail:");
         string? email = Console.ReadLine();
 
         bool validAge = false;
         int age = -1;
-        while (!validAge)
+
+        while (!validAge) // mit agecheckuser() kombinieren?
         {
             Console.WriteLine("Enter age:");
             string? ageStr = Console.ReadLine();
-
             validAge = int.TryParse(ageStr, out age);
+        }
+
+        if (!ageCheckUser(age))
+        {
+            Console.WriteLine("Invalid age... Press anything to try again");
+            Console.ReadKey();  continue; // bewege ich mich auf dünnem Eis?
         }
 
         Console.WriteLine("Create a password:");
@@ -243,4 +252,9 @@ List<Bank> LoadBanks()
     Bank bank3 = new("N26", Bank.GenerateBlz());
 
     return [bank1, bank2, bank3];
+}
+
+bool ageCheckUser(int reqAgeUser)
+{
+    return (reqAgeUser >= 18); // return (age != 18 | age >18
 }
