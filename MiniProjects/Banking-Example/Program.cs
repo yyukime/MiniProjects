@@ -21,6 +21,7 @@ User? selectedUser = null;
 
 // TODO: example data initialization -> create banks and users, create accounts in banks etc.
 
+
 Ui();
 
 return;
@@ -30,6 +31,7 @@ void Ui()
     while (true)
     {
         Console.Clear();
+        ExampleInitialization();
         PrintTitle();
 
         // -> Create User
@@ -245,16 +247,40 @@ Bank SelectBank()
     // }
 }
 
-List<Bank> LoadBanks()
+List<Bank> LoadBanks() // how to with ExampleInitialization
 {
-    Bank bank1 = new("Norisbank", Bank.GenerateBlz());
-    Bank bank2 = new("ING", Bank.GenerateBlz());
-    Bank bank3 = new("N26", Bank.GenerateBlz());
+    Bank BankExample1 = new Bank("Volksbank", Bank.GenerateBlz());
+    Bank BankExample2 = new Bank("N26", Bank.GenerateBlz());
+    Bank BankExample3 = new Bank("Sparkasse", Bank.GenerateBlz());
+    Bank BankExample4 = new Bank("Deutsche Bank", Bank.GenerateBlz());
+    Bank BankExample5 = new Bank("ING", Bank.GenerateBlz());
 
-    return [bank1, bank2, bank3];
+    return [BankExample1, BankExample2, BankExample3, BankExample4, BankExample5];
 }
 
 bool ageCheckUser(int reqAgeUser)
 {
-    return (reqAgeUser >= 18); // return (age != 18 | age >18
+    return (reqAgeUser >= 18); // return (age != 18 | age >18) TROLL
 }
+
+void ExampleInitialization()
+{
+    User ExampleUser1 = new User("Michael", "Myers", "M.Stevens@gmail.com", 23, "MMBANK00");
+    User ExampleUser2 = new User("Ofri", "Bruno", "O.Bruno@gmail.com", 29, "BOFRIBANK95");
+    User ExampleUser3 = new User("Ottavio", "MacGuinnes", "O.MacGuinnes@gmail.com@", 37, "OMACGUINNESBANK87");
+    User ExampleUser4 = new User("Nicolas", "Larsen", "NLarsen@gmail.com", 45, "NLARSENBANK79");
+    User ExampleUser5 = new User("Clovis", "Carrillo", "CCarrillo@gmail.com", 58, "CCARRILLOBANK66");
+
+    Bank BankExample1 = new Bank("Volksbank", Bank.GenerateBlz());
+    Bank BankExample2 = new Bank("N26", Bank.GenerateBlz());
+    Bank BankExample3 = new Bank("Sparkasse", Bank.GenerateBlz());
+    Bank BankExample4 = new Bank("Deutsche Bank", Bank.GenerateBlz());
+    Bank BankExample5 = new Bank("ING", Bank.GenerateBlz());
+
+    BankAccount BankAccUser1 = new BankAccount($"{BankExample1.GenerateIban}, ", ExampleUser1);
+    BankAccount BankAccUser2 = new BankAccount($"{BankExample2.GenerateIban}, ", ExampleUser2);
+    BankAccount BankAccUser3 = new BankAccount($"{BankExample3.GenerateIban}, ", ExampleUser3);
+    BankAccount BankAccUser4 = new BankAccount($"{BankExample4.GenerateIban()}, ", ExampleUser4); // difference generateiban & generateiban()?
+    BankAccount BankAccUser5 = new BankAccount($"{BankExample4.GenerateIban()}, ", ExampleUser5); // To test more than 1 user for a bank... Bank5 currently with no users (ING)
+}
+

@@ -82,7 +82,7 @@ public class Bank
         // return accounts;
     }
 
-    private string GenerateIban()
+    public string GenerateIban()    //from private to public string
     {
         var rand = new Random();
         int i1 = rand.Next(1000);
