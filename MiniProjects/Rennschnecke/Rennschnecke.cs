@@ -5,50 +5,63 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Security.Cryptography;
+using Microsoft.VisualBasic.FileIO;
+using System.Xml.Schema;
 
 namespace Rennschnecken;
 
 class Rennschnecke
 {
-    public string Snail;
-    public string Race;
-    public int MaxSpeed;
-    // die Schnecke soll wissen welche Strecke sie zurückgelegt hat
+    string Name;
+    string Race;
+    int MaxSpeed;
+    int DistancePassed;
 
-    public Rennschnecke(int maxSpeed, string snail, string race)// need to call constructor
+    Rennschnecke(string ConName, string ConRace, int ConMaxSpeed, int ConDistancePassed)
     {
-        Snail = snail;
-        Race = race;
-        MaxSpeed = maxSpeed;
-        
+        Name = ConName;
+        Race = ConRace;
+        MaxSpeed = ConMaxSpeed;
+        DistancePassed = ConDistancePassed;
     }
 
-    void Kriechen()
+    int krieche(int speed) // maybe use void method 
     {
-        Random randomDistance = new();
-        int randomDistanceInt = randomDistance.Next(MaxSpeed);       
+        Random random = new();
+        int kriecheInt = random.Next(speed);
+        return kriecheInt;
 
     }
-    
+
     public override string ToString()
     {
-        string SnailData = ($"Snailname: {Snail}, SnailRace: {Race}, SnailSpeed: {MaxSpeed}");
-        return SnailData;
+        
+         return $"Name: {Name}, Race: {Race}, Snail max-speed: {MaxSpeed}, Total distance passed: {DistancePassed}";
     }
-    
+
     static void Main(string[] args)
     {
-        Rennschnecke Schnecke1 = new Rennschnecke(10, "george", "nacktschnecke");
-        Console.WriteLine();
-        Console.WriteLine(Schnecke1);
+        Rennschnecke Schnecke1 = new("Jeremy", "Nacktschnecke", 200, 0);
+        Console.WriteLine(Schnecke1.ToString());
     }
 }
 
+class Rennen
+{
+    string NameOfRace;
+    int AmountOfParticipants = 3;
+    List<Rennschnecke> Participants;
+    int DistanceToRace;
 
+    bool AddSchnecke(Rennschnecke SchneckeToAdd)
+    {
+        if (Participants.Contains(SchneckeToAdd)) return false;
+        Participants.Add(SchneckeToAdd);
+        return true;
+    }
 
-
-
-
+    
+}
 
 
 
