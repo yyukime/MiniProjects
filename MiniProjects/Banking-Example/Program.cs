@@ -265,7 +265,7 @@ bool ageCheckUser(int reqAgeUser)
 
 void ExampleInitialization()
 {
-    User ExampleUser1 = new User("Michael", "Myers", "M.Stevens@gmail.com", 23, "MMBANK00");
+    User ExampleUser1 = new User("Michael", "Stevens", "M.Stevens@gmail.com", 23, "MMBANK00");
     User ExampleUser2 = new User("Ofri", "Bruno", "O.Bruno@gmail.com", 29, "BOFRIBANK95");
     User ExampleUser3 = new User("Ottavio", "MacGuinnes", "O.MacGuinnes@gmail.com@", 37, "OMACGUINNESBANK87");
     User ExampleUser4 = new User("Nicolas", "Larsen", "NLarsen@gmail.com", 45, "NLARSENBANK79");
