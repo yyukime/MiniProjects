@@ -1,51 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace DirectoryAnalyser
+﻿namespace DirectoryAnalyser
 {
 
     class Program
     {
         public static void Main()
         {
-            StartUI();
-        }
-
-        static void StartUI()
-        {
-            Console.Clear();
-            Console.WriteLine("Enter a Dir to analyse:");
             Input();
         }
+
         public static void Input()
         {
-            string? MethodOutput = Console.ReadLine();
-
-            if (!string.IsNullOrWhiteSpace(MethodOutput) == true)
-            {
-                try
-                {
-                    AnalyzeAll(MethodOutput);
-                }
-                catch
-                {
-                    Console.WriteLine("Something went wrong... Press any key to try again");
-                    Console.ReadKey();
-                    StartUI();
-                }
-            }
-            else
+            while (true)
             {
                 Console.Clear();
-                StartUI();
+                Console.WriteLine("Enter a Dir to analyse:");
+                string? MethodOutput = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(MethodOutput))
+                {
+                    try
+                    {
+                        AnalyzeAll(MethodOutput);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Something went wrong... Press any key to try again");
+                        Console.WriteLine(ex.Message);
+                        Console.ReadKey();
+                    }
+                }
             }
         }
 
@@ -93,30 +77,29 @@ namespace DirectoryAnalyser
             long TotalSize = 0;
             int TotalSubDirs = 0;
             int FileCount = 0;
-            
+
             // Total SubDirs
             string[] DirSearch = Directory.GetDirectories(Path,"*.*",SearchOption.AllDirectories);
             foreach (string  dir in DirSearch)
             {
                 TotalSubDirs ++;
             }
-
+            
             // Amount of Files
             string[] files = Directory.GetFiles(Path, "*.*", SearchOption.AllDirectories);
             foreach (string file in files)
             {
                 FileCount++; // oder +=
             }
-
+            
             // Total Size
             string[] SizeSearch = Directory.GetFiles(Path, "*.*", SearchOption.AllDirectories);
-            
             foreach (string file in SizeSearch)
             {
                 FileInfo f1 = new(file);
                 TotalSize += f1.Length;
             }
-
+            
             // Convert to Mb
             double ConvertToMb = TotalSize / Math.Pow(1024, 2);
             double FinalResult = Math.Round(ConvertToMb, 2);
