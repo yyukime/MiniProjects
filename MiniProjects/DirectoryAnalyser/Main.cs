@@ -53,7 +53,7 @@ namespace DirectoryAnalyser
         public static void AnalyzeForSubDirectories(string Path)
         {
             Console.WriteLine($"You are analyzing the Directory: {Path}");
-            DirectoryInfo dir = new DirectoryInfo(Path);
+            DirectoryInfo dir = new(Path);
             DirectoryInfo[] ToDisplay = dir.GetDirectories();
             Console.WriteLine("The number of subdirectories is: " + ToDisplay.Length);
         }
@@ -62,8 +62,8 @@ namespace DirectoryAnalyser
         {
             long TotalSize = 0;
 
-            DirectoryInfo DirInfo = new DirectoryInfo(Path);
-            FileInfo fileInfo = new FileInfo(Path);
+            DirectoryInfo DirInfo = new(Path);
+     
             DirectoryInfo[] DirList = DirInfo.GetDirectories();
 
             foreach (DirectoryInfo Dir in DirList) // makes list for each step? Inefficient?
@@ -95,12 +95,6 @@ namespace DirectoryAnalyser
             int TotalSubDirs = 0;
             int FileCount = 0;
             
-
-            FileInfo fileInfo = new FileInfo(Path);
-            DirectoryInfo dirInfo = new DirectoryInfo(Path);
-           
-            DirectoryInfo[] DirList = dirInfo.GetDirectories();
-
             // Total SubDirs
             string[] DirSearch = Directory.GetDirectories(Path,"*.*",SearchOption.AllDirectories);
             foreach (string  dir in DirSearch)
@@ -120,7 +114,7 @@ namespace DirectoryAnalyser
             
             foreach (string file in SizeSearch)
             {
-                FileInfo f1 = new FileInfo(file);
+                FileInfo f1 = new(file);
                 TotalSize += f1.Length;
             }
 
