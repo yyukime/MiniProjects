@@ -123,30 +123,19 @@ namespace DirectoryAnalyser
                 FileInfo f1 = new FileInfo(file);
                 TotalSize += f1.Length;
             }
-            
+
+            // Convert to Mb
+            double ConvertToMb = TotalSize / Math.Pow(1024, 2);
+            double FinalResult = Math.Round(ConvertToMb, 2);
+
             // Display 
             Console.WriteLine($"You are analyzing the Directory: {Path}");
             Console.WriteLine();
-            Console.WriteLine($"Total Size: {TotalSize} b");
+            Console.WriteLine($"Total Size: {FinalResult} mb");
             Console.WriteLine($"Amount of Files: {FileCount}");
             Console.WriteLine($"Subdirectories: {TotalSubDirs}");
         }
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
 }
 
 
