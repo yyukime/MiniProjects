@@ -16,7 +16,6 @@ namespace DirectoryAnalyser
     {
         public static void Main()
         {
-
             StartUI();
         }
 
