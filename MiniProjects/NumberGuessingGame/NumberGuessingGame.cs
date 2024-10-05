@@ -78,8 +78,7 @@ namespace NumberGuessingGame
                 }
             }
             else
-            {
-
+            { 
                 Console.Clear();
                 Console.WriteLine("You guessed: " + intInput); // ugly
                 Console.WriteLine($"The correct input was {rNumber}"); // want organization: using class
@@ -105,7 +104,9 @@ namespace NumberGuessingGame
                 if (number == rNumber) return true;
                 return false;
             }
-        }
 
+        }
+   
     }
+
 }

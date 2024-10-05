@@ -41,6 +41,7 @@ class Rennschnecke
         Rennschnecke Schnecke1 = new Rennschnecke(10, "george", "nacktschnecke");
         Console.WriteLine();
         Console.WriteLine(Schnecke1);
+        
     }
 }
 

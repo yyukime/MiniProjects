@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Current", "Current", "{F720
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryAnalyzer", "DirectoryAnalyzer\DirectoryAnalyzer.csproj", "{01B6D130-AD0B-449B-9355-D81E5FB28368}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordCounter (in VSC)", "Current\WordCounter (in VSC)\WordCounter (in VSC).csproj", "{BFC5D7C6-AAAE-4640-843F-AD8C769B3D93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{01B6D130-AD0B-449B-9355-D81E5FB28368}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01B6D130-AD0B-449B-9355-D81E5FB28368}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01B6D130-AD0B-449B-9355-D81E5FB28368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC5D7C6-AAAE-4640-843F-AD8C769B3D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC5D7C6-AAAE-4640-843F-AD8C769B3D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC5D7C6-AAAE-4640-843F-AD8C769B3D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC5D7C6-AAAE-4640-843F-AD8C769B3D93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +101,7 @@ Global
 		{0297EC67-EFDB-4414-8ACB-CB9FA111D84F} = {06529C2F-C772-4261-946C-5018E404AA11}
 		{4E5FD2D9-906E-4E6E-8C3D-A43134396423} = {06529C2F-C772-4261-946C-5018E404AA11}
 		{01B6D130-AD0B-449B-9355-D81E5FB28368} = {F7200F3C-3A1F-4464-9976-E48D963654CB}
+		{BFC5D7C6-AAAE-4640-843F-AD8C769B3D93} = {F7200F3C-3A1F-4464-9976-E48D963654CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB94EDF4-5750-4875-91A4-6FCBD78E655A}

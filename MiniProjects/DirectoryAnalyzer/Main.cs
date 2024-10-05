@@ -14,6 +14,7 @@ namespace DirectoryAnalyser
 
     class Program
     {
+
         public static void Main()
         {
             StartUI();
@@ -25,11 +26,12 @@ namespace DirectoryAnalyser
             Console.WriteLine("Enter a Dir to analyse:");
             Input();
         }
+        
         public static void Input()
         {
             string? MethodOutput = Console.ReadLine();
 
-            if (!string.IsNullOrWhiteSpace(MethodOutput) == true)
+            if (!string.IsNullOrWhiteSpace(MethodOutput))
             {
                 try
                 {
@@ -56,7 +58,7 @@ namespace DirectoryAnalyser
             DirectoryInfo[] ToDisplay = dir.GetDirectories();
             Console.WriteLine("The number of subdirectories is: " + ToDisplay.Length);
         }
-
+        
         public static void AnalyzeForTotalDirSize(string Path)
         {
             long TotalSize = 0;
@@ -76,7 +78,7 @@ namespace DirectoryAnalyser
             }
             Console.WriteLine(TotalSize);
         }
-
+        
         public static void AnalyzeForTotalFileCount(string Path) // Wo ist meine Zeit hin? Und wieso war ich trotz ihr so machtlos? 
         {
             int FileCount = 0;
@@ -87,7 +89,7 @@ namespace DirectoryAnalyser
             }
             Console.WriteLine(FileCount);
         }
-
+        
         public static void AnalyzeAll(string Path)
         {
             long TotalSize = 0;
@@ -127,8 +129,11 @@ namespace DirectoryAnalyser
             Console.WriteLine($"Total Size: {FinalResult} mb");
             Console.WriteLine($"Amount of Files: {FileCount}");
             Console.WriteLine($"Subdirectories: {TotalSubDirs}");
+
         }
+
     }
+
 }
 
 
