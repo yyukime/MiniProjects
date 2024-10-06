@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime;
 
 namespace WordCounter__in_VSC_;
 
@@ -9,6 +10,7 @@ public class Class1
 {
     public static void Main(string[] args)
     {
+
         Menu();
     }
     public static void Menu()
@@ -17,8 +19,8 @@ public class Class1
         {
             Console.Clear();
             Console.WriteLine("Please Enter a File to read:");
-            string? UserInput = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(UserInput))
+            string? path = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(path))
             {
                 break;
             }
@@ -26,7 +28,7 @@ public class Class1
             {
                 try
                 {
-                    WordCount(UserInput);
+                    SearchForWord(path);
                 }
                 catch (Exception ex)
                 {
@@ -63,14 +65,14 @@ public class Class1
 
     public static void SearchForWord(string path)
     {
-        string? WordInput;
-        int UserWord = 0;
+        string? wordInput;
+        int userWordCount = 0;
 
         while (true)
-        {    
+        {
             Console.WriteLine("Please Enter a Word to search for:");
-            WordInput = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(WordInput)) break;
+            wordInput = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(wordInput)) break;
             Console.Clear();
         }
 
@@ -79,21 +81,29 @@ public class Class1
         foreach (string line in allLines)
         {
             string[] lineWords = line.Split(" ");
+            
             foreach (string word in lineWords)
             {
-                if (string.IsNullOrWhiteSpace(word))
-                {
-                    continue;
-                }
-                
-                if (word == WordInput) UserWord++;
-                break;           
-            }
+                if (string.IsNullOrWhiteSpace(word) || !word.Equals(wordInput)) continue; 
+                userWordCount++;
+            }   
         }
 
+        Console.WriteLine($"Your word was found {userWordCount} times \npress any key to exit...");
+        Console.ReadKey();
+    }
 
-    }    
+    public static void UniqueWord(string path)
+    {
+        
+        // Dictionary
+        
+
+    }
+
+
 }
+
 
 
 
