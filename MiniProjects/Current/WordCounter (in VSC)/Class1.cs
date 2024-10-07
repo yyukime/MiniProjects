@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Runtime;
+using System.Security.Authentication;
 
 namespace WordCounter__in_VSC_;
 
@@ -28,7 +29,7 @@ public class Class1
             {
                 try
                 {
-                    SearchForWord(path);
+                    UniqueWord(path);
                 }
                 catch (Exception ex)
                 {
@@ -95,9 +96,31 @@ public class Class1
 
     public static void UniqueWord(string path)
     {
+        int i = 1;
+        int val = 1;
+       
+        // Dictionary\
+        Dictionary<string, int> dict = new();
+       
+        string[] allLines = File.ReadAllLines(path);
+
+        foreach (string line in allLines)
+        {
+            string[] lineWords = line.Split(" ");
+            
+            foreach (string word in lineWords)
+            {
+                if (string.IsNullOrWhiteSpace(word)) continue; 
+
+                if (!dict.TryAdd(word, i)) 
+                {
+                    dict[word] ++; // = ++ // = val +=1 // val = i +1; etc.. 
+                }
+               
+            }   
+        }
         
-        // Dictionary
-        
+
 
     }
 
