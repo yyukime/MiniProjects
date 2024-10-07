@@ -106,7 +106,7 @@ public class Class1
 
         foreach (string line in allLines)
         {
-            string[] lineWords = line.Split(" ");
+            string[] lineWords = line.Split([' ', ',', '\t', '\n', '.', '(',')','{','}','[',']']);
             
             foreach (string word in lineWords)
             {
@@ -119,7 +119,17 @@ public class Class1
                
             }   
         }
+
+        // List<string> values = new();
+
+        foreach (KeyValuePair<string, int> output in dict.OrderByDescending(KVP => KVP.Value))
+        {
+            // values.Add(output.Key + ": " + output.Value);
+            Console.WriteLine(output.Key + ": " + output.Value);  
+        }
         
+        // File.WriteAllLines(@"C:\Users\gemba\Documents\test\tmp\TESTCOPY.txt", values);
+        Console.ReadKey();
 
 
     }
