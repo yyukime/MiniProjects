@@ -7,13 +7,13 @@ using System.Security.Authentication;
 
 namespace WordCounter__in_VSC_;
 
-public class Program
+public class WordCounter
 {
     public static void Main(string[] args)
     {
-
         Menu();
     }
+
     public static void Menu()
     {
         while (true)
@@ -55,13 +55,13 @@ public class Program
                 {
                     continue;
                 }
+
                 wordAmount++;
             }
         }
 
         Console.WriteLine($"WordAmount: {wordAmount}");
         Console.ReadKey();
-
     }
 
     public static void SearchForWord(string path)
@@ -82,12 +82,12 @@ public class Program
         foreach (string line in allLines)
         {
             string[] lineWords = line.Split(" ");
-            
+
             foreach (string word in lineWords)
             {
-                if (string.IsNullOrWhiteSpace(word) || !word.Equals(wordInput)) continue; 
+                if (string.IsNullOrWhiteSpace(word) || !word.Equals(wordInput)) continue;
                 userWordCount++;
-            }   
+            }
         }
 
         Console.WriteLine($"Your word was found {userWordCount} times \npress any key to exit...");
@@ -97,51 +97,36 @@ public class Program
     public static void UniqueWord(string path)
     {
         int i = 1;
-        
-       
+
         // Dictionary\
         Dictionary<string, int> dict = new();
-       
+
         string[] allLines = File.ReadAllLines(path);
 
         foreach (string line in allLines)
         {
-            string[] lineWords = line.Split([' ', ',', '\t', '\n', '.', '(',')','{','}','[',']']);
-            
+            string[] lineWords = line.Split(' ', ',', '\t', '\n', '.', '(', ')', '{', '}', '[', ']');
+
             foreach (string word in lineWords)
             {
-                if (string.IsNullOrWhiteSpace(word)) continue; 
+                if (string.IsNullOrWhiteSpace(word)) continue;
 
-                if (!dict.TryAdd(word, i)) 
+                if (!dict.TryAdd(word, i))
                 {
-                    dict[word] ++; // = ++ // = val +=1 // val = i +1; etc.. 
+                    dict[word]++; // = ++ // = val +=1 // val = i +1; etc.. 
                 }
-               
-            }   
+            }
         }
 
         // List<string> values = new();
 
-        foreach (KeyValuePair<string, int> output in dict.OrderByDescending(KVP => KVP.Value))
+        foreach (KeyValuePair<string, int> output in dict.OrderByDescending(kvp => kvp.Value))
         {
             // values.Add(output.Key + ": " + output.Value);
-            Console.WriteLine(output.Key + ": " + output.Value);  
+            Console.WriteLine(output.Key + ": " + output.Value);
         }
-        
+
         // File.WriteAllLines(@"C:\Users\gemba\Documents\test\tmp\TESTCOPY.txt", values);
         Console.ReadKey();
-
-
     }
-
-
 }
-
-
-
-
-
-
-
-
-
