@@ -7,7 +7,7 @@ using System.Security.Authentication;
 
 namespace WordCounter__in_VSC_;
 
-public class Class1
+public class Program
 {
     public static void Main(string[] args)
     {
@@ -97,7 +97,7 @@ public class Class1
     public static void UniqueWord(string path)
     {
         int i = 1;
-        int val = 1;
+        
        
         // Dictionary\
         Dictionary<string, int> dict = new();
