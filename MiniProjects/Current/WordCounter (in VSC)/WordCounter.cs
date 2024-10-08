@@ -11,15 +11,8 @@ public class Program
 {
     public static void Main(string[] args)
     {
-
-        Menu();
-    }
-    public static void Menu()
-    {
         while (true)
         {
-
-
             Console.WriteLine("Enter a path to analyse: ");
             string? path = Console.ReadLine();
             while (true)
@@ -43,7 +36,7 @@ public class Program
                     }
                 }
             }
-        }
+        }     
     }
 
     public static void WordCount(string path)
@@ -130,7 +123,8 @@ public class Program
 
         foreach (KeyValuePair<string, int> output in dict.OrderByDescending(KVP => KVP.Value))
         {
-            for (int o = 0; i < 15; o++)
+
+            for (int o = 0; o < 10; o++)
             {
                 Console.WriteLine(output.Key + ": " + output.Value);
             }
