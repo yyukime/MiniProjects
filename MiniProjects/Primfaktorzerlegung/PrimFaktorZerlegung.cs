@@ -10,6 +10,9 @@ namespace Primfaktorzerlegung
     // Let user input prime number
     internal class PrimFaktorZerlegung
     {
-
+        public static void Main()
+        {
+            Console.WriteLine("Hello world!");
+        }
     }
 }
