@@ -7,34 +7,40 @@ using System.Security.Authentication;
 
 namespace WordCounter__in_VSC_;
 
-public class WordCounter
+public class Program
 {
     public static void Main(string[] args)
     {
+
         Menu();
     }
-
     public static void Menu()
     {
         while (true)
         {
-            Console.Clear();
-            Console.WriteLine("Please Enter a File to read:");
+
+
+            Console.WriteLine("Enter a path to analyse: ");
             string? path = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(path))
+            while (true)
             {
-                break;
-            }
-            else
-            {
-                try
+                if (!string.IsNullOrWhiteSpace(path))
                 {
-                    UniqueWord(path);
-                }
-                catch (Exception ex)
-                {
-                    Console.Write(ex.ToString());
-                    Console.ReadKey();
+                    Text(path);
+                    Console.WriteLine("Mode: "); string? mode = Console.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(mode))
+                    {
+
+                        if (int.TryParse(mode, out int modeInt))
+                        {
+                            switch (modeInt)
+                            {
+                                case 1: WordCount(path); break;
+                                case 2: SearchForWord(path); break;
+                                case 3: UniqueWord(path); break;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -55,7 +61,6 @@ public class WordCounter
                 {
                     continue;
                 }
-
                 wordAmount++;
             }
         }
@@ -98,6 +103,7 @@ public class WordCounter
     {
         int i = 1;
 
+
         // Dictionary\
         Dictionary<string, int> dict = new();
 
@@ -105,7 +111,7 @@ public class WordCounter
 
         foreach (string line in allLines)
         {
-            string[] lineWords = line.Split(' ', ',', '\t', '\n', '.', '(', ')', '{', '}', '[', ']');
+            string[] lineWords = line.Split([' ', ',', '\t', '\n', '.', '(', ')', '{', '}', '[', ']']);
 
             foreach (string word in lineWords)
             {
@@ -113,20 +119,42 @@ public class WordCounter
 
                 if (!dict.TryAdd(word, i))
                 {
-                    dict[word]++; // = ++ // = val +=1 // val = i +1; etc.. 
+                    dict[word]++;
                 }
             }
         }
 
         // List<string> values = new();
+        // File.WriteAllLines(@"C:\Users\gemba\Documents\test\tmp\TESTCOPY.txt", values);
+        // values.Add(output.Key + ": " + output.Value);
 
-        foreach (KeyValuePair<string, int> output in dict.OrderByDescending(kvp => kvp.Value))
+        foreach (KeyValuePair<string, int> output in dict.OrderByDescending(KVP => KVP.Value))
         {
-            // values.Add(output.Key + ": " + output.Value);
-            Console.WriteLine(output.Key + ": " + output.Value);
+            for (int o = 0; i < 15; o++)
+            {
+                Console.WriteLine(output.Key + ": " + output.Value);
+            }
         }
 
-        // File.WriteAllLines(@"C:\Users\gemba\Documents\test\tmp\TESTCOPY.txt", values);
         Console.ReadKey();
     }
+
+    public static void Text(string path)
+    {
+        Console.WriteLine("--Please select a mode--");
+        Console.WriteLine($"You are analysing: {path}");
+        Console.WriteLine("1: Display the total amount of words");
+        Console.WriteLine("2: Search for the amount of times a specific word occurs");
+        Console.WriteLine("3: List the 15 most used words");
+
+    }
 }
+
+
+
+
+
+
+
+
+
