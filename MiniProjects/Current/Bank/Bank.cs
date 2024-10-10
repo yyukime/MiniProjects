@@ -7,7 +7,9 @@ public class Bank
 {
     public string Name { get; init; }
     public int BLZ { get; init; }
-    private List<Account> registeredAccounts;
+    public List<Account> registeredAccounts;
+
+    // Private List<BankAccount> ThisBanksBankAccounts >> good idea? 
 
     public Bank(string name, int BLZ) // internal (only in here) for using hub class with other projects
     {

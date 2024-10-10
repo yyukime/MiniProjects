@@ -4,15 +4,19 @@ using System.Security.Cryptography;
 
 namespace Bank;
 
-public class BankAccount
+public class BankAccount 
 {
     public string iban { get; init;}
-    private Account owner;
+    public Account owner { get; init; } // should not be public WHAT THE FLIP? 
     private Bank bank;
     private decimal balance; 
     private string pin;
     public bool Isloggedin { get; private set; }
-    public BankAccount(Account Owner, Bank bank, string pin)
+    
+    
+    /// List<BankAccounts> BankAccsByOwner 
+
+    public BankAccount(Account Owner, Bank bank, string pin) // like so?
     {
         this.owner = Owner;
         this.bank = bank;
@@ -38,9 +42,11 @@ public class BankAccount
         return true;
     }
 
-    public string CheckBalance()
+    public (decimal, Status) CheckBalance(Account account) // Maybe GUID and not account for this and Transfer/Deposit?
     {
-        return $"Your balance is {balance}";
+        if (account != owner) return (-1, Status.AccountMisMatch); // why no bool? -> For each return a different UI element
+        if (Isloggedin == false) return (-1, Status.NotLoggedIn);// for example "this is not your account" or "you are not logged in, please enter your pin to continue"
+        return (balance, Status.Successful); 
     }
     
     public void LogIn(string pin)
@@ -50,8 +56,8 @@ public class BankAccount
 
     public bool Deposit(string pin, decimal amount)
     {
-        if (!Isloggedin) return false;
-        if (pin != this.pin) return false;
+        if (!Isloggedin) return false; 
+        if (pin != this.pin) return false; //
         if (amount <= 0) return false;
         balance += amount;
         return true;
@@ -69,5 +75,7 @@ public class BankAccount
 
 
 
-
+    // OpenAccount()
+    
 }
+
