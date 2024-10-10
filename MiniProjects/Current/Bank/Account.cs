@@ -10,7 +10,7 @@ public class Account
     private Guid ID;
     private string password;
     private List<BankAccount> AccountsBankAccounts { get;  set; }// list of all BankAccounts that have a Owner? 
-    
+
     public Account(string firstName, string lastName, string email, string password)
     {
         this.firstName = firstName;
@@ -21,7 +21,7 @@ public class Account
         ID = Guid.NewGuid();
     }
 
-    public List<BankAccount> GetOwnedAccounts(Account owner)
+        public List<BankAccount> GetOwnedAccounts(Account owner)
     {
         List<BankAccount> byThisUser = new();
         foreach (BankAccount bankAccount in AccountsBankAccounts)

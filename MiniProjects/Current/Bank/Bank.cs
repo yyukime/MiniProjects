@@ -5,6 +5,7 @@ namespace Bank;
 
 public class Bank
 {
+    
     public string Name { get; init; }
     public int BLZ { get; init; }
     public List<Account> registeredAccounts;
@@ -39,11 +40,6 @@ public class Bank
     {
         return registeredAccounts.Remove(account); 
     }
-
-
-
-
-
 
 }
 
