@@ -8,11 +8,11 @@ namespace Bank;
 public class BankAccount 
 {
     public string iban { get; init;}
-    protected Account owner;
+    internal Account owner;
     private Bank bank;
-    protected decimal balance; 
-    protected string pin;
-    public bool Isloggedin { get; private set; }
+    private decimal balance; 
+    internal string pin;
+    public bool IsLoggedIn { get; private set; }
    
     /// List<BankAccounts> BankAccsByOwner 
 
@@ -25,7 +25,6 @@ public class BankAccount
         this.iban = GenIBAN(bank.BLZ);
     }
 
-    
     private static string GenIBAN(int BLZ)
     {
         Random random = new();
@@ -35,29 +34,40 @@ public class BankAccount
         return IBAN;
     }
 
-    public bool MoneyTransfer(BankAccount receiver, decimal amount)
+    public Status TransferMoney(BankAccount receiver, decimal amount)
     {
-        if (balance < amount || amount <= 0) return false;
+        if (balance < amount) return Status.NoMoney;
+        if(amount <= 0 ) return Status.IllegalArgument;
         this.balance -= amount;
         receiver.balance += amount;
-        return true;
+        return Status.Successful;
     }
 
-    
-    
     public void LogIn(string pin)
     {
-       if (pin == this.pin) Isloggedin = true;
+       if (pin == this.pin) IsLoggedIn = true;
     }
 
-    public bool Deposit(string pin, decimal amount)
+    public Status Deposit(string pin, decimal amount)
     {
-        if (!Isloggedin) return false; 
-        if (pin != this.pin) return false; //
-        if (amount <= 0) return false;
+        if (!IsLoggedIn) return Status.NotLoggedIn; 
+        if (pin != this.pin) return Status.wrongPin;
+        if (amount <= 0) return Status.IllegalArgument;
         balance += amount;
-        return true;
+        return Status.Successful;
     }
+
+    public Status Withdraw(string pin, decimal amount)
+    {
+        if (!IsLoggedIn) return Status.NotLoggedIn;
+        if (pin != this.pin) return Status.wrongPin;
+        if (amount > this.balance) return Status.NoMoney;
+        if (amount <= 0) return Status.IllegalArgument;
+        balance -= amount;
+        return Status.Successful;
+    }
+
+
 
 
 

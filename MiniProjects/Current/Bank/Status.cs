@@ -7,8 +7,10 @@ public enum Status
     NotLoggedIn,
     NoMoney,
     wrongPin,
+    IllegalArgument,
+    NoAccountWithBank,
 
-    valueFormatError
+
 
 
 }
