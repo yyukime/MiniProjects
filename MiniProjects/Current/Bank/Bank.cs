@@ -40,9 +40,12 @@ public class Bank
         if (!Registered.ContainsKey(account)) return Status.NoAccountWithBank;
         if (string.IsNullOrWhiteSpace(pin)) return Status.IllegalArgument;
         BankAccount bankAccount = new(account, this, pin); 
+        Registered[account].Add(bankAccount);
         return Status.Successful;
    }
 
+    // Close BankAccount
+    // Delete Account
 
     
 }
