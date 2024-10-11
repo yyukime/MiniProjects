@@ -5,4 +5,10 @@ public enum Status
     Successful,
     AccountMisMatch,
     NotLoggedIn,
+    NoMoney,
+    wrongPin,
+
+    valueFormatError
+
+
 }

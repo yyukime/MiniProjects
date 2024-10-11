@@ -8,13 +8,13 @@ public class Bank
     
     public string Name { get; init; }
     public int BLZ { get; init; }
-    public List<Account> registeredAccounts;
-
-    // Private List<BankAccount> ThisBanksBankAccounts >> good idea? 
+    public List<Account> registeredAccounts; // lists all registered Accounts 
+    public List<BankAccount> thisBanksAccounts; // lists all BankAccounts 
 
     public Bank(string name, int BLZ) // internal (only in here) for using hub class with other projects
     {
         registeredAccounts = new();
+        thisBanksAccounts = new();
         this.Name = name;
         this.BLZ = BLZ;
     }
@@ -41,5 +41,6 @@ public class Bank
         return registeredAccounts.Remove(account); 
     }
 
+    
 }
 
