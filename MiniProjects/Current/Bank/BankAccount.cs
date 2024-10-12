@@ -1,6 +1,7 @@
 using System;
 using System.Dynamic;
 using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 namespace Bank;
@@ -8,15 +9,15 @@ namespace Bank;
 public class BankAccount 
 {
     public string iban { get; init;}
-    internal Account owner;
+    internal User owner;
     private Bank bank;
     private decimal balance; 
     internal string pin;
-    public bool IsLoggedIn { get; private set; }
+    public  bool correctPin { get; private set; }
    
     /// List<BankAccounts> BankAccsByOwner 
 
-    public BankAccount(Account Owner, Bank bank, string pin) // like so?
+    public BankAccount(User Owner, Bank bank, string pin) // like so?
     {
         this.owner = Owner;
         this.bank = bank;
@@ -43,14 +44,15 @@ public class BankAccount
         return Status.Successful;
     }
 
-    public void LogIn(string pin)
+    public bool LogIn(string pin) // 12.10 17:40 - from void to bool
     {
-       if (pin == this.pin) IsLoggedIn = true;
+       if (pin != this.pin) return false;
+       return true;
     }
 
     public Status Deposit(string pin, decimal amount)
     {
-        if (!IsLoggedIn) return Status.NotLoggedIn; 
+        if (!correctPin) return Status.NotLoggedIn; 
         if (pin != this.pin) return Status.wrongPin;
         if (amount <= 0) return Status.IllegalArgument;
         balance += amount;
@@ -59,13 +61,15 @@ public class BankAccount
 
     public Status Withdraw(string pin, decimal amount)
     {
-        if (!IsLoggedIn) return Status.NotLoggedIn;
+        if (!correctPin) return Status.NotLoggedIn;
         if (pin != this.pin) return Status.wrongPin;
         if (amount > this.balance) return Status.NoMoney;
         if (amount <= 0) return Status.IllegalArgument;
         balance -= amount;
         return Status.Successful;
     }
+
+
 
 
 

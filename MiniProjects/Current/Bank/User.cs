@@ -2,17 +2,18 @@ using System;
 
 namespace Bank;
 
-public class Account
+public class User
 {
     private string firstName;
     private string lastName;
     private string email;
     private Guid ID;
-    private string password;
+    internal string password; // must be internal for deleteAccount in Bank Class 
+    public bool AccountLogin { get; private set;}
   
     
 
-    public Account(string firstName, string lastName, string email, string password)
+    public User(string firstName, string lastName, string email, string password)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,6 +22,8 @@ public class Account
       
         ID = Guid.NewGuid();
     }
+
+ 
 
 
 }

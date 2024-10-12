@@ -9,8 +9,4 @@ public enum Status
     wrongPin,
     IllegalArgument,
     NoAccountWithBank,
-
-
-
-
 }

@@ -10,7 +10,7 @@ public class Bank
     public string Name { get; init; }
     public int BLZ { get; init; }
 
-    public Dictionary<Account, List<BankAccount>> Registered;
+    public Dictionary<User, List<BankAccount>> Registered;
 
     public Bank(string name, int BLZ) // internal (only in here) for using hub class with other projects
     {
@@ -25,7 +25,7 @@ public class Bank
         return BLZ;
     }
 
-    public bool RegisterAccount(Account account)
+    public bool RegisterAccount(User account)
     {
         if (Registered.ContainsKey(account)) 
         {
@@ -35,7 +35,7 @@ public class Bank
         return true;
     }
 
-   public Status CreateBankAccount(Account account, string pin) // Pin must be formatted correctly 
+   public Status CreateBankAccount(User account, string pin) // Pin must be formatted correctly 
    {
         if (!Registered.ContainsKey(account)) return Status.NoAccountWithBank;
         if (string.IsNullOrWhiteSpace(pin)) return Status.IllegalArgument;
@@ -44,9 +44,17 @@ public class Bank
         return Status.Successful;
    }
 
+
+    public Status DeleteAccount(User account, string password) // Account class does not have bool IsLoggedIn (doesnt need to?)
+    {
+        if(password != account.password) return Status.wrongPin;
+        Registered.Remove(account);
+        return Status.Successful; 
+    }
+
     // Close BankAccount
-    // Delete Account
 
     
+
 }
 
