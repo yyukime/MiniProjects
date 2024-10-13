@@ -6,7 +6,7 @@ namespace Bank;
 
 public class Bank
 {
-    
+
     public string Name { get; init; }
     public int BLZ { get; init; }
 
@@ -27,7 +27,7 @@ public class Bank
 
     public bool RegisterAccount(User account)
     {
-        if (Registered.ContainsKey(account)) 
+        if (Registered.ContainsKey(account))
         {
             return false;
         }
@@ -35,26 +35,47 @@ public class Bank
         return true;
     }
 
-   public Status CreateBankAccount(User account, string pin) // Pin must be formatted correctly 
-   {
+    public Status CreateBankAccount(User account, string pin) // Pin must be formatted correctly 
+    {
         if (!Registered.ContainsKey(account)) return Status.NoAccountWithBank;
         if (string.IsNullOrWhiteSpace(pin)) return Status.IllegalArgument;
-        BankAccount bankAccount = new(account, this, pin); 
+        BankAccount bankAccount = new(account, this, pin);
         Registered[account].Add(bankAccount);
         return Status.Successful;
-   }
-
-
-    public Status DeleteAccount(User account, string password) // Account class does not have bool IsLoggedIn (doesnt need to?)
-    {
-        if(password != account.password) return Status.wrongPin;
-        Registered.Remove(account);
-        return Status.Successful; 
     }
 
-    // Close BankAccount
+    public Status DeleteUser(User account, string password) // Account class does not have bool IsLoggedIn (doesnt need to?)
+    {
+        if (password != account.password) return Status.wrongPin;
+        Registered.Remove(account);
+        return Status.Successful;
+    }
 
-    
+    public void CloseAccount(BankAccount account, User user)
+    {
+        // var L = Registered.GetValueOrDefault(user);
+        // L.Remove(account);
+
+        Registered[user].Remove(account);
+        
+        // possible to do with only value?
+
+    }
+
+    public (BankAccount?, bool b) GetBankAccountTroughIBAN(string IBAN)
+    {
+        foreach (KeyValuePair<User, List<BankAccount>> kvp in Registered)
+        {
+            foreach (BankAccount acc in kvp.Value)
+            {
+                if (acc.iban != IBAN) continue;
+                return (acc, true);
+            }
+        }
+        return (null, false); // how to make better
+    }
+
+
 
 }
 

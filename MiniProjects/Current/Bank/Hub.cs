@@ -42,5 +42,4 @@ public class Hub
         }
         return UsersBanks;
     }
-
 }

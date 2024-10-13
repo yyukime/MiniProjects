@@ -8,12 +8,12 @@ namespace Bank;
 
 public class BankAccount 
 {
-    public string iban { get; init;}
+    internal string iban { get; init;} // changed from public to internal
     internal User owner;
     private Bank bank;
     private decimal balance; 
     internal string pin;
-    public  bool correctPin { get; private set; }
+    internal  bool correctPin { get; private set; } // change from public to internal
    
     /// List<BankAccounts> BankAccsByOwner 
 
