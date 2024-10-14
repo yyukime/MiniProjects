@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquarium", "Old\Aquarium\Aq
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rennschnecke", "Old\Rennschnecke\Rennschnecke.csproj", "{4E5FD2D9-906E-4E6E-8C3D-A43134396423}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirectoryAnalyzer", "Current\DirectoryAnalyzer\DirectoryAnalyzer.csproj", "{01B6D130-AD0B-449B-9355-D81E5FB28368}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DirectoryAnalyzer", "Old\DirectoryAnalyzer\DirectoryAnalyzer.csproj", "{01B6D130-AD0B-449B-9355-D81E5FB28368}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordCounter (in VSC)", "Current\WordCounter (in VSC)\WordCounter (in VSC).csproj", "{BFC5D7C6-AAAE-4640-843F-AD8C769B3D93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordCounter (in VSC)", "Old\WordCounter (in VSC)\WordCounter (in VSC).csproj", "{BFC5D7C6-AAAE-4640-843F-AD8C769B3D93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old", "Old", "{06529C2F-C772-4261-946C-5018E404AA11}"
 EndProject
