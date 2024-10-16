@@ -10,7 +10,7 @@ public class Code
 {
     public static void Main() // string[] args?
     {
-       SetEmail();
+       SpawnUser();
     }
 
     public static void SpawnUser()
