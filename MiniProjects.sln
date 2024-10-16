@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bank", "Current\Bank\Bank.c
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "Current\UI\UI.csproj", "{269FC7F4-AF09-4499-97C1-1627394158C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hangman", "Current\Hangman\Hangman.csproj", "{7D756DC3-1F00-4EAE-B9E8-F0577BEC6CA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{269FC7F4-AF09-4499-97C1-1627394158C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{269FC7F4-AF09-4499-97C1-1627394158C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{269FC7F4-AF09-4499-97C1-1627394158C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D756DC3-1F00-4EAE-B9E8-F0577BEC6CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D756DC3-1F00-4EAE-B9E8-F0577BEC6CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D756DC3-1F00-4EAE-B9E8-F0577BEC6CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D756DC3-1F00-4EAE-B9E8-F0577BEC6CA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +122,7 @@ Global
 		{BFC5D7C6-AAAE-4640-843F-AD8C769B3D93} = {06529C2F-C772-4261-946C-5018E404AA11}
 		{C03D7EB8-24F1-4F69-B35E-74190403B91F} = {F7200F3C-3A1F-4464-9976-E48D963654CB}
 		{269FC7F4-AF09-4499-97C1-1627394158C8} = {F7200F3C-3A1F-4464-9976-E48D963654CB}
+		{7D756DC3-1F00-4EAE-B9E8-F0577BEC6CA4} = {F7200F3C-3A1F-4464-9976-E48D963654CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB94EDF4-5750-4875-91A4-6FCBD78E655A}
