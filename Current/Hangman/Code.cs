@@ -17,9 +17,9 @@ public class Code
     {
         while (true)
         {
-             
+
             Console.Clear();
-            char glC = new();
+
             bool gW = new();
             // pls select:
 
@@ -31,28 +31,47 @@ public class Code
             int input = int.Parse(stringInput); // why worse thant !tryparse -> continue;
 
             // switch statement
-            switch(input)
+            switch (input)
             {
-                case 1: glC = CTurn(); break;
+                case 1: CTurn(lowerWord); break;
                 case 2: gW = GuessWord(lowerWord); break;
             }
-
             // char gc present || bool true/false present
- 
-            List<int> indexes = SubmitChar(lowerWord, glC);
+
+
+
         }
 
     }
-    private static char CTurn()
+    private static void CTurn(string lowerWord) // return string fe ("- - l l - ") -> (Hallo)
     {
+        // 
+        char glC;
+        
         Console.Write("Enter your next guess:");
         string? input = Console.ReadLine();
+        
         if (string.IsNullOrWhiteSpace(input)) throw new ArgumentException("input is null or empty");
         if (input.Length > 1) throw new Exception("too long");
-        char c = Convert.ToChar(input[0]);
-        if (!char.IsLetter(c)) throw new Exception("not a letter");
-        char.ToLower(c);
-        return c;
+        
+        glC = Convert.ToChar(input[0]);
+        if (!char.IsLetter(glC)) throw new Exception("not a letter");
+        
+        char.ToLower(glC);  
+        //
+        //
+        List<int> indexes = SubmitChar(lowerWord, glC);
+
+        char[] uScores = lowerWord.ToArray();
+        for (int i = 0; i < uScores.Length; i++)
+        {
+            uScores[i] = '_';
+        }
+        foreach (int i in indexes)
+        {
+            uScores[i] = glC;
+        }
+
     }
 
     private static string[] ReadFile() // maybe give path?
@@ -80,19 +99,19 @@ public class Code
         // SelectWord()
         List<int> indexes = new();
         if (string.IsNullOrWhiteSpace(lowerWord)) throw new ArgumentException("string value may be null");
-        char[] index = lowerWord.ToArray();
-        int i = index.Count();
-        for (int a = 0; a < i; i++)
+        List<char> index = lowerWord.ToList();
+
+        for (int i = 0; i < index.Count; i++)
         {
-            if (index[a] != lowerC) continue;
-            indexes.Add(a);
+            if (lowerC != index[i]) continue;
+            indexes.Add(i);
         }
-        return indexes;
+        return indexes; 
     }
 
     private static bool GuessWord(string lowerWord)
     {
-        while(true)
+        while (true)
         {
             Console.Clear();
             Console.Write("Enter your next guess: ");
