@@ -16,41 +16,51 @@ public class Code
 
     public static void Main()
     {
-        // Credit wordmaster.txt https://github.com/Xethron/Hangman.git
+        // Credit wordmaster.txt https://github.com/Xethron/Hangman.git\
+        // Variables
+        int hp = 9;
         string path = "/home/joshuagemba/Documents/github/MiniProjects/Current/Hangman/words.txt";
         string lowerWord;
-        char[] lhWordArray;
+        string lhWord;
         string m1;
         bool m2;
-        // 
 
-        (lhWordArray, lowerWord) = InitWord(path);  // sets successfully 
-        string lhWord = new(lhWordArray); // ONLY IN THIS CONTEXT FOR DISPLAY 
+         
+        // Get Word and lowerHiddenWordArray (Will reconstruct soon)
+        (lhWord, lowerWord) = InitWord(path);  // sets successfully  
 
-
+        // Ui 
         Console.WriteLine("Welcome to Hangman");
         Console.WriteLine();
         Console.WriteLine($"Your word is {lhWord} . It has {lhWord.Length} characters");
 
         while (true)
         {
-            SelectTurnType(lhWordArray, lowerWord, out m1, out m2); // use status to know which value to grab?  <- stupid idea <- stupid idea to call this stupid idea actually 
+            SelectTurnType(lhWord.ToArray(), lowerWord, out m1, out m2); // use status to know which value to grab?  <- stupid idea <- stupid idea to call this stupid idea actually 
             char youSelected = new();
 
             foreach (char c in lowerWord)
             {
-                if(c == '?') continue;
-                youSelected = c; 
+                if (c == '?') continue;
+                youSelected = c;
                 break;
             }
+
             // example turn ch 
-            Console.WriteLine($"You guessed the character: {youSelected}");         
-            Console.WriteLine($"Your new Word is: {m1}");                         
-            
+            Console.WriteLine($"You guessed the character: {youSelected}");
+            Console.WriteLine();
+            if (m1 == lhWord)
+            {
+                hp -= 1;
+                Console.WriteLine($"Tough luck... Your new hp is {hp}");
+            }
+            else
+            {
+                Console.WriteLine($"You have found the following characters: {m1}");
+            }
             Console.WriteLine("press any key to retry");    // how to construct output based on status returned
             Console.ReadKey();
         }
-
     }
 
     static public Status SelectTurnType(char[] lhWordArray, string lowerWord, out string m1, out bool m2)
@@ -66,7 +76,7 @@ public class Code
             string? stringInput = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(stringInput)) continue;
             if (stringInput.Length > 1) continue;
-            if (!stringInput.All(char.IsDigit)) continue;
+            if (!stringInput.All(char.IsLetter)) continue;
             int input = int.Parse(stringInput); // why worse thant !tryparse -> continue;
 
             // switch statement
@@ -75,6 +85,7 @@ public class Code
                 case 1: m1 = CTurn(lhWordArray, lowerWord); m2 = false; return Status.Char; // I know that m2 = false is not a incorrect word guess because Status.Char is given with it; 
                 case 2: m2 = WTurn(lowerWord); m1 = "m2 was chosen"; return Status.Word; // I know m1="m2 was chosen" is a placeholder as guess cannot be more than 1 word;
             }
+            // Why return status? I would hope I can do If(Status x) -> Code for char turn
         }
     }
     private static string CTurn(char[] lhWord, string lowerWord) // return string fe ("- - l l - ") -> (Hallo)
@@ -89,46 +100,48 @@ public class Code
 
         if (string.IsNullOrWhiteSpace(input)) throw new ArgumentException("input is null or empty");
         if (input.Length > 1) throw new Exception("too long");
-
-        glC = Convert.ToChar(input[0]);
+        glC = input[0];
         if (!char.IsLetter(glC)) throw new Exception("not a letter");
         char.ToLower(glC);
         indexes = MatchChar(lowerWord, glC);
         foreach (int i in indexes)
         {
-            lhWord[i] = glC;
+            if(lhWord[i] != glC) continue;
+            lhWord[i] = glC; 
+            
         }
         string output = new(lhWord);
         return output;
     }
 
-    private static (char[], string) InitWord(string path)// string path or constance? 
+    private static (string, string) InitWord(string path)// string path or constance? 
     {
         //
         Random rIndex = new();
-        int index;
-        string sWord;
+        int seed;
+        string Word;
         string lowerWord;
-        // either use generic path or select path every time
+        string chHidden;
 
         string allText = File.ReadAllText(path);
         string[] s = allText.Split([' ', ',', '\t', '\n', '.', '(', ')', '{', '}', '[', ']', '\r']);
         //
-        index = rIndex.Next(0, s.Length);
-        sWord = s[index];
+        seed = rIndex.Next(0, s.Length);
+        Word = s[seed];
         //
-        if (string.IsNullOrWhiteSpace(sWord)) throw new ArgumentException("index empty");
+        if (string.IsNullOrWhiteSpace(Word)) throw new ArgumentException("chosen word empty");
         //
-        lowerWord = sWord.ToLower();
-        ////
-        char[] hidden = lowerWord.ToArray(); // Why ToArray() -> String array and why do ToArray() & ToCharArray() do the same thing? 
-        for (int i = 0; i < hidden.Length; i++)
+        lowerWord = Word.ToLower();
+        chHidden = lowerWord;
+        
+        foreach (Index index in chHidden)
         {
-            hidden[i] = '?'; // why not work in foreach loop where foreach char in h: c = '?'; ERROR not possible cuz iterable or some shit 
+            chHidden.Replace(chHidden[index], '?');
         }
-        return (hidden, lowerWord);
-    }
 
+        string hword = new(chHidden);
+        return (hword, lowerWord);
+    }
 
 
     private static List<int> MatchChar(string lowerWord, char lowerC) // all, will be given in lowercase
@@ -146,15 +159,16 @@ public class Code
         return indexes;
     }
 
+
     private static bool WTurn(string lowerWord)
     {
         while (true)
         {
             Console.Clear();
             Console.Write("Enter your next guess: ");
-            string? input = Console.ReadLine();
+            string? input = Console.ReadLine().ToLower();
             if (string.IsNullOrWhiteSpace(input)) continue;
-            if (input.ToArray().Length > 1) continue;
+            if (input.Length <= 1) continue;
             string lowerGuess = input.ToLower();
             return lowerWord == lowerGuess;
         }
