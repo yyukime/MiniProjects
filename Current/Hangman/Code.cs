@@ -52,7 +52,7 @@ public class Code
             if (m1 == lhWord)
             {
                 hp -= 1;
-                Console.WriteLine($"Tough luck... Your new hp is {hp}");
+                Console.WriteLine($"Tough luck... Your hp now is: {hp}");
             }
             else
             {
@@ -108,7 +108,6 @@ public class Code
         {
             if(lhWord[i] != glC) continue;
             lhWord[i] = glC; 
-            
         }
         string output = new(lhWord);
         return output;
@@ -166,7 +165,7 @@ public class Code
         {
             Console.Clear();
             Console.Write("Enter your next guess: ");
-            string? input = Console.ReadLine().ToLower();
+            string? input = Console.ReadLine().ToLower(); // why null refernce warning?? 
             if (string.IsNullOrWhiteSpace(input)) continue;
             if (input.Length <= 1) continue;
             string lowerGuess = input.ToLower();

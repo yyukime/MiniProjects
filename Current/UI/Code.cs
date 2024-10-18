@@ -1,8 +1,10 @@
 using System;
 using System.Buffers;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
 
 namespace UI;
 
@@ -10,7 +12,7 @@ public class Code
 {
     public static void Main() // string[] args?
     {
-       SpawnUser();
+        SpawnUser();
     }
 
     public static void SpawnUser()
@@ -26,6 +28,7 @@ public class Code
         if (lastname.Any(char.IsDigit)) throw new Exception("goofy lastname");
 
         // User user1 = new();
+        // AllUser.Add(this User);
     }
 
     public static string SetPassword()
@@ -53,7 +56,7 @@ public class Code
     {
         bool supportedbool = false;
 
-        string[] supported = { "gmail.com", "mail.yahoo.com","outlook.com"}; 
+        string[] supported = { "gmail.com", "mail.yahoo.com", "outlook.com" };
         string email = EmailTxt("Email");
         string[] split = email.ToLower().Split("@");
 
@@ -115,6 +118,45 @@ public class Code
             if (string.IsNullOrWhiteSpace(input)) continue;
             return input;
         }
+    }
+
+    public static void LogInUser()
+    {
+        // TODO : Fancy up console.writeline(); ! 
+        string? pswdInput;
+        string? emailInput;
+
+        while (true)
+        {
+            Console.Clear();
+            Console.Write("Password:");
+            pswdInput = Console.ReadLine();
+            Console.Write("Email:");
+            emailInput = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(pswdInput) || string.IsNullOrWhiteSpace(emailInput)) continue; // Can do this shorter? Too lazy to look up 
+            break;
+        }
+
+        // CHANGE LATER: PLACEHOLDER
+        List <string> AllUsers = new();
+        // CHANGE LATER: PLACEHOLDER
+
+        // foreach (User u in AllUser)
+        // {
+        //     if (User.Email == emailInput) ????????????????? 
+        //     return good
+        // }
+
+
+        
+
+
+
+
+
+
+
+
     }
 
 

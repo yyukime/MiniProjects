@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-string? input = Console.ReadLine().ToLower();
-Console.WriteLine(input);
+﻿Console.Write("Password:");
+string? pswdInput = Console.ReadLine();
+Console.Write("Email:");
+Console.ReadLine();
