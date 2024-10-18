@@ -26,9 +26,7 @@ public class Code
 
         if (firstname.Any(char.IsDigit)) throw new Exception("goofy name");
         if (lastname.Any(char.IsDigit)) throw new Exception("goofy lastname");
-
-        // User user1 = new();
-        // AllUser.Add(this User);
+        
     }
 
     public static string SetPassword()
@@ -137,21 +135,9 @@ public class Code
             break;
         }
 
-        // CHANGE LATER: PLACEHOLDER
-        List <string> AllUsers = new();
-        // CHANGE LATER: PLACEHOLDER
-
-        // foreach (User u in AllUser)
-        // {
-        //     if (User.Email == emailInput) ????????????????? 
-        //     return good
-        // }
 
 
         
-
-
-
 
 
 

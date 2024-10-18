@@ -45,6 +45,7 @@ public class Code
                 youSelected = c;
                 break;
             }
+            
 
             // example turn ch 
             Console.WriteLine($"You guessed the character: {youSelected}");
@@ -69,9 +70,6 @@ public class Code
         {
 
             Console.Clear();
-
-            // pls select:
-
 
             string? stringInput = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(stringInput)) continue;
@@ -149,6 +147,7 @@ public class Code
         List<int> indexes = new();
         if (string.IsNullOrWhiteSpace(lowerWord)) throw new ArgumentException("string value may be null");
         List<char> index = lowerWord.ToList();
+       
 
         for (int i = 0; i < index.Count; i++)
         {
@@ -165,11 +164,10 @@ public class Code
         {
             Console.Clear();
             Console.Write("Enter your next guess: ");
-            string? input = Console.ReadLine().ToLower(); // why null refernce warning?? 
+            string? input = Console.ReadLine()?.ToLower(); // why null refernce warning?? -> because to lower cannot be null or crash
             if (string.IsNullOrWhiteSpace(input)) continue;
             if (input.Length <= 1) continue;
-            string lowerGuess = input.ToLower();
-            return lowerWord == lowerGuess;
+            return lowerWord.Equals(input, StringComparison.OrdinalIgnoreCase); // -> StringComparison.OrdinalIgnoreCase WILL NEGATE to Lower
         }
     }
 
