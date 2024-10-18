@@ -2,25 +2,35 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Configuration.Assemblies;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Xml;
+using System.Xml.XPath;
 
 namespace Hangman;
 
 public class Code
 {
+
     public static void Main()
     {
+        string word
+        string m1;
+        bool m2;
+
+
+        SelectTurnType("word", out m1, out m2); // use status to know which value to grab? 
+        Console.ReadKey();
 
     }
 
-    static public void SelectTurnType(string lowerWord)
+    static public Status SelectTurnType(string lowerWord, out string m1, out bool m2)
     {
         while (true)
         {
 
             Console.Clear();
 
-            bool gW = new();
             // pls select:
 
 
@@ -33,31 +43,26 @@ public class Code
             // switch statement
             switch (input)
             {
-                case 1: CTurn(lowerWord); break;
-                case 2: gW = GuessWord(lowerWord); break;
+                case 1: m1 = CTurn(lowerWord); m2 = false; return Status.Char; // I know that m2 = false is not a incorrect word guess because Status.Char is given with it; 
+                case 2: m2 = GuessWord(lowerWord); m1 = "m2 was chosen"; return Status.Word; // I know m1="m2 was chosen" is a placeholder as guess cannot be more than 1 word;
             }
-            // char gc present || bool true/false present
-
-
-
         }
-
     }
-    private static void CTurn(string lowerWord) // return string fe ("- - l l - ") -> (Hallo)
+    private static string CTurn(string lowerWord) // return string fe ("- - l l - ") -> (Hallo)
     {
         // 
         char glC;
-        
+
         Console.Write("Enter your next guess:");
         string? input = Console.ReadLine();
-        
+
         if (string.IsNullOrWhiteSpace(input)) throw new ArgumentException("input is null or empty");
         if (input.Length > 1) throw new Exception("too long");
-        
+
         glC = Convert.ToChar(input[0]);
         if (!char.IsLetter(glC)) throw new Exception("not a letter");
-        
-        char.ToLower(glC);  
+
+        char.ToLower(glC);
         //
         //
         List<int> indexes = SubmitChar(lowerWord, glC);
@@ -65,33 +70,39 @@ public class Code
         char[] uScores = lowerWord.ToArray();
         for (int i = 0; i < uScores.Length; i++)
         {
-            uScores[i] = '_';
+            uScores[i] = '?';
         }
         foreach (int i in indexes)
         {
             uScores[i] = glC;
         }
-
+        string output = new(uScores);
+        return output;
     }
 
-    private static string[] ReadFile() // maybe give path?
+    private static string ReadFile()// string path or constance? 
     {
-        // either use generic path or select path every time
-        string path = "Examplepath";
-        string allText = File.ReadAllText(path);
-        string[] allWords = allText.Split([' ', ',', '\t', '\n', '.', '(', ')', '{', '}', '[', ']', '\r']);
-        return allWords;
-    }
-
-    private static string SelectWord(string[] s)
-    {
+        //
         Random rIndex = new();
-        int index = rIndex.Next(0, s.Length);
-        string sWord = s[index];
+        int index;
+        string sWord;
+        string lowerWord;
+        //
+        string path = "Examplepath"; //! 
+        // 
+
+        // either use generic path or select path every time
+      
+        string allText = File.ReadAllText(path);
+        string[] s = allText.Split([' ', ',', '\t', '\n', '.', '(', ')', '{', '}', '[', ']', '\r']);
+        index = rIndex.Next(0, s.Length);
+        sWord = s[index];
         if (string.IsNullOrWhiteSpace(sWord)) throw new ArgumentException("index empty");
-        string word = sWord.ToLower();
-        return word; // word.ToArray(); In method or in UI
+        lowerWord = sWord.ToLower();
+        return lowerWord; 
     }
+
+
 
     private static List<int> SubmitChar(string lowerWord, char lowerC) // all, will be given in lowercase
     {
@@ -106,7 +117,7 @@ public class Code
             if (lowerC != index[i]) continue;
             indexes.Add(i);
         }
-        return indexes; 
+        return indexes;
     }
 
     private static bool GuessWord(string lowerWord)
@@ -117,6 +128,7 @@ public class Code
             Console.Write("Enter your next guess: ");
             string? input = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(input)) continue;
+            if (input.ToArray().Length > 1) continue;
             string lowerGuess = input.ToLower();
             return lowerWord == lowerGuess;
         }
