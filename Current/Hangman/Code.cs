@@ -31,29 +31,34 @@ public class Code
         Console.WriteLine($"Your (hidden) word is {lhWord} . It has {lhWord.Length} characters");
         Console.WriteLine("Press any key to start playing...");
         Console.ReadKey();
-        string updatedhWord = new(lhWord);
 
-        while (true)
+        do
         {
-            int turnType = SelectTurnType(lhWord);
-            string charTurnOutput;
-            char? c = null;
+            string updatedhWord = new(lhWord);
 
+            int turnType = SelectTurnType(lhWord);
+
+
+
+            string charTurnOutput;
             switch (turnType)
             {
-                case 1: c = CharTurnP1(updatedhWord); break;
+                case 1:
+                    {
+                        char c = CharTurnP1(updatedhWord);
+                        charTurnOutput = CharTurnP2(lhWord, lowerWord, c);
+                        if (charTurnOutput == lowerWord) WinScreen();
+                        charTurnOutput = updatedhWord;
+                        break;
+                    }
+                case 2:
+                    {
+                        if (WordTurn(updatedhWord, lowerWord)) WinScreen();//method Winscreen
+                        break;
+                    }
             }
-            
-            if (c != null)
-            {
-                CharTurnP2(lhWord, lowerWord,  c); // how to not have to make c in method CharTurnP2 nullable here? As I cannot arg(char c!) and KNOW it cannot be null?
-            }
-    
-
-            updatedhWord = charTurnOutput;
-
-
         }
+        while (true);
     }
 
     static public int SelectTurnType(string lhWord) // faster as boolean?
@@ -149,6 +154,31 @@ public class Code
         }
         string output = new(lhArray);
         return output;
+    }
+
+    private static bool WordTurn(string updatedhWord, string word)
+    {
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("- Guess the word -");
+            Console.WriteLine();
+            Console.WriteLine($"Your word currently looks like this: {updatedhWord}");
+            Console.WriteLine();
+            Console.Write("Enter your guess: ");
+            string? input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input)) continue;
+            if (input.Length! > 1) continue;
+            if (input.Any(char.IsDigit)) continue;
+
+            return input == word;
+        }
+        while (true);
+    }
+
+    private static void WinScreen()
+    {
+        Console.WriteLine("Nice");
     }
 
 }
