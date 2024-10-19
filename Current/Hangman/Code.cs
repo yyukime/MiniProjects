@@ -97,7 +97,6 @@ public class Code
         int seed;
         string Word;
         string lowerWord;
-        string chHidden;
 
         string allText = File.ReadAllText(path);
         string[] s = allText.Split([' ', ',', '\t', '\n', '.', '(', ')', '{', '}', '[', ']', '\r']);
