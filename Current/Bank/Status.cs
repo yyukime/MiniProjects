@@ -1,12 +1,21 @@
 namespace Bank;
 
-public enum Status
+
+
+public enum BankStatus
 {
+    NoAccountWithBank,
     Successful,
-    AccountMisMatch,
+    IllegalArgument,
+    wrongPassword
+
+}
+
+public enum BankAccountStatus
+{
     NotLoggedIn,
     NoMoney,
     wrongPin,
     IllegalArgument,
-    NoAccountWithBank,
+    Successful
 }

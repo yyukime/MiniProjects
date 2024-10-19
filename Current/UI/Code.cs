@@ -14,9 +14,15 @@ public class Code
 {
     public static void Main() // string[] args?
     {
-        SpawnUser();
+        //...
+
+        
     }
 
+    public static int Layer1SelectAction()
+    {
+        return 0;
+    }
     public static void SpawnUser()
     {
         string password = SetPassword();
@@ -28,6 +34,9 @@ public class Code
 
         if (firstname.Any(char.IsDigit)) throw new Exception("goofy name");
         if (lastname.Any(char.IsDigit)) throw new Exception("goofy lastname");
+
+        User user = new(firstname, lastname, email, password);
+        Hub.AllUsers.Add(user);
     }
 
     public static string SetPassword()
@@ -135,15 +144,7 @@ public class Code
             if (string.IsNullOrWhiteSpace(pswdInput) || string.IsNullOrWhiteSpace(emailInput)) continue; // Can do this shorter? Too lazy to look up 
             break;
         }
-
-
-
         
-
-
-
-
-
     }
 
 

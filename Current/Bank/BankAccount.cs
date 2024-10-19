@@ -35,13 +35,13 @@ public class BankAccount
         return IBAN;
     }
 
-    public Status TransferMoney(BankAccount receiver, decimal amount)
+    public BankAccountStatus TransferMoney(BankAccount receiver, decimal amount)
     {
-        if (balance < amount) return Status.NoMoney;
-        if(amount <= 0 ) return Status.IllegalArgument;
+        if (balance < amount) return BankAccountStatus.NoMoney;
+        if(amount <= 0 ) return BankAccountStatus.IllegalArgument;
         this.balance -= amount;
         receiver.balance += amount;
-        return Status.Successful;
+        return BankAccountStatus.Successful;
     }
 
     public bool LogIn(string pin) // 12.10 17:40 - from void to bool
@@ -50,23 +50,23 @@ public class BankAccount
        return true;
     }
 
-    public Status Deposit(string pin, decimal amount)
+    public BankAccountStatus Deposit(string pin, decimal amount)
     {
-        if (!correctPin) return Status.NotLoggedIn; 
-        if (pin != this.pin) return Status.wrongPin;
-        if (amount <= 0) return Status.IllegalArgument;
+        if (!correctPin) return BankAccountStatus.NotLoggedIn; 
+        if (pin != this.pin) return BankAccountStatus.wrongPin;
+        if (amount <= 0) return BankAccountStatus.IllegalArgument;
         balance += amount;
-        return Status.Successful;
+        return BankAccountStatus.Successful;
     }
 
-    public Status Withdraw(string pin, decimal amount)
+    public BankAccountStatus Withdraw(string pin, decimal amount)
     {
-        if (!correctPin) return Status.NotLoggedIn;
-        if (pin != this.pin) return Status.wrongPin;
-        if (amount > this.balance) return Status.NoMoney;
-        if (amount <= 0) return Status.IllegalArgument;
+        if (!correctPin) return BankAccountStatus.NotLoggedIn;
+        if (pin != this.pin) return BankAccountStatus.wrongPin;
+        if (amount > this.balance) return BankAccountStatus.NoMoney;
+        if (amount <= 0) return BankAccountStatus.IllegalArgument;
         balance -= amount;
-        return Status.Successful;
+        return BankAccountStatus.Successful;
     }
 
 

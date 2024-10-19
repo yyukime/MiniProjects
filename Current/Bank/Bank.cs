@@ -35,31 +35,34 @@ public class Bank
         return true;
     }
 
-    public Status CreateBankAccount(User account, string pin) // Pin must be formatted correctly 
+    public BankStatus CreateBankAccount(User account, string pin) // Pin must be formatted correctly 
     {
-        if (!Registered.ContainsKey(account)) return Status.NoAccountWithBank;
-        if (string.IsNullOrWhiteSpace(pin)) return Status.IllegalArgument;
+        if (!Registered.ContainsKey(account)) return BankStatus.NoAccountWithBank;
+        if (string.IsNullOrWhiteSpace(pin)) return BankStatus.IllegalArgument;
         BankAccount bankAccount = new(account, this, pin);
         Registered[account].Add(bankAccount);
-        return Status.Successful;
+        return BankStatus.Successful;
     }
 
-    public Status DeleteUser(User account, string password) // Account class does not have bool IsLoggedIn (doesnt need to?)
+    public BankStatus DeleteUser(User account, string password) // Account class does not have bool IsLoggedIn (doesnt need to?)
     {
-        if (password != account.password) return Status.wrongPin;
+        if (password != account.password) return BankStatus.wrongPassword;
+        if (!Registered.ContainsKey(account)) return BankStatus.NoAccountWithBank;
         Registered.Remove(account);
-        return Status.Successful;
+        return BankStatus.Successful;
     }
 
-    public void CloseAccount(BankAccount account, User user)
+    public BankStatus CloseAccount(BankAccount account, User user)
     {
         // var L = Registered.GetValueOrDefault(user);
         // L.Remove(account);
 
+        if(!Registered.ContainsKey(user)) return BankStatus.NoAccountWithBank;
         Registered[user].Remove(account);
+        return BankStatus.Successful;
+        
         
         // possible to do with only value?
-
     }
 
     public (BankAccount?, bool b) GetBankAccountTroughIBAN(string IBAN)
@@ -72,7 +75,7 @@ public class Bank
                 return (acc, true);
             }
         }
-        return (null, false); // how to make better
+        return (null, false);
     }
 
     
