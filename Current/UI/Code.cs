@@ -141,7 +141,6 @@ public class Code
             if (string.IsNullOrWhiteSpace(pswdInput) || string.IsNullOrWhiteSpace(emailInput)) continue; // Can do this shorter? Too lazy to look up 
             break;
         }
-
     }
 
     public static int BankAccountMenu()
