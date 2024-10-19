@@ -18,7 +18,6 @@ public class Code
         // maybe add islogged in to user? 
         // why would multiple users exist? 
         // realistically if this is a atm --> user has to log into 
-
     }
 
     public static void SpawnUser()

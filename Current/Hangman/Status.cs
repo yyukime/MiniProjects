@@ -1,6 +1,6 @@
 namespace Hangman;
 
-public enum Status
+public enum Turn
 {
     Char,
     Word,
