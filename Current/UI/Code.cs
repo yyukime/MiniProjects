@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Metadata;
+using System.Security;
 using System.Text.RegularExpressions;
+using Bank;
 
 namespace UI;
 
@@ -26,7 +28,6 @@ public class Code
 
         if (firstname.Any(char.IsDigit)) throw new Exception("goofy name");
         if (lastname.Any(char.IsDigit)) throw new Exception("goofy lastname");
-        
     }
 
     public static string SetPassword()

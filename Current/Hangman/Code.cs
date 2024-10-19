@@ -147,7 +147,15 @@ public class Code
         List<int> indexes = new();
         if (string.IsNullOrWhiteSpace(lowerWord)) throw new ArgumentException("string value may be null");
         List<char> index = lowerWord.ToList();
-       
+        
+       // Needs to return Enumerable<int> to allow yield return
+        // int idx = lowerWord.IndexOf(lowerC);
+        // while (idx > 0)
+        // {
+        //     yield return idx;
+        //
+        //     idx = lowerWord.IndexOf(lowerC, idx + 1);
+        // }
 
         for (int i = 0; i < index.Count; i++)
         {

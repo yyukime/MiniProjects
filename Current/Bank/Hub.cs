@@ -9,7 +9,7 @@ namespace Bank;
 
 public class Hub
 {
-    public static readonly List<User> AllAccounts = new();
+    public static readonly List<User> AllUsers = new();
     public static readonly List<Bank> AllBanks = new(); 
     
 
