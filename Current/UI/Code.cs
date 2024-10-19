@@ -15,7 +15,9 @@ public class Code
     public static void Main() // string[] args?
     {
         //...
-
+        // maybe add islogged in to user? 
+        // why would multiple users exist? 
+        // realistically if this is a atm --> user has to log into 
 
     }
 
