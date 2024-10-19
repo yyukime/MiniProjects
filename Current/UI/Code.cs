@@ -19,10 +19,6 @@ public class Code
 
     }
 
-    public static int Layer1SelectAction()
-    {
-        return 0;
-    }
     public static void SpawnUser()
     {
         string password = SetPassword();
@@ -196,11 +192,9 @@ public class Code
         while (true);
     }
 
-    public static int MainMenu() // either give user or have user log in 
+    public static int UserLoggedInMenu(User loggedinUser) // either give user or have user log in 
     {
-        // If User is logged in
-        User loggedinUser = new("1","1","1","1");
-
+        // If User is logged in        
         do
         {
             Console.Clear();
@@ -226,11 +220,26 @@ public class Code
         while (true);
     }
 
-
-
-
-
-
-
+    public static int UserLoggedOutMenu()
+    {
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("- Select Action -");
+            Console.WriteLine();
+            Console.WriteLine("--------");
+            Console.WriteLine("[1]: Log into User");
+            Console.WriteLine("[2]: Create New User");
+            Console.WriteLine("[3]: exit");
+            Console.WriteLine("--------");
+            Console.Write("Selection: ");
+     
+            string? @string = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(@string)) continue;
+            if (!int.TryParse(@string, out int input)) continue;
+            return input;
+        }
+        while(true);
+    }
 
 }
