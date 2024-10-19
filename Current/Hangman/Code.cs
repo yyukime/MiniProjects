@@ -35,17 +35,14 @@ public class Code
         do
         {
             string updatedhWord = new(lhWord);
-
-            int turnType = SelectTurnType(lhWord);
-
-
+            int turnType = SelectTurnType(lhWord, hp);
 
             string charTurnOutput;
             switch (turnType)
             {
                 case 1:
                     {
-                        char c = CharTurnP1(updatedhWord);
+                        char c = CharTurnP1(updatedhWord, hp);
                         charTurnOutput = CharTurnP2(lhWord, lowerWord, c);
                         if (charTurnOutput == lowerWord) WinScreen();
                         charTurnOutput = updatedhWord;
@@ -53,21 +50,31 @@ public class Code
                     }
                 case 2:
                     {
-                        if (WordTurn(updatedhWord, lowerWord)) WinScreen();//method Winscreen
+                        if (WordTurn(updatedhWord, lowerWord, hp)) WinScreen();
                         break;
                     }
             }
+
+            if (hp == 1) FailScreen();
+            hp -= 1;
+            
+            Console.WriteLine("Your guess was wrong!");
+            Console.WriteLine($"You have {hp}hp left");
+            Console.WriteLine("Press any key to try again");
+            Console.ReadKey();
         }
         while (true);
     }
 
-    static public int SelectTurnType(string lhWord) // faster as boolean?
+    static public int SelectTurnType(string updatedhWord, int hp) // faster as boolean?
     {
         do
         {
+            Console.WriteLine($"Current Word: {updatedhWord}");
+            Console.WriteLine($"Current HP: {hp}");
+            Console.WriteLine();
             Console.WriteLine("- Select a Turn type - ");
             Console.WriteLine();
-            Console.WriteLine($"Your word currently looks like this: {lhWord}");
             Console.WriteLine();
             Console.WriteLine("[1]: Guess a character:");
             Console.WriteLine("[2]: Guess a Word:");
@@ -101,23 +108,25 @@ public class Code
         if (string.IsNullOrWhiteSpace(Word)) throw new ArgumentException("chosen word empty");
         //
         lowerWord = Word.ToLower();
-        chHidden = lowerWord;
 
-        foreach (Index index in chHidden)
+        char[] chArray = lowerWord.ToArray();
+
+        for(int i = 0; i < chArray.Length; i++)
         {
-            chHidden.Replace(chHidden[index], '?');
+            chArray[i] = '?';
         }
-
-        string hword = new(chHidden);
-
+        string hword = new(chArray);
         return (hword, lowerWord);
     }
 
-    public static char CharTurnP1(string updatedhWord)
+    public static char CharTurnP1(string updatedhWord,int hp)
     {
         do
         {
             Console.Clear();
+            Console.WriteLine($"Current Word: {updatedhWord}");
+            Console.WriteLine($"Current HP: {hp}");
+            Console.WriteLine();
             Console.WriteLine("- Guess a character -");
             Console.WriteLine();
             Console.WriteLine($"Your word currently looks like this: {updatedhWord}");
@@ -156,11 +165,14 @@ public class Code
         return output;
     }
 
-    private static bool WordTurn(string updatedhWord, string word)
+    private static bool WordTurn(string updatedhWord, string word, int hp)
     {
         do
         {
             Console.Clear();
+            Console.WriteLine($"Current Word: {updatedhWord}");
+            Console.WriteLine($"Current HP: {hp}");
+            Console.WriteLine();
             Console.WriteLine("- Guess the word -");
             Console.WriteLine();
             Console.WriteLine($"Your word currently looks like this: {updatedhWord}");
@@ -178,7 +190,12 @@ public class Code
 
     private static void WinScreen()
     {
-        Console.WriteLine("Nice");
+        Console.WriteLine("Wooho");
+    }
+
+    private static void FailScreen()
+    {
+        Console.WriteLine("You died");
     }
 
 }
