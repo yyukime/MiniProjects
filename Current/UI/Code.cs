@@ -16,7 +16,7 @@ public class Code
     {
         //...
 
-        
+
     }
 
     public static int Layer1SelectAction()
@@ -144,7 +144,86 @@ public class Code
             if (string.IsNullOrWhiteSpace(pswdInput) || string.IsNullOrWhiteSpace(emailInput)) continue; // Can do this shorter? Too lazy to look up 
             break;
         }
-        
+
+    }
+
+    public static int BankAccountMenu()
+    {
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("- Select Action -");
+            Console.WriteLine();
+            Console.WriteLine("--------");
+            Console.WriteLine("[1]: Money Transfer");
+            Console.WriteLine("[2]: Deposit");
+            Console.WriteLine("[3]: Withdraw");
+            Console.WriteLine("[4]: go back");
+            Console.WriteLine("--------");
+            Console.Write("Selection: ");
+
+            string? @string = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(@string)) continue;
+            if (!int.TryParse(@string, out int input)) continue;
+
+            return input;
+        }
+        while (true);
+    }
+
+    public static int BankMenu()
+    {
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("- Select Action -");
+            Console.WriteLine();
+            Console.WriteLine("--------");
+            Console.WriteLine("[1]: Log in");
+            Console.WriteLine("[2]: Create new Bank Account");
+            Console.WriteLine("[3]: Delete Bank Account"); // If deleted: Money transfers in another account (selected) or gets 'withdrawn' (deleted)
+            Console.WriteLine("[4]: go back");
+            Console.WriteLine("--------");
+            Console.Write("Selection: ");
+
+            string? @string = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(@string)) continue;
+            if (!int.TryParse(@string, out int input)) continue;
+
+            return input;
+
+        }
+        while (true);
+    }
+
+    public static int MainMenu() // either give user or have user log in 
+    {
+        // If User is logged in
+        User loggedinUser = new("1","1","1","1");
+
+        do
+        {
+            Console.Clear();
+            List<Bank.Bank> BankList = Hub.GetBanksForUser(loggedinUser);
+
+            Console.Clear();
+            Console.WriteLine("- Select Action -");
+            Console.WriteLine();
+            Console.WriteLine("--------");
+            int i = new();
+            for (i = 1; i < BankList.Count; i++)
+            {
+                Console.WriteLine($"[{i}]: {BankList[i].Name}");
+            }
+            Console.WriteLine($"[{i += 1}]: exit");
+            Console.WriteLine("--------");
+            Console.Write("Selection: ");
+            string? @string = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(@string)) continue;
+            if (!int.TryParse(@string, out int input)) continue;
+            return input;
+        }
+        while (true);
     }
 
 

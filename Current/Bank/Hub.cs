@@ -20,7 +20,7 @@ public class Hub
     //     correct == correctBank; //true
     // }
     
-    public BankStatus GetBankByBLZ(string BLZInput, out Bank? correctBank) // cannot return with (Bank, Status) as no Bank object is in hand ? Idk whas happaning
+    public static BankStatus GetBankByBLZ(string BLZInput, out Bank? correctBank) // cannot return with (Bank, Status) as no Bank object is in hand ? Idk whas happaning
     {
         correctBank = null;
         if(!int.TryParse(BLZInput, out int BLZ)) return BankStatus.IllegalArgument;
@@ -32,7 +32,7 @@ public class Hub
         return BankStatus.Successful;
     }
 
-    public List<Bank> GetBanksForUser(User user)
+    public static List<Bank> GetBanksForUser(User user)
     {
         List<Bank> UsersBanks = new();
         foreach (Bank bank in AllBanks)
@@ -42,6 +42,8 @@ public class Hub
         }
         return UsersBanks;
     }
+
+
 
     
 }
