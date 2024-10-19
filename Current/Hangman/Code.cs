@@ -36,7 +36,6 @@ public class Code
         {
             string updatedhWord = new(lhWord);
             int turnType = SelectTurnType(lhWord, hp);
-
             string charTurnOutput;
             switch (turnType)
             {
@@ -47,6 +46,7 @@ public class Code
                         if (charTurnOutput == lowerWord) WinScreen();
                         charTurnOutput = updatedhWord;
                         break;
+                        
                     }
                 case 2:
                     {
@@ -62,6 +62,7 @@ public class Code
             Console.WriteLine($"You have {hp}hp left");
             Console.WriteLine("Press any key to try again");
             Console.ReadKey();
+            
         }
         while (true);
     }

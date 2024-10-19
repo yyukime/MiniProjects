@@ -110,7 +110,7 @@ public class Code
 
     public static string PasswordTxt(string what)
     {
-        while (true)
+        do
         {
             Console.Clear();
             Console.WriteLine(" -- Create User -- ");
@@ -123,6 +123,7 @@ public class Code
             if (string.IsNullOrWhiteSpace(input)) continue;
             return input;
         }
+        while(true);
     }
 
     public static void LogInUser()
@@ -131,7 +132,7 @@ public class Code
         string? pswdInput;
         string? emailInput;
 
-        while (true)
+        do
         {
             Console.Clear();
             Console.Write("Password:");
@@ -141,6 +142,7 @@ public class Code
             if (string.IsNullOrWhiteSpace(pswdInput) || string.IsNullOrWhiteSpace(emailInput)) continue; // Can do this shorter? Too lazy to look up 
             break;
         }
+        while(true);
     }
 
     public static int BankAccountMenu()
@@ -161,7 +163,6 @@ public class Code
             string? @string = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(@string)) continue;
             if (!int.TryParse(@string, out int input)) continue;
-
             return input;
         }
         while (true);
@@ -185,7 +186,6 @@ public class Code
             string? @string = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(@string)) continue;
             if (!int.TryParse(@string, out int input)) continue;
-
             return input;
 
         }
@@ -204,17 +204,18 @@ public class Code
             Console.WriteLine("- Select Action -");
             Console.WriteLine();
             Console.WriteLine("--------");
-            int i = new();
-            for (i = 1; i < BankList.Count; i++)
+
+            for (int i = 1; i < BankList.Count; i++)
             {
                 Console.WriteLine($"[{i}]: {BankList[i].Name}");
             }
-            Console.WriteLine($"[{i += 1}]: exit");
+            Console.WriteLine($"[{BankList.Count + 1}]: exit");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
             string? @string = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(@string)) continue;
             if (!int.TryParse(@string, out int input)) continue;
+
             return input;
         }
         while (true);
@@ -233,13 +234,12 @@ public class Code
             Console.WriteLine("[3]: exit");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
-     
+
             string? @string = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(@string)) continue;
             if (!int.TryParse(@string, out int input)) continue;
             return input;
         }
-        while(true);
+        while (true);
     }
-
 }
