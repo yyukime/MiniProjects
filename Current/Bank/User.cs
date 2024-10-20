@@ -29,14 +29,15 @@ public class User
         ID = Guid.NewGuid();
     }
 
-    public static bool LogIn(string password, string email)
+    public static (User?, bool) LogIn(string password, string email)
     {
-        foreach (User user in Hub.AllUsers)
+        foreach (User thisUser in Hub.AllUsers)
         {
-            if (user.password != password && user.email != email) continue;
-            return true;
+            if (thisUser.password != password && thisUser.email != email) continue;
+            return (thisUser, true);
         }
-        return false; // user either does not exist // either password or email is wrong   
+        User? NullUser = null;
+        return (NullUser, false); // user either does not exist // either password or email is wrong   
     }
 
     public static void UserInfo(User user)
@@ -46,12 +47,12 @@ public class User
         Console.WriteLine();
         Console.WriteLine($"Name: {user.lastName}, {user.firstName}");
         Console.WriteLine($"Email: {user.email}");
-        char[] hpword = user.password.ToArray();
+        char[] hpassword = user.password.ToArray();
         for (int i = 0; i > user.password.Length; i++)
         {
-            hpword[i] = '*';
+            hpassword[i] = '*';
         }
-        string displayPassword = new(hpword);
+        string displayPassword = new(hpassword);
         Console.WriteLine($"Password: {displayPassword}");
     }
 

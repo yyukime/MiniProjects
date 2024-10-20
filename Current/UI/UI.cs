@@ -21,19 +21,29 @@ public class UI
         {
             int MainMenuInt = MainMenu();
 
+            
             switch (MainMenuInt)
             {
-                case 1:  bool UserLogIn = UserLoggedOutActions.LogIn(); break;
-                case 2: 
-                {
-                    User newUser = UserLoggedOutActions.NewUser();
-                    Bank.User.UserInfo(newUser);
-                    Console.ReadKey();
-                    break;
-                }
+                case 1:
+                    {
+                        (User? thisRealUser, bool UserLogIn) = MainMenuActions.LogIn();
+                        if (UserLogIn == false || thisRealUser == null) throw new Exception("Account LogIn failed. User does not Exist or Password || Email is wrong");
+                        BankMenu(thisRealUser);
+                        break;
+                    }
+                case 2:
+                    {
+                        User newUser = MainMenuActions.NewUser();
+                        Bank.User.UserInfo(newUser);
+                        Console.ReadKey();
+                        break;
+                    }
+                case 3: MainMenuActions.Exit(); break; // why have to break here even though Exit() kills program?
             }
+
         }
-        while(true);
+        while (true);
+        
     }
 
     public static (BankAccount, int) BankAccountMenu(BankAccount account)
@@ -60,7 +70,7 @@ public class UI
     }
 
     public static int BankMenu(User loggedinUser) // only accessible if user logged in 
-    {  
+    {
         do
         {
             Console.Clear();
@@ -87,7 +97,6 @@ public class UI
         while (true);
     }
 
-
     public static int MainMenu()
     {
         do
@@ -98,7 +107,7 @@ public class UI
             Console.WriteLine("--------");
             Console.WriteLine("[1]: Log into User");
             Console.WriteLine("[2]: Create New User");
-            Console.WriteLine("[3]: exit");
+            Console.WriteLine("[3]: Exit");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
             string? @string = Console.ReadLine();

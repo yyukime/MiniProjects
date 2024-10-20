@@ -4,9 +4,9 @@ using UI;
 
 namespace BankUI;
 
-public class UserLoggedOutActions
+public class MainMenuActions
 {
-    public static bool LogIn()
+    public static (User?, bool) LogIn()
     {
         string? pswdInput;
         string? emailInput;
