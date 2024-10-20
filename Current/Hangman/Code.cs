@@ -19,7 +19,7 @@ public class Code
     {
         // Credit words.txt https://github.com/Xethron/Hangman.git\
         // Variables
-        int hp = 9;
+        int hp = 2;
         string path = "/home/joshuagemba/Documents/github/MiniProjects/Current/Hangman/words.txt";
 
         // Get Word and lowerHiddenWordArray (Will reconstruct soon)
@@ -30,23 +30,40 @@ public class Code
         Console.WriteLine();
         Console.WriteLine($"Your (hidden) word is {lhWord} . It has {lhWord.Length} characters");
         Console.WriteLine("Press any key to start playing...");
-        Console.ReadKey();
+        Console.ReadLine();
+
+
+
+        string updatedhWord = new(lhWord);
+        string charTurnOutput;
 
         do
         {
-            string updatedhWord = new(lhWord);
+            Console.Clear();
             int turnType = SelectTurnType(lhWord, hp);
-            string charTurnOutput;
+
+
+
             switch (turnType)
             {
                 case 1:
                     {
                         char c = CharTurnP1(updatedhWord, hp);
-                        charTurnOutput = CharTurnP2(lhWord, lowerWord, c);
+                        charTurnOutput = CharTurnP2(updatedhWord, lowerWord, c, out bool p2Correct);
                         if (charTurnOutput == lowerWord) WinScreen();
-                        charTurnOutput = updatedhWord;
+                        updatedhWord = charTurnOutput;
+
+                        if (p2Correct is true)
+                        {
+                            Console.WriteLine($"Your guess was correct! // You guess {c}.");
+                            Console.WriteLine($"Your new word is: {updatedhWord}");
+                            Console.WriteLine("Press any key to try again");
+                            Console.ReadLine();
+                            continue;
+                        }
+
                         break;
-                        
+
                     }
                 case 2:
                     {
@@ -54,23 +71,20 @@ public class Code
                         break;
                     }
             }
-
-            if (hp == 1) FailScreen();
             hp -= 1;
-            
-            Console.WriteLine("Your guess was wrong!");
-            Console.WriteLine($"You have {hp}hp left");
+            Console.WriteLine($"Your guess was wrong // You have {hp}hp left.");
             Console.WriteLine("Press any key to try again");
-            Console.ReadKey();
-            
+            Console.ReadLine();
         }
-        while (true);
+        while (hp >= 1);
+        FailScreen();
     }
 
     static public int SelectTurnType(string updatedhWord, int hp) // faster as boolean?
     {
         do
         {
+            Console.Clear();
             Console.WriteLine($"Current Word: {updatedhWord}");
             Console.WriteLine($"Current HP: {hp}");
             Console.WriteLine();
@@ -111,7 +125,7 @@ public class Code
 
         char[] chArray = lowerWord.ToArray();
 
-        for(int i = 0; i < chArray.Length; i++)
+        for (int i = 0; i < chArray.Length; i++)
         {
             chArray[i] = '?';
         }
@@ -119,7 +133,7 @@ public class Code
         return (hword, lowerWord);
     }
 
-    public static char CharTurnP1(string updatedhWord,int hp)
+    public static char CharTurnP1(string updatedhWord, int hp)
     {
         do
         {
@@ -141,27 +155,34 @@ public class Code
         while (true);
     }
 
-    public static string CharTurnP2(string lh, string w, char guess)
+    public static string CharTurnP2(string lh, string w, char guess, out bool p2Correct)
     {
         if (lh.Length != w.Length) throw new Exception("take antidepressants");
 
-        List<int> indexes = new();
+        List<int> correctIndexes = new();
         if (string.IsNullOrWhiteSpace(w)) throw new ArgumentException("string value may be null");
         List<char> index = w.ToList();
+
         for (int i = 0; i < index.Count; i++)
         {
             if (guess != index[i]) continue;
-            indexes.Add(i);
+            correctIndexes.Add(i);
         }
 
         char[] lhArray = lh.ToArray();
-
-        for (int i = 0; i < lh.Length; i++)
+        foreach (int i in correctIndexes)
         {
-            if (lh[i] != guess) continue;
+
             lhArray[i] = guess;
         }
+
         string output = new(lhArray);
+        if (output != lh)
+        {
+            p2Correct = true;
+            return output;  // if input(updatedHStrign != new string) => no changes to string == wrong guess /// so if != correctly guessed (someting)
+        }
+        p2Correct = false;
         return output;
     }
 
