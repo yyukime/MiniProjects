@@ -16,34 +16,32 @@ public class UI
 {
     public static void Main() // string[] args?
     {
-        // Main Menu
-        do
+        int MainMenuSelection = MainMenu();
+
+        User? ActiveUser = MainMenuLoop(MainMenuSelection);
+        if (ActiveUser == null) throw new Exception("Kill yourself");
+    }
+    public static User? MainMenuLoop(int MainMenuSelection)
+    {
+        int[] validSelections = {1, 2, 3};
+        if(!validSelections.Contains(MainMenuSelection)) throw new Exception("Selection Input not valid");
+        switch (MainMenuSelection)
         {
-            int MainMenuInt = MainMenu();
-
-            
-            switch (MainMenuInt)
-            {
-                case 1:
-                    {
-                        (User? thisRealUser, bool UserLogIn) = MainMenuActions.LogIn();
-                        if (UserLogIn == false || thisRealUser == null) throw new Exception("Account LogIn failed. User does not Exist or Password || Email is wrong");
-                        BankMenu(thisRealUser);
-                        break;
-                    }
-                case 2:
-                    {
-                        User newUser = MainMenuActions.NewUser();
-                        Bank.User.UserInfo(newUser);
-                        Console.ReadKey();
-                        break;
-                    }
-                case 3: MainMenuActions.Exit(); break; // why have to break here even though Exit() kills program?
-            }
-
+            case 1:
+                {
+                    (User? thisRealUser, bool UserLogIn) = MainMenuActions.LogIn();
+                    if (UserLogIn == false || thisRealUser == null) throw new Exception("Account LogIn failed. User does not Exist or Password || Email is wrong");
+                    return thisRealUser;
+                }
+            case 2:
+                {
+                    User newUser = MainMenuActions.NewUser();
+                    Bank.User.UserInfo(newUser);
+                    return newUser;
+                }
+            case 3: MainMenuActions.Exit(); return null;
         }
-        while (true);
-        
+        return null;
     }
 
     public static (BankAccount, int) BankAccountMenu(BankAccount account)
