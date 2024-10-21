@@ -16,20 +16,21 @@ public class UI
 {
     public static void Main() // string[] args?
     {
-        //Main menu
-        int MainMenuSelection = UI.MainMenuSelection();
-        User? activeUser = MainMenuSwitch(MainMenuSelection);
+        do
+        {
+            //Main menu
+            int MainMenuSelection = UI.MainMenuSelection();
+            User? activeUser = MainMenuSwitch(MainMenuSelection);
 
-        if (activeUser == null) throw new Exception("case 3 exit for some reason?");
-
-        //Select Bank
-        Bank.Bank selectedBank = BankSelectionMenu(activeUser);
-        //Select BankAccount
-        BankAccount SelectedBankAccount = BankAccountSelection(activeUser, selectedBank);
-        //Select BankAccountAction
-        int BankAccountAction = BankAccountMenu(SelectedBankAccount);
-
-
+            if (activeUser == null) throw new Exception("case 3 exit for some reason?");
+            //Select Bank
+            Bank.Bank selectedBank = BankSelectionMenu(activeUser);
+            //Select BankAccount
+            BankAccount SelectedBankAccount = BankAccountSelection(activeUser, selectedBank);
+            //Select BankAccountAction
+            int BankAccountAction = BankAccountMenu(SelectedBankAccount);
+        }
+        while (true);
     }
     public static User? MainMenuSwitch(int MainMenuSelection)
     {
@@ -188,10 +189,9 @@ public class UI
                     break;
                 }
             case 4:
-            {
-                break; //what does this do?
-            }
-
+                {
+                    break; //what does this do?
+                }
         }
 
     }
