@@ -155,7 +155,7 @@ public class UI
         while (true);
     }
 
-    public static void BankAccountAction(int selection, BankAccount account)
+    public static void BankAccountSelection(int selection, BankAccount account)
     {
 
         switch (selection)

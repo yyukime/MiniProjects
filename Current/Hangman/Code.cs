@@ -20,7 +20,7 @@ public class Code
         // Credit words.txt https://github.com/Xethron/Hangman.git\
         // Variables
         int hp = 2;
-        string path = "/home/joshuagemba/Documents/github/MiniProjects/Current/Hangman/words.txt";
+        string path = "words.txt";
 
         // Get Word and lowerHiddenWordArray (Will reconstruct soon)
         (string lhWord, string lowerWord) = InitWord(path);  // sets successfully  
