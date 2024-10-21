@@ -48,7 +48,7 @@ public class UI
                     Bank.User.UserInfo(newUser);
                     return newUser;
                 }
-            case 3: MainMenuActions.Exit(); return null;
+            case 3: Environment.Exit(0); break;
         }
         return null;
     }
