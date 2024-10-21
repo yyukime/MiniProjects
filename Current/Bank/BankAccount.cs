@@ -11,8 +11,8 @@ public class BankAccount
     internal string iban { get; init;} // changed from public to internal
     internal User owner;
     private Bank bank;
-    private decimal balance; 
-    internal string pin;
+    private decimal balance;
+    private string pin;
     internal  bool correctPin { get; private set; } // change from public to internal
    
     /// List<BankAccounts> BankAccsByOwner 

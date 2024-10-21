@@ -10,7 +10,7 @@ public class Bank
     public string Name { get; init; }
     public int BLZ { get; init; }
 
-    public Dictionary<User, List<BankAccount>> Registered;
+    internal Dictionary<User, List<BankAccount>> Registered;
 
     public Bank(string name, int BLZ) // internal (only in here) for using hub class with other projects
     {
