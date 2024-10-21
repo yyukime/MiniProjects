@@ -16,15 +16,20 @@ public class UI
 {
     public static void Main() // string[] args?
     {
-        int MainMenuSelection = MainMenu();
+        //Main menu
+        int MainMenuSelection = UI.MainMenuSelection();
+        User? ActiveUser = MainMenuSwitch(MainMenuSelection);
+        
+        if (ActiveUser == null) throw new Exception("case 3 exit for some reason?");
 
-        User? ActiveUser = MainMenuLoop(MainMenuSelection);
-        if (ActiveUser == null) throw new Exception("Kill yourself");
+        //Select Bank
+        Bank.Bank SelectedBank = BankSelectionMenu(ActiveUser);
+        //Select BankAccount
+        
+
     }
-    public static User? MainMenuLoop(int MainMenuSelection)
+    public static User? MainMenuSwitch(int MainMenuSelection)
     {
-        int[] validSelections = {1, 2, 3};
-        if(!validSelections.Contains(MainMenuSelection)) throw new Exception("Selection Input not valid");
         switch (MainMenuSelection)
         {
             case 1:
@@ -67,7 +72,7 @@ public class UI
         while (true);
     }
 
-    public static int BankMenu(User loggedinUser) // only accessible if user logged in 
+    public static Bank.Bank BankSelectionMenu(User loggedinUser) // only accessible if user logged in 
     {
         do
         {
@@ -78,7 +83,6 @@ public class UI
             Console.WriteLine("- Select Action -");
             Console.WriteLine();
             Console.WriteLine("--------");
-
             for (int i = 1; i < BankList.Count; i++)
             {
                 Console.WriteLine($"[{i}]: {BankList[i].Name}");
@@ -89,17 +93,17 @@ public class UI
             string? @string = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(@string)) continue;
             if (!int.TryParse(@string, out int input)) continue;
-
-            return input;
+            return BankList[input];
         }
         while (true);
     }
 
-    public static int MainMenu()
+    public static int MainMenuSelection()
     {
         do
         {
             Console.Clear();
+
             Console.WriteLine("- Select Action -");
             Console.WriteLine();
             Console.WriteLine("--------");
@@ -111,9 +115,17 @@ public class UI
             string? @string = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(@string)) continue;
             if (!int.TryParse(@string, out int input)) continue;
+            int[] validSelections = { 1, 2, 3 };
+            if (!validSelections.Contains(input)) continue;
             return input;
         }
         while (true);
+    }
+
+    private static int BankAccountSelection(User activeUser, Bank.Bank selectedBank)
+    {
+        
+        selectedBank.Registered.TryGetValue(activeUser, out List<BankAccount> BankAccountsForUser);
     }
 
 }
