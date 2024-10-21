@@ -29,6 +29,7 @@ public class UI
         //Select BankAccountAction
         int BankAccountAction = BankAccountMenu(SelectedBankAccount);
 
+
     }
     public static User? MainMenuSwitch(int MainMenuSelection)
     {
@@ -138,7 +139,7 @@ public class UI
             Console.WriteLine("--------");
             for (int i = 1; i < BankAccountsForUser.Count; i++)
             {
-                Console.WriteLine($"[{i}]: Account with IBAN: ******{BankAccountsForUser[i].GetBankAccountIBAN}"); // !No BankAccount ToString// Display method?
+                Console.WriteLine($"[{i}]: Account with IBAN: ******{BankAccountsForUser[i].GetShortBankAccountIBAN}"); // !No BankAccount ToString// Display method?
             }
             Console.WriteLine($"[{BankAccountsForUser.Count + 1}]: exit");
             Console.WriteLine("--------");
@@ -166,6 +167,30 @@ public class UI
                     Bank.BankAccountStatus plswork = account.TransferMoney(receiver, amount);
                     break;
                 }
+            case 2:
+                {
+                    (string pin, decimal amount) = BankAccountActions.ActionsUI();
+                    BankAccountStatus result = account.Deposit(pin, amount);
+                    if (result != BankAccountStatus.Successful) throw new Exception("Deposit failed");
+                    Console.WriteLine("You deposited {amount} successfully");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadLine();
+                    break;
+                }
+            case 3:
+                {
+                    (string pin, decimal amount) = BankAccountActions.ActionsUI();
+                    BankAccountStatus result = account.Withdraw(pin, amount);
+                    if (result != BankAccountStatus.Successful) throw new Exception("Withdraw failed");
+                    Console.WriteLine("You have withdrawn{amount} successfully, please stand by as the machine prints the money..");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadLine();
+                    break;
+                }
+            case 4:
+            {
+                break; //what does this do?
+            }
 
         }
 

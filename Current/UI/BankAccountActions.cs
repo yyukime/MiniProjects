@@ -1,4 +1,5 @@
 using System;
+using System.Net.NetworkInformation;
 using Bank;
 
 namespace BankUI;
@@ -19,7 +20,7 @@ public class BankAccountActions
             if (string.IsNullOrWhiteSpace(ibanInput)) continue;
             break;
         }
-        while(true);
+        while (true);
         do
         {
             Console.Clear();
@@ -28,10 +29,10 @@ public class BankAccountActions
             Console.Write("Please enter the amount: ");
             string? stringDecimalInput = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(stringDecimalInput)) continue;
-            if(!decimal.TryParse(stringDecimalInput, out amountDecimal)) continue;
+            if (!decimal.TryParse(stringDecimalInput, out amountDecimal)) continue;
             break;
         }
-        while(true);
+        while (true);
         return (ibanInput, amountDecimal);
     }
 
@@ -49,5 +50,31 @@ public class BankAccountActions
             }
         }
         return (null, false);
+    }
+
+    public static (string, decimal) ActionsUI()
+    {
+        decimal amount;
+        string pin;
+        do
+        {
+            Console.Clear();
+            Console.Write("Please enter the amount: ");
+            string? stringInput = Console.ReadLine();
+            if (!decimal.TryParse(stringInput, out amount)) continue;
+            break;
+        }
+        while (true);
+        do
+        {
+            Console.Clear();
+            Console.Write("Please enter your pin: ");
+            pin = Console.ReadLine()!;
+            if (string.IsNullOrWhiteSpace(pin)) continue;
+            break;
+        }
+        while (true);
+        return (pin, amount);
+
     }
 }
