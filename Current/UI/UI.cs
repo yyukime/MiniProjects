@@ -18,14 +18,16 @@ public class UI
     {
         //Main menu
         int MainMenuSelection = UI.MainMenuSelection();
-        User? ActiveUser = MainMenuSwitch(MainMenuSelection);
-        
-        if (ActiveUser == null) throw new Exception("case 3 exit for some reason?");
+        User? activeUser = MainMenuSwitch(MainMenuSelection);
+
+        if (activeUser == null) throw new Exception("case 3 exit for some reason?");
 
         //Select Bank
-        Bank.Bank SelectedBank = BankSelectionMenu(ActiveUser);
+        Bank.Bank selectedBank = BankSelectionMenu(activeUser);
         //Select BankAccount
-        
+        BankAccount SelectedBankAccount = BankAccountSelection(activeUser, selectedBank);
+        //Select BankAccountAction
+        int BankAccountAction = BankAccountMenu(SelectedBankAccount);
 
     }
     public static User? MainMenuSwitch(int MainMenuSelection)
@@ -49,7 +51,7 @@ public class UI
         return null;
     }
 
-    public static (BankAccount, int) BankAccountMenu(BankAccount account)
+    public static int BankAccountMenu(BankAccount account)
     {
         do
         {
@@ -63,11 +65,11 @@ public class UI
             Console.WriteLine("[4]: go back");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
+            string? stringInput = Console.ReadLine();
 
-            string? @string = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(@string)) continue;
-            if (!int.TryParse(@string, out int input)) continue;
-            return (account, input);
+            if (stringInput?.Length != 1) continue;
+            if (!int.TryParse(stringInput, out int output)) continue;
+            return output;
         }
         while (true);
     }
@@ -90,9 +92,9 @@ public class UI
             Console.WriteLine($"[{BankList.Count + 1}]: exit");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
-            string? @string = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(@string)) continue;
-            if (!int.TryParse(@string, out int input)) continue;
+            string? stringInput = Console.ReadLine();
+            if (stringInput?.Length != 1) continue;
+            if (!int.TryParse(stringInput, out int input)) continue;
             return BankList[input];
         }
         while (true);
@@ -112,9 +114,10 @@ public class UI
             Console.WriteLine("[3]: Exit");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
-            string? @string = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(@string)) continue;
-            if (!int.TryParse(@string, out int input)) continue;
+            string? stringInput = Console.ReadLine();
+
+            if (stringInput?.Length != 1) continue;
+            if (!int.TryParse(stringInput, out int input)) continue;
             int[] validSelections = { 1, 2, 3 };
             if (!validSelections.Contains(input)) continue;
             return input;
@@ -122,10 +125,50 @@ public class UI
         while (true);
     }
 
-    private static int BankAccountSelection(User activeUser, Bank.Bank selectedBank)
+    private static BankAccount BankAccountSelection(User activeUser, Bank.Bank selectedBank)
     {
-        
-        selectedBank.Registered.TryGetValue(activeUser, out List<BankAccount> BankAccountsForUser);
+        do
+        {
+            Console.Clear();
+            List<BankAccount>? BankAccountsForUser;
+            if (!selectedBank.Registered.TryGetValue(activeUser, out BankAccountsForUser)) throw new Exception("Unreachable 'This user does not have BankAcocunts'");
+            if (BankAccountsForUser == null) throw new Exception("Unreachable: null-value for key activeUser");
+            Console.WriteLine("- Select Action -");
+            Console.WriteLine();
+            Console.WriteLine("--------");
+            for (int i = 1; i < BankAccountsForUser.Count; i++)
+            {
+                Console.WriteLine($"[{i}]: Account with IBAN: ******{BankAccountsForUser[i].GetBankAccountIBAN}"); // !No BankAccount ToString// Display method?
+            }
+            Console.WriteLine($"[{BankAccountsForUser.Count + 1}]: exit");
+            Console.WriteLine("--------");
+            Console.Write("Selection: ");
+            string? stringInput = Console.ReadLine();
+
+            if (stringInput?.Length != 1) continue;
+            if (!int.TryParse(stringInput, out int input)) continue;
+            BankAccount selectedBankAccount = BankAccountsForUser[input];
+            return selectedBankAccount;
+        }
+        while (true);
+    }
+
+    public static void BankAccountAction(int selection, BankAccount account)
+    {
+
+        switch (selection)
+        {
+            case 1:
+                {
+                    (string iban, decimal amount) = BankAccountActions.InputIBANAndAmount(account);
+                    (BankAccount? receiver, bool works) = BankAccountActions.MatchIBANandInput(iban);
+                    if (receiver == null) throw new Exception("This should not happen");
+                    Bank.BankAccountStatus plswork = account.TransferMoney(receiver, amount);
+                    break;
+                }
+
+        }
+
     }
 
 }

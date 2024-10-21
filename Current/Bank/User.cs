@@ -56,6 +56,11 @@ public class User
         Console.WriteLine($"Password: {displayPassword}");
     }
 
+    internal static string getName(User user)
+    {
+        return user.firstName + user.lastName;
+    }
+
 
 
 
