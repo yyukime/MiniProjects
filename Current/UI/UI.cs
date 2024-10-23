@@ -1,4 +1,6 @@
 using System;
+using System.Net;
+using System.Runtime.CompilerServices;
 using Bank;
 
 namespace BankUI;
@@ -83,7 +85,7 @@ public class UI
         while (true);
     }
 
-    public static int Actions()
+    public static int SelectAction()
     {
         do
         {
@@ -118,7 +120,6 @@ public class UI
             {
                 Console.WriteLine($"[{i}]: {BanksForUser[i].Name}");
             }
-            Console.WriteLine($"[{BanksForUser.Count + 1}]: exit");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
             string? stringInput = Console.ReadLine();
@@ -141,15 +142,42 @@ public class UI
             {
                 Console.WriteLine($"[{i}]: Account with Iban: ******{UserAccounts[i].GetShortBankAccountIBAN}");
             }
-            Console.WriteLine($"[{UserAccounts.Count + 1}]: exit");
+            Console.WriteLine($"[b]: go back");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
             string? stringInput = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(stringInput)) continue;
+            string trim = stringInput.Trim();
+            if(trim == "b") return -1;
             if (stringInput?.Length != 1) continue;
             if (!int.TryParse(stringInput, out int output)) continue;
             return output;
         }
         while (true);
+    }
+
+    public static (decimal, string, bool) Deposit()
+    {
+        decimal amount;
+        string? pin;
+
+        while (true)
+        {
+            Console.Clear();
+            Console.Write("Please enter the amount, or [b] to go back: "); // currently pin CAN BE 1;
+            string? stringAmount = Console.ReadLine();
+
+            if (stringAmount == "b") return (1, "b", true);
+            if (!decimal.TryParse(stringAmount, out amount)) continue;
+
+            Console.Clear();
+            Console.Write("Please enter your pin, or [b] to change the amount: ");
+            pin = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(pin)) continue;
+            if (pin == "b") continue;
+            break;
+        }
+        return (amount, pin, false);
     }
 
 

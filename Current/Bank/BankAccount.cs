@@ -50,9 +50,9 @@ public class BankAccount
        return true;
     }
 
-    public BankAccountStatus Deposit(string pin, decimal amount)
+    public BankAccountStatus Deposit(decimal amount, string pin)
     {
-        if (!correctPin) return BankAccountStatus.NotLoggedIn; 
+        // if (!correctPin) return BankAccountStatus.NotLoggedIn; 
         if (pin != this.pin) return BankAccountStatus.wrongPin;
         if (amount <= 0) return BankAccountStatus.IllegalArgument;
         balance += amount;
@@ -82,21 +82,5 @@ public class BankAccount
     {
         return account.iban;
     }
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
