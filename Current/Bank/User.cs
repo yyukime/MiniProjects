@@ -1,18 +1,20 @@
 using System;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Dynamic;
 using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Bank;
 
 public class User
 {
-    private string firstName;
-    private string lastName;
-    internal string email;
-    private Guid ID;
-    private string password;
+    private readonly string firstName;
+    private readonly string lastName;
+    internal readonly string email;
+    private readonly Guid ID;
+    private readonly string password;
 
     public User(string firstName, string lastName, string email, string password)
     {
@@ -23,7 +25,6 @@ public class User
         ID = Guid.NewGuid();
 
     }
-
 
     public static void UserInfo(User user)
     {
@@ -41,18 +42,28 @@ public class User
         Console.WriteLine($"Password: {displayPassword}");
     }
 
- 
+
     public bool MatchPassword(string password)
     {
         return this.password != password;
     }
 
+    public override bool Equals(object? obj)
+    {
+        if (obj is not User user)
+        {
+            return false;
+        }
 
+        if (user.firstName == this.firstName
+         && user.lastName == this.lastName
+         && user.email == this.email
+         && user.password == this.password)
+            return true;
 
-
-
-
-
+        return false;
+    }
+    public override int GetHashCode() => HashCode.Combine(firstName, lastName, email, password);
 
 
 

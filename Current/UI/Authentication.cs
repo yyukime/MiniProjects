@@ -4,12 +4,41 @@ using Bank;
 
 namespace BankUI;
 
-public class MainMethods
+public class Authentication
 {
+    public static User? Authenticate()
+    {
+        do
+        {
+            int selection = UI.Authenticate();
+
+            switch (selection)
+            {
+                case 1:
+                    {
+                        User? foundUser = LogIn();
+                        if (foundUser == null) continue; // credentials wrong or user does not exist
+                        return foundUser;
+                    }
+                case 2:
+                    {
+                        User? newUser = CreateNewUser();
+                        if (newUser == null) continue; // User already exists
+                        return newUser;
+                    }
+                case 3:
+                    {
+                        return null;
+                    }
+            }
+
+        }
+        while (true);
+    }
     public static User? LogIn()
     {
-        string email = Txt("Log in", "E-Mail");
-        string password = Txt("Log in", "password");
+        string email = UI.Template("Log in", "E-Mail");
+        string password = UI.Template("Log in", "password");
         (User? foundUser, bool exists) = Hub.LogIn(password, email);
 
         if (!exists)
@@ -28,13 +57,14 @@ public class MainMethods
         (string firstName, string Lastname) = SetName();
         User newUser = new(firstName, Lastname, SetEmail(), SetPassword());
 
-        if (!Hub.AllUsers.Contains(newUser))
+        if (!Hub.AllUsers.Equals(newUser))
         {
             Console.Clear();
             Console.WriteLine("User already exists.. Press Enter to continue..");
             Console.ReadLine();
             return null;
         }
+
         Hub.AllUsers.Add(newUser);
         return newUser;
     }
@@ -43,9 +73,9 @@ public class MainMethods
     {
         do
         {
-            string firstName = Txt("Create User", "first name");
+            string firstName = UI.Template("Create User", "first name");
             if (firstName.Any(char.IsDigit)) continue;
-            string lastName = Txt("Create User", "last name");
+            string lastName = UI.Template("Create User", "last name");
             if (lastName.Any(char.IsDigit)) continue;
             return (firstName, lastName);
         }
@@ -57,18 +87,7 @@ public class MainMethods
     {
         do
         {
-            Console.Clear();
-            Console.WriteLine(" -- Create User -- ");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Please note: Emails are in the format name@domain.com");
-            Console.WriteLine("Supported services: gmail.com | mail.yahoo.com | outlook.com");
-            Console.WriteLine();
-            Console.Write($"Please enter your E-Mail: ");
-            string? input = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) continue;
-
-
+            string input = UI.Email();
             bool supported = false;
             string[] supportedEmails = { "gmail.com", "mail.yahoo.com", "outlook.com" };
             string[] split = input.ToLower().Split("@");
@@ -86,7 +105,6 @@ public class MainMethods
                 Console.ReadLine();
                 continue;
             }
-
             return input;
         }
         while (true);
@@ -96,16 +114,7 @@ public class MainMethods
     {
         do
         {
-            Console.Clear();
-            Console.WriteLine(" -- Create User -- ");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Requirements: Atleast one letter, atleast one capital letter, atleast 8 characters");
-            Console.WriteLine();
-            Console.Write($"Please enter your password: ");
-            string? input = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) continue;
-
+            string input = UI.Password();
             bool ok = false;
             if (input.Length < 8)
             {
@@ -127,20 +136,8 @@ public class MainMethods
         }
         while (true);
     }
-    public static string Txt(string title, string what)
-    {
-        while (true)
-        {
-            Console.Clear();
-            Console.WriteLine($" -- {title} -- ");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.Write($"Please enter your {what}: ");
-            string? input = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(input)) continue;
-            if (input.Length! > 1) continue; // ?
-            return input;
-        }
-    }
+
+
+
 
 }
