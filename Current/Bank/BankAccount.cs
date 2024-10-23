@@ -61,7 +61,7 @@ public class BankAccount
 
     public BankAccountStatus Withdraw(string pin, decimal amount)
     {
-        if (!correctPin) return BankAccountStatus.NotLoggedIn;
+        // if (!correctPin) return BankAccountStatus.NotLoggedIn;
         if (pin != this.pin) return BankAccountStatus.wrongPin;
         if (amount > this.balance) return BankAccountStatus.NoMoney;
         if (amount <= 0) return BankAccountStatus.IllegalArgument;
@@ -81,6 +81,11 @@ public class BankAccount
     public string GetIBAN(BankAccount account)
     {
         return account.iban;
+    }
+
+    public decimal GetBalance()
+    {
+        return balance;
     }
 }
 

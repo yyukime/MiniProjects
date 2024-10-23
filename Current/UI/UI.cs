@@ -230,14 +230,4 @@ public class UI
         while (true);
     }
 
-
-    public static (string, decimal) WithdrawPin()
-    {
-        while(true)
-        {
-            Console.Clear();
-            Console.WriteLine("Please entery")
-        }
-    }
-
 }

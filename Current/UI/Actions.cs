@@ -148,17 +148,37 @@ public class Actions
         return null;
     }
 
-    public static (string?, decimal?) Withdraw(BankAccount selectedAccount)
+    public static (bool, decimal?) Withdraw(BankAccount selectedAccount)
     {
         string pin = UI.EnterPin();
         if(!selectedAccount.LogIn(pin))
         {
             Console.Clear();
             Console.WriteLine("Authentication failed.. Press enter to continue...");
-            return (null, null);
+            return (false, null);
         }
 
         (decimal amount, bool back) = UI.EnterAmount();
+        if (back) return (false, null);
+        BankAccountStatus status = selectedAccount.Withdraw(pin, amount);
+
+        switch(status)
+        {
+            case BankAccountStatus.NoMoney:
+            {
+                Console.Clear();
+                Console.WriteLine($"You don't have enough money to withdraw {amount}$");
+                Console.WriteLine($"current account balance: {selectedAccount.GetBalance}$");
+                Console.WriteLine();
+                Console.WriteLine("press enter to continue");
+                return (false, null);
+            }
+            case BankAccountStatus.Successful:
+            {
+                return (true, amount);
+            }
+        }
+        return (false, null);
 
     }
 

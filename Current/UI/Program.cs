@@ -21,15 +21,13 @@ public class Program
             while (true)
             {
                 BankAccount? SelectedBankAccount = SelectBankAccount(activeUser, UserBank);
-                if (SelectedBankAccount == null) break; 
+                if (SelectedBankAccount == null) break;
                 SelectAction(SelectedBankAccount);
             }
-
         }
-
-
-
+        
     }
+    
     public static Bank.Bank SelectBank(User activeUser)
     {
         List<Bank.Bank> BanksForUser = Hub.GetBanksForUser(activeUser);
@@ -59,6 +57,7 @@ public class Program
     public static void SelectAction(BankAccount SelectedBankAccount)
     {
         int Selection = UI.SelectAction();
+
         do
         {
             switch (Selection)
@@ -77,9 +76,15 @@ public class Program
                         return;
                     }
                 case 3: // Withdraw
-                {
-                
-                }
+                    {
+                        (bool success, decimal? amount) = Actions.Withdraw(SelectedBankAccount);
+                        if (!success) continue;
+                        Console.Clear();
+                        Console.WriteLine($"You have successfuly withdrawn {amount}$");
+                        Console.WriteLine("press enter to continue");
+                        Console.ReadLine();
+                        return;
+                    }
                 case 4: return; //what?
             }
         }
