@@ -161,8 +161,6 @@ public class UI
 
     public static (decimal, string, bool) Deposit() // rebuild // add no -1
     {
-
-
         while (true)
         {
             Console.Clear();
