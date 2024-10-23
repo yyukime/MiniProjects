@@ -82,5 +82,6 @@ public class Bank
     {
         return Registered[user];
     }
+
 }
 

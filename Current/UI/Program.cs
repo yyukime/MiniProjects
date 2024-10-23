@@ -21,7 +21,7 @@ public class Program
             while (true)
             {
                 BankAccount? SelectedBankAccount = SelectBankAccount(activeUser, UserBank);
-                if (SelectedBankAccount == null) break; // If user enters bogus number while selection account, this will happen?
+                if (SelectedBankAccount == null) break; 
                 SelectAction(SelectedBankAccount);
             }
 
@@ -42,10 +42,18 @@ public class Program
 
     public static BankAccount? SelectBankAccount(User activeUser, Bank.Bank SelectedBank)
     {
-        List<BankAccount> UserAccounts = SelectedBank.BankAccountsForUser(activeUser);
-        int Selection = UI.SelectBankAccount(UserAccounts);
-        if (Selection == -1) return null;
-        return UserAccounts[Selection];
+        do
+        {
+            List<BankAccount> UserAccounts = SelectedBank.BankAccountsForUser(activeUser);
+            int Selection = UI.SelectBankAccount(UserAccounts);
+            if (Selection == -1) return null;
+
+            if (UserAccounts[Selection].LogIn(UI.EnterPin())) return UserAccounts[Selection];
+
+            Console.WriteLine("Authentication failed... Press enter to continue");
+            continue;
+        }
+        while (true);
     }
 
     public static void SelectAction(BankAccount SelectedBankAccount)
@@ -57,17 +65,21 @@ public class Program
             {
                 case 1: // Transfer
                     {
-                        return;
+                        Actions.Transfer(SelectedBankAccount);
+                        continue;
                     }
                 case 2: // Deposit
                     {
                         (bool back, decimal? amount) = Actions.Deposit(SelectedBankAccount);
                         if (back) continue;
-                        Console.WriteLine($"You successfully Deposited {amount}");
+                        Console.WriteLine($"You successfully Deposited {amount}$.. Press enter to return continue...");
                         Console.ReadLine();
                         return;
                     }
                 case 3: // Withdraw
+                {
+                
+                }
                 case 4: return; //what?
             }
         }

@@ -7,8 +7,8 @@ public enum BankStatus
     NoAccountWithBank,
     Successful,
     IllegalArgument,
-    wrongPassword
-
+    wrongPassword,
+    BankIsNotReal,
 }
 
 public enum BankAccountStatus

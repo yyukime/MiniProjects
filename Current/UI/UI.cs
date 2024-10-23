@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using Bank;
 
 namespace BankUI;
@@ -22,11 +23,10 @@ public class UI
             Console.WriteLine("--------");
             Console.Write("Selection: ");
             string? stringInput = Console.ReadLine();
-
             if (stringInput?.Length != 1) continue;
             if (!int.TryParse(stringInput, out int input)) continue;
-            int[] validSelections = { 1, 2, 3 };
-            if (!validSelections.Contains(input)) continue;
+            int[] valid = [1, 2, 3];
+            if (!valid.Contains(input)) continue;
             return input;
         }
         while (true);
@@ -93,16 +93,17 @@ public class UI
             Console.WriteLine("- Select Action -");
             Console.WriteLine();
             Console.WriteLine("--------");
-            Console.WriteLine("[1]: Money Transfer");
+            Console.WriteLine("[1]: Transfer");
             Console.WriteLine("[2]: Deposit");
             Console.WriteLine("[3]: Withdraw");
             Console.WriteLine("[4]: go back");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
             string? stringInput = Console.ReadLine();
-
             if (stringInput?.Length != 1) continue;
             if (!int.TryParse(stringInput, out int output)) continue;
+            int[] valid = [1, 2, 3, 4];
+            if (!valid.Contains(output)) continue;
             return output;
         }
         while (true);
@@ -125,6 +126,7 @@ public class UI
             string? stringInput = Console.ReadLine();
             if (stringInput?.Length != 1) continue;
             if (!int.TryParse(stringInput, out int output)) continue;
+            if (output > BanksForUser.Count || output < 1) continue;
             return output;
         }
         while (true);
@@ -148,39 +150,94 @@ public class UI
             string? stringInput = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(stringInput)) continue;
             string trim = stringInput.Trim();
-            if(trim == "b") return -1;
+            if (trim == "b") return -1;
             if (stringInput?.Length != 1) continue;
             if (!int.TryParse(stringInput, out int output)) continue;
+            if (output > UserAccounts.Count || output < 1) continue;
             return output;
         }
         while (true);
     }
 
-    public static (decimal, string, bool) Deposit()
+    public static (decimal, string, bool) Deposit() // rebuild // add no -1
     {
-        decimal amount;
-        string? pin;
+
 
         while (true)
         {
             Console.Clear();
             Console.Write("Please enter the amount, or [b] to go back: "); // currently pin CAN BE 1;
             string? stringAmount = Console.ReadLine();
-
             if (stringAmount == "b") return (1, "b", true);
-            if (!decimal.TryParse(stringAmount, out amount)) continue;
+            if (!decimal.TryParse(stringAmount, out decimal amount)) continue;
 
             Console.Clear();
             Console.Write("Please enter your pin, or [b] to change the amount: ");
-            pin = Console.ReadLine();
+            string? pin = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(pin)) continue;
             if (pin == "b") continue;
-            break;
+
+            return (amount, pin, false);
         }
-        return (amount, pin, false);
+    }
+
+    public static (decimal, bool) EnterAmount()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.Write("Please enter the amount, or [b] to go back: ");
+            string? stringAmount = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(stringAmount)) continue;
+            string trim = stringAmount.Trim();
+            if (trim == "b") return (-1, true);
+            if (!decimal.TryParse(stringAmount, out decimal amount)) continue;
+            if (amount <= 0) continue;
+            return (amount, false);
+        }
+    }
+
+    public static string? EnterIBAN()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.Write("Please enter the receivers IBAN or [b] to go back");
+            string? input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input)) continue;
+            string trim = input.Trim();
+            if (trim == "b") return null;
+
+
+            if (input.Length != 11) continue;
+            return input;
+
+
+            // 1234 [-] 123456
+        }
+    }
+
+    public static string EnterPin()
+    {
+        do
+        {
+            Console.Clear();
+            Console.Write("Please enter your pin: ");
+            string? input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input)) continue;
+            return input;
+        }
+        while (true);
     }
 
 
-
+    public static (string, decimal) WithdrawPin()
+    {
+        while(true)
+        {
+            Console.Clear();
+            Console.WriteLine("Please entery")
+        }
+    }
 
 }

@@ -24,6 +24,7 @@ public class Hub
             if (bank.BLZ != BLZ) continue;
             correctBank = bank;
         }
+        if (correctBank == null) return (correctBank, BankStatus.)
         return (correctBank, BankStatus.Successful);
     }
 
