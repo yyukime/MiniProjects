@@ -21,8 +21,8 @@ public class Program
             while (true)
             {
                 BankAccount? SelectedBankAccount = SelectBankAccount(activeUser, UserBank);
-                if (SelectedBankAccount == null) break;
-                Action(SelectedBankAccount);
+                if (SelectedBankAccount == null) break; // If user enters bogus number while selection account, this will happen?
+                SelectAction(SelectedBankAccount);
             }
 
         }
@@ -48,7 +48,7 @@ public class Program
         return UserAccounts[Selection];
     }
 
-    public static void Action(BankAccount SelectedBankAccount)
+    public static void SelectAction(BankAccount SelectedBankAccount)
     {
         int Selection = UI.SelectAction();
         do
