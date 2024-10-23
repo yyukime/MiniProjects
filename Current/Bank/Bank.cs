@@ -78,8 +78,9 @@ public class Bank
         return (null, false);
     }
 
-    
-
-
+    public List<BankAccount> BankAccountsForUser(User user)
+    {
+        return Registered[user];
+    }
 }
 

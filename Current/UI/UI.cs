@@ -46,7 +46,7 @@ public class UI
         }
     }
 
-    public static string Email()
+    public static string SetEmail()
     {
         do
         {
@@ -65,7 +65,7 @@ public class UI
         while (true);
     }
 
-    public static string Password()
+    public static string SetPassword()
     {
         do
         {
@@ -83,7 +83,7 @@ public class UI
         while (true);
     }
 
-    public static int BankAccount()
+    public static int Actions()
     {
         do
         {
@@ -106,7 +106,7 @@ public class UI
         while (true);
     }
 
-    public static int Bank(List<Bank.Bank> BanksForUser,User activeUser)
+    public static int SelectBank(List<Bank.Bank> BanksForUser, User activeUser)
     {
         do
         {
@@ -119,6 +119,29 @@ public class UI
                 Console.WriteLine($"[{i}]: {BanksForUser[i].Name}");
             }
             Console.WriteLine($"[{BanksForUser.Count + 1}]: exit");
+            Console.WriteLine("--------");
+            Console.Write("Selection: ");
+            string? stringInput = Console.ReadLine();
+            if (stringInput?.Length != 1) continue;
+            if (!int.TryParse(stringInput, out int output)) continue;
+            return output;
+        }
+        while (true);
+    }
+
+    public static int SelectBankAccount(List<BankAccount> UserAccounts)
+    {
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("- Select Bank -");
+            Console.WriteLine();
+            Console.WriteLine("--------");
+            for (int i = 1; i < UserAccounts.Count; i++)
+            {
+                Console.WriteLine($"[{i}]: Account with Iban: ******{UserAccounts[i].GetShortBankAccountIBAN}");
+            }
+            Console.WriteLine($"[{UserAccounts.Count + 1}]: exit");
             Console.WriteLine("--------");
             Console.Write("Selection: ");
             string? stringInput = Console.ReadLine();

@@ -87,7 +87,7 @@ public class Authentication
     {
         do
         {
-            string input = UI.Email();
+            string input = UI.SetEmail();
             bool supported = false;
             string[] supportedEmails = { "gmail.com", "mail.yahoo.com", "outlook.com" };
             string[] split = input.ToLower().Split("@");
@@ -114,7 +114,7 @@ public class Authentication
     {
         do
         {
-            string input = UI.Password();
+            string input = UI.SetPassword();
             bool ok = false;
             if (input.Length < 8)
             {
