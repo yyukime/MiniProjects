@@ -1,0 +1,40 @@
+
+public static void Main()
+{
+        int Selection = GetUser.CLI;
+        User user = GetUser.CreateUser;
+        User user = GetUser.LogInUser;
+        // user is present
+        // step cannot be reversed
+        
+        
+        while (true)
+        {
+            int Selection = GetBank.CLI;// select between selecting bank and registering at one // or back 
+            if == back return;
+            Bank bank = GetBank.RegisterWithBank; // if null continue;
+            Bank bank = GetBank.SelectBank; // if null continue;
+            // bank is present
+            
+            
+            while (true)
+            {
+                int Selection = GetBankAccount.CLI; // select between registering account or selecting one // or back
+                if == back return;
+                BankAccount account = GetBankAccout.Register; // if null continue;
+                BankAccount account = GetBankAccount.Select; // if null continue;
+                // BankAccount is present
+                
+                
+                while(true)
+                {
+                    int Selection2 = Action.CLI;
+                    if == back return;
+                    bool x = Action.Withdraw / Deposit / Transfer / XYZ; // ERROR has to be handled inside, CANNOT RETURN FALSE IF DIDNT SELECT BACK!!! 
+                    if false = continue; 
+                }
+            }
+            
+            
+        }
+ }
