@@ -12,9 +12,9 @@ public class Bank
 
     internal Dictionary<User, List<BankAccount>> Registered;
 
-    public Bank(string name, int BLZ) // internal (only in here) for using hub class with other projects
+    public Bank(string name, int BLZ) 
     {
-        this.Name = name;
+        Name = name;
         this.BLZ = BLZ;
     }
 
@@ -25,28 +25,26 @@ public class Bank
         return BLZ;
     }
 
-    public bool RegisterAccount(User account)
+    public bool RegisterUserAtBank(User user)
     {
-        if (Registered.ContainsKey(account))
+        if (Registered.ContainsKey(user))
         {
             return false;
         }
-        Registered.Add(account, new List<BankAccount>());
+        Registered.Add(user, new List<BankAccount>());
         return true;
     }
 
-    public BankStatus CreateBankAccount(User account, string pin) // Pin must be formatted correctly 
+    public bool CreateBankAccount(User account, string pin)
     {
-        if (!Registered.ContainsKey(account)) return BankStatus.NoAccountWithBank;
-        if (string.IsNullOrWhiteSpace(pin)) return BankStatus.IllegalArgument;
+        if (!Registered.ContainsKey(account)) return false;
         BankAccount bankAccount = new(account, this, pin);
         Registered[account].Add(bankAccount);
-        return BankStatus.Successful;
+        return true;
     }
 
     public BankStatus DeleteUser(User account, string password) // Account class does not have bool IsLoggedIn (doesnt need to?)
     {
-        if (password != account.password) return BankStatus.wrongPassword;
         if (!Registered.ContainsKey(account)) return BankStatus.NoAccountWithBank;
         Registered.Remove(account);
         return BankStatus.Successful;

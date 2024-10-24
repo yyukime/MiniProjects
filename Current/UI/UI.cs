@@ -43,7 +43,6 @@ public class UI
             Console.Write($"Please enter your {what}: ");
             string? input = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(input)) continue;
-            if (input.Length! > 1) continue; // ?
             return input;
         }
     }

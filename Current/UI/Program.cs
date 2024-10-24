@@ -9,8 +9,35 @@ namespace BankUI;
 public class Program
 {
 
+
     public static void Main()
     {
+        Hub.AllUsers.AddRange([
+    new User("John", "Doe", "john.doe@gmail.com", "password123"),
+            new User("Jane", "Smith", "jane.smith@gmail.com", "password123"),
+            new User("Alice", "Johnson", "alice.johnson@gmail.com", "password123"),
+            new User("Bob", "Brown", "bob.brown@gmail.com", "password123"),
+            new User("Charlie", "Davis", "charlie.davis@gmail.com", "password123"),
+            new User("Donna", "Miller", "donna.miller@gmail.com", "password123"),
+            new User("Edward", "Wilson", "edward.wilson@gmail.com", "password123"),
+            new User("Fiona", "Moore", "fiona.moore@gmail.com", "password123"),
+            new User("George", "Taylor", "george.taylor@gmail.com", "password123"),
+            new User("Hannah", "Anderson", "hannah.anderson@gmail.com", "password123")
+]);
+
+        Hub.AllBanks.AddRange([
+            new("Bank of America", 1000),
+            new("Wells Fargo", 1001),
+            new("Chase Bank", 1002),
+            new("Citibank", 1003),
+            new("U.S. Bank", 1004),
+            new("PNC Bank", 1005),
+            new("Capital One", 1006),
+            new("TD Bank", 1007),
+            new("BB&T", 1008),
+            new("SunTrust Bank", 1009)
+        ]);
+
         User? activeUser = Authentication.Authenticate();
         if (activeUser == null) return;
 
@@ -25,9 +52,9 @@ public class Program
                 SelectAction(SelectedBankAccount);
             }
         }
-        
+
     }
-    
+
     public static Bank.Bank SelectBank(User activeUser)
     {
         List<Bank.Bank> BanksForUser = Hub.GetBanksForUser(activeUser);
