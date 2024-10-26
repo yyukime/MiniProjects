@@ -66,8 +66,18 @@ public class Hub
         }
         return allBankStringList;
     }
-    
-    
+
+    public static List<string> GetAllBanksStringList()
+    {
+        var allBankStringList = new List<string>();
+        foreach (Bank b in Hub.AllBanks)
+        {
+            allBankStringList.Add(b.Name + " " + $"[{b.BLZ}]");
+        }
+        return allBankStringList;
+    }
+
+
 
 
 }

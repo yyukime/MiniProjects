@@ -116,9 +116,9 @@ public class BankAccount
         return output;
     }
 
-    public bool CloseAccount(BankAccount account)
+    public bool CloseBankAccount()
     {
-        return account.bank.Registered[account.owner].Remove(account); // does this work?
+        return this.bank.Registered[this.owner].Remove(this); // does this work?
     }
 
     private static void AuthenticationFailedCLI()
