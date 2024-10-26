@@ -35,12 +35,11 @@ public class Bank
         return true;
     }
 
-    public (BankAccount?, bool) OpenBankAccount(User account, string pin)
+    public BankAccount? OpenBankAccount(User account, string pin)
     {
-        if (!Registered.ContainsKey(account)) return (null, false);
         BankAccount bankAccount = new(account, this, pin);
         Registered[account].Add(bankAccount);
-        return (bankAccount, true);
+        return bankAccount;
     }
 
     public BankStatus DeleteUser(User account, string password) // Account class does not have bool IsLoggedIn (doesnt need to?)
@@ -50,32 +49,19 @@ public class Bank
         return BankStatus.Successful;
                 
     }
-
-    public BankStatus CloseAccount(BankAccount account, User user)
+    
+    public (BankAccount?, bool found) GetBankAccountTroughIBAN(string IBAN)
     {
-        // var L = Registered.GetValueOrDefault(user);
-        // L.Remove(account);
-
-        if(!Registered.ContainsKey(user)) return BankStatus.NoAccountWithBank;
-        Registered[user].Remove(account);
-        return BankStatus.Successful;
-        
-        
-        // possible to do with only value?
+        foreach (KeyValuePair<User, List<BankAccount>> kvp in Registered)
+        {
+            foreach (BankAccount acc in kvp.Value)
+            {
+                if (acc.iban != IBAN) continue;
+                return (acc, true);
+            }
+        }
+        return (null, false);
     }
-
-    // public (BankAccount?, bool b) GetBankAccountTroughIBAN(string IBAN)
-    // {
-    //     foreach (KeyValuePair<User, List<BankAccount>> kvp in Registered)
-    //     {
-    //         foreach (BankAccount acc in kvp.Value)
-    //         {
-    //             if (acc.iban != IBAN) continue;
-    //             return (acc, true);
-    //         }
-    //     }
-    //     return (null, false);
-    // }
 
     public List<BankAccount> GetBankAccountsForUser(User user)
     {

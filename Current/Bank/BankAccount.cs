@@ -6,17 +6,16 @@ using System.Security.Cryptography;
 
 namespace Bank;
 
-public class BankAccount 
+public class BankAccount
 {
-    internal string iban { get; init;} // changed from public to internal
+    internal string iban { get; init; } // changed from public to internal
     internal User owner;
     private Bank bank;
     private decimal balance;
     private string pin;
-    internal  bool correctPin { get; private set; } // change from public to internal
-   
-    /// List<BankAccounts> BankAccsByOwner 
+    internal bool correctPin { get; private set; } // change from public to internal
 
+    /// List<BankAccounts> BankAccsByOwner 
     public BankAccount(User Owner, Bank bank, string pin) // like so?
     {
         this.owner = Owner;
@@ -35,57 +34,106 @@ public class BankAccount
         return IBAN;
     }
 
-    public BankAccountStatus TransferMoney(BankAccount receiver, decimal amount)
+    public bool TransferMoney(BankAccount receiver, string pin, decimal amount)
     {
-        if (balance < amount) return BankAccountStatus.NoMoney;
-        if(amount <= 0 ) return BankAccountStatus.IllegalArgument;
+        if (pin != this.pin)
+        {
+            AuthenticationFailedCLI();
+            return false;
+        }
+
+        if (balance < amount)
+        {
+            Console.Clear();
+            Console.WriteLine("Insufficient balance...");
+            Console.WriteLine($"You have {balance}$ and tried to transfer {amount}$");
+            Console.WriteLine("Press any key to try again...");
+            Console.ReadKey();
+            return false;
+        }
+
+        if (amount < 0) throw new Exception("This should have been handled before calling this Method");
+
         this.balance -= amount;
         receiver.balance += amount;
-        return BankAccountStatus.Successful;
+
+        return true;
     }
 
     public bool LogIn(string pin) // 12.10 17:40 - from void to bool
     {
-       if (pin != this.pin) return false;
-       return true;
+        if (pin != this.pin) return false;
+        return true;
     }
 
-    public BankAccountStatus Deposit(decimal amount, string pin)
+    public bool Deposit(string pin, decimal amount)
     {
-        // if (!correctPin) return BankAccountStatus.NotLoggedIn; 
-        if (pin != this.pin) return BankAccountStatus.wrongPin;
-        if (amount <= 0) return BankAccountStatus.IllegalArgument;
+        if (pin == null) throw new ArgumentNullException(nameof(pin));
+
+        if (pin != this.pin)
+        {
+            AuthenticationFailedCLI();
+            return false;
+        }
+
+        if (amount < 0) throw new Exception("This should have been handled before calling this Method");
+        
+        Console.WriteLine($"You have successfully withdrawn {amount}");
+        Console.WriteLine($"Your new account balance is {balance + amount}$");
         balance += amount;
-        return BankAccountStatus.Successful;
+        return true;
     }
 
-    public BankAccountStatus Withdraw(string pin, decimal amount)
+    public bool Withdraw(string pin, decimal amount)
     {
-        // if (!correctPin) return BankAccountStatus.NotLoggedIn;
-        if (pin != this.pin) return BankAccountStatus.wrongPin;
-        if (amount > this.balance) return BankAccountStatus.NoMoney;
-        if (amount <= 0) return BankAccountStatus.IllegalArgument;
+        if (pin != this.pin)
+        {
+            AuthenticationFailedCLI();
+            return false;
+        }
+
+        if (balance < amount)
+        {
+            Console.Clear();
+            Console.WriteLine("Insufficient balance...");
+            Console.WriteLine($"You have {balance}$ and tried to withdraw {amount}$");
+            Console.WriteLine("Press any key to try again...");
+            Console.ReadKey();
+            return false;
+        }
+        Console.WriteLine($"You have successfully withdrawn {amount}");
+        Console.WriteLine($"Your new account balance is {balance - amount}$");
         balance -= amount;
-        return BankAccountStatus.Successful;
+        return true;
     }
 
     public string GetShortBankAccountIBAN(BankAccount account)
     {
         char[] ibanArray = account.iban.ToArray();
         int count = ibanArray.Length;
-        int[] lastDigits = [count -1, count];
+        int[] lastDigits = [count - 1, count];
         string output = string.Concat(lastDigits.Select(x => x.ToString())); // add to TechSupportQueue!!! 
         return output;
     }
 
-    public string GetIBAN(BankAccount account)
+    public bool CloseAccount(BankAccount account)
     {
-        return account.iban;
+        return account.bank.Registered[account.owner].Remove(account); // does this work?
     }
 
-    public decimal GetBalance()
+    private static void AuthenticationFailedCLI()
     {
-        return balance;
+        Console.Clear();
+        Console.WriteLine("Authentication failed... Press any key to try again...");
+        Console.ReadKey();
+    }
+
+    private void InsufficientBalanceCLI(decimal amount)
+    {
+        Console.Clear();
+        Console.WriteLine("Insufficient balance...");
+        Console.WriteLine($"You have {balance}$ and tried to withdraw {amount}$");
+        Console.WriteLine("Press any key to try again...");
+        Console.ReadKey();
     }
 }
-

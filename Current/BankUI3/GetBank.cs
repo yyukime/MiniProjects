@@ -5,7 +5,7 @@ namespace BankUI3;
 
 public class GetBank
 {
-    public static Bank.Bank SelectBankOrRegister(User user)
+    public static Bank.Bank SelectOrRegister(User user)
     {
         while (true)
         {
