@@ -18,6 +18,7 @@ public class User
 
     public User(string firstName, string lastName, string email, string password)
     {
+        
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -33,19 +34,19 @@ public class User
         Console.WriteLine();
         Console.WriteLine($"Name: {user.lastName}, {user.firstName}");
         Console.WriteLine($"Email: {user.email}");
-        char[] hpassword = user.password.ToArray();
+        char[] hiddenPassword = user.password.ToArray();
         for (int i = 0; i > user.password.Length; i++)
         {
-            hpassword[i] = '*';
+            hiddenPassword[i] = '*';
         }
-        string displayPassword = new(hpassword);
+        string displayPassword = new(hiddenPassword);
         Console.WriteLine($"Password: {displayPassword}");
     }
 
 
     public bool MatchPassword(string password)
     {
-        return this.password != password;
+        return this.password == password;
     }
 
     public override bool Equals(object? obj)
@@ -54,10 +55,10 @@ public class User
         {
             return false;
         }
-
+        
         if (user.firstName == this.firstName
          && user.lastName == this.lastName
-         && user.email == this.email
+         && user.email .Equals(this.email, StringComparison.InvariantCultureIgnoreCase)
          && user.password == this.password)
             return true;
 
@@ -65,6 +66,16 @@ public class User
     }
     public override int GetHashCode() => HashCode.Combine(firstName, lastName, email, password);
 
+    public bool LogIn(string inEmail, string inPassword)
+    {
+        return (this.email == inEmail && this.password == inPassword);
+    }
+
+    public string GetUserName()
+    {
+        return this.firstName + " " + this.lastName;
+    }
+    
 
 
 }

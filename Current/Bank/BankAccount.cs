@@ -73,7 +73,7 @@ public class BankAccount
     {
         char[] ibanArray = account.iban.ToArray();
         int count = ibanArray.Length;
-        int[] lastDigits = {count - 3, count -2, count -1, count};
+        int[] lastDigits = [count -1, count];
         string output = string.Concat(lastDigits.Select(x => x.ToString())); // add to TechSupportQueue!!! 
         return output;
     }

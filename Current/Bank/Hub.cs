@@ -9,25 +9,11 @@ namespace Bank;
 
 public class Hub
 {
-    public static readonly List<User> AllUsers = new();
-    public static readonly List<Bank> AllBanks = new();
+    private static readonly List<User> AllUsers = new();
+    private static readonly List<Bank> AllBanks = new();
 
 
-
-
-    public static (Bank?, BankStatus) GetBankByBLZ(string BLZInput)
-    {
-        Bank? correctBank = null;
-        if (!int.TryParse(BLZInput, out int BLZ)) return (correctBank, BankStatus.IllegalArgument);
-        foreach (Bank bank in AllBanks)
-        {
-            if (bank.BLZ != BLZ) continue;
-            correctBank = bank;
-        }
-        if (correctBank == null) return (correctBank, BankStatus.BankIsNotReal);
-        return (correctBank, BankStatus.Successful);
-    }
-
+    
     public static List<Bank> GetBanksForUser(User user)
     {
         List<Bank> UsersBanks = new();
@@ -43,12 +29,43 @@ public class Hub
     {
         foreach (User thisUser in Hub.AllUsers)
         {
-            if (thisUser.email != email && thisUser.MatchPassword(password)) continue;
-            return (thisUser, true);
+            if (thisUser.email == email && thisUser.MatchPassword(password)) return (thisUser, true);
         }
         return (null, false); 
     }
+    
 
+    public static Bank GetBankByIndex(int index)
+    {
+        index += 1;   // Console.WriteLine($"[{i + 1}] {options[i]}");
+        return AllBanks[index];
+    }
+
+
+    public static bool TryAddUser(User user)
+    {
+        if (AllUsers.Contains(user)) return false;
+        AllUsers.Add(user);
+        return true;
+    }
+
+    public static bool TryAddBank(Bank bank)
+    {
+        if (AllBanks.Contains(bank)) return false;
+        AllBanks.Add(bank);
+        return true;
+    }
+
+    public static List<string> GetAllBankStringListExceptWhereUserExists(User user)
+    {
+        var allBankStringList = new List<string>();
+        var banksForUser = GetBanksForUser(user);
+        foreach (Bank x in Hub.AllBanks.Except(banksForUser))
+        {
+            allBankStringList.Add(x.Name + " " + $"[{x.BLZ}]");
+        }
+        return allBankStringList;
+    }
 
 
 }
