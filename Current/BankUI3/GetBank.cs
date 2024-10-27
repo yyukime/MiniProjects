@@ -5,12 +5,14 @@ namespace BankUI3;
 
 public class GetBank
 {
-    public static Bank.Bank SelectOrRegister(User user)
+    public static Bank.Bank? SelectOrRegister(User user)
     {
+        
         while (true)
         {
 
-            int selection = Program.SelectionTemplate("Please Select",["Select Bank", "Register at Bank"]);
+            int selection = Program.SelectionTemplate("Please Select",["Select Bank", "Register at Bank"], true);
+            if (selection == 3) return null;
 
             Bank.Bank? selectedBank = selection switch
             {

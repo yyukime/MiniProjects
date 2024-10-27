@@ -67,8 +67,8 @@ public static class GetUser
 
     private static User? LogIn()
     {
-        string password = Program.Enter("password", input => input.Any(char.IsUpper) && input.Length >= 8);
         string email = Program.Enter("Email", condition: input => input.Contains('@') && input.Length > 1);
+        string password = Program.Enter("password", input => input.Any(char.IsUpper) && input.Length >= 8);
         (User? authUser, bool found) = Hub.LogIn(password, email);
         if(found) return authUser;
         return null;

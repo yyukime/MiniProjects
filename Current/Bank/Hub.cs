@@ -76,6 +76,34 @@ public class Hub
         }
         return allBankStringList;
     }
+    
+    public static void TEST()
+    {     
+        Hub.AllUsers.AddRange([
+            new User("John", "Doe", "john.doe@example.com", "Password123"),
+            new User("Jane", "Smith", "jane.smith@example.com", "Password123"),
+            new User("Alice", "Johnson", "alice.johnson@example.com", "Password123"),
+            new User("Bob", "Brown", "bob.brown@example.com", "Password123"),
+            new User("Charlie", "Davis", "charlie.davis@example.com", "Password123"),
+            new User("Donna", "Miller", "donna.miller@example.com", "Password123"),
+            new User("Edward", "Wilson", "edward.wilson@example.com", "Password123"),
+            new User("Fiona", "Moore", "fiona.moore@example.com","Password123"),
+            new User("George", "Taylor", "george.taylor@example.com", "Password123"),
+            new User("Hannah", "Anderson", "hannah.anderson@example.com", "Password123")
+        ]);
+
+        Hub.AllBanks.AddRange([
+            new("Bank of America", 1000),
+            new("Wells Fargo", 1001),
+            new("Chase Bank", 1002),
+            new("Citibank", 1003),
+            new("U.S. Bank", 1004),
+            new("PNC Bank", 1005),
+            new("Capital One", 1006),
+            new("TD Bank", 1007),
+            new("BB&T", 1008),
+            new("SunTrust Bank", 1009)
+        ]);}
 
 
 

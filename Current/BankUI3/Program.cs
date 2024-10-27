@@ -1,3 +1,4 @@
+using System.Xml;
 using Bank;
 
 namespace BankUI3;
@@ -6,13 +7,31 @@ public class Program
 {
     public static void Main()
     {
+        Hub.TEST();
 
+        User user = GetUser.SelectAndHandle();
 
+        while (true)
+        {
+            
+            Bank.Bank? selBank = GetBank.SelectOrRegister(user);
+            if (selBank == null) break;
+            
+            BankAccount? account = GetBankAccount.CreateOrSelectOrBack(selBank, user);
+            if (account == null) continue;
+            
+            Actions.SelectAndHandle(account);
+            
+        }
+        
+        Console.WriteLine("See you soon!");
+        Thread.Sleep(1500);
+        
     }
-
-
+    
     public static int SelectionTemplate(string title, List<string> options, bool canBack = false)
     {
+        
         while (true)
         {
             
@@ -43,7 +62,9 @@ public class Program
             if (result > options.Count + boolPatch|| result <= 0) continue;
             
             return result;
+            
         }
+        
     }
 
     public static string Enter(string what, Func<string, bool>? condition = null)
