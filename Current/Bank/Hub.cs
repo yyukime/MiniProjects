@@ -13,7 +13,6 @@ public class Hub
     private static readonly List<Bank> AllBanks = new();
 
 
-    
     public static List<Bank> GetBanksForUser(User user)
     {
         List<Bank> UsersBanks = new();
@@ -22,6 +21,7 @@ public class Hub
             if (!bank.Registered.ContainsKey(user)) continue;
             UsersBanks.Add(bank);
         }
+
         return UsersBanks;
     }
 
@@ -31,13 +31,14 @@ public class Hub
         {
             if (thisUser.email == email && thisUser.MatchPassword(password)) return (thisUser, true);
         }
-        return (null, false); 
+
+        return (null, false);
     }
-    
+
 
     public static Bank GetBankByIndex(int index)
     {
-        index += 1;   // Console.WriteLine($"[{i + 1}] {options[i]}");
+        index += 1; // Console.WriteLine($"[{i + 1}] {options[i]}");
         return AllBanks[index];
     }
 
@@ -64,6 +65,7 @@ public class Hub
         {
             allBankStringList.Add(x.Name + " " + $"[{x.BLZ}]");
         }
+
         return allBankStringList;
     }
 
@@ -74,38 +76,35 @@ public class Hub
         {
             allBankStringList.Add(b.Name + " " + $"[{b.BLZ}]");
         }
+
         return allBankStringList;
     }
+
+    public static void ControlGetBankAccountInformation(BankAccount account)
+    {
+        
+    }
     
+    
+
     public static void TEST()
-    {     
-        Hub.AllUsers.AddRange([
-            new User("John", "Doe", "john.doe@example.com", "Password123"),
-            new User("Jane", "Smith", "jane.smith@example.com", "Password123"),
-            new User("Alice", "Johnson", "alice.johnson@example.com", "Password123"),
-            new User("Bob", "Brown", "bob.brown@example.com", "Password123"),
-            new User("Charlie", "Davis", "charlie.davis@example.com", "Password123"),
-            new User("Donna", "Miller", "donna.miller@example.com", "Password123"),
-            new User("Edward", "Wilson", "edward.wilson@example.com", "Password123"),
-            new User("Fiona", "Moore", "fiona.moore@example.com","Password123"),
-            new User("George", "Taylor", "george.taylor@example.com", "Password123"),
-            new User("Hannah", "Anderson", "hannah.anderson@example.com", "Password123")
-        ]);
-
-        Hub.AllBanks.AddRange([
-            new("Bank of America", 1000),
-            new("Wells Fargo", 1001),
-            new("Chase Bank", 1002),
-            new("Citibank", 1003),
-            new("U.S. Bank", 1004),
-            new("PNC Bank", 1005),
-            new("Capital One", 1006),
-            new("TD Bank", 1007),
-            new("BB&T", 1008),
-            new("SunTrust Bank", 1009)
-        ]);}
+    {
+        User user1 = new User("John", "Doe", "john.doe@example.com", "Password123");
+        User user2 = new User("Jane", "Smith", "jane.smith@example.com", "Password123");
+        User user3 = new User("Alice", "Johnson", "alice.johnson@example.com", "Password123");
 
 
+        Bank bank1 = new("Bank of America", 1000);
+        Bank bank2 = new("Wells Fargo", 1001);
+        Bank bank3 = new("Chase Bank", 1002);
+        
+        Hub.AllUsers.AddRange(new List<User> { user1, user2, user3 });
+        Hub.AllBanks.AddRange(new List<Bank> { bank1, bank2, bank3 });
+        
+        bool b1 = bank1.RegisterUserAtBank(user1);
+        bool b2 = bank2.RegisterUserAtBank(user2);
+        bool b3 = bank3.RegisterUserAtBank(user3);
+    
 
-
+    }
 }

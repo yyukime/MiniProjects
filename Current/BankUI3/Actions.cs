@@ -1,5 +1,3 @@
-using System.Security.Principal;
-using System.Transactions;
 using Bank;
 
 namespace BankUI3;
@@ -11,7 +9,7 @@ public class Actions
         while (true)
         {
             int selection = Program.SelectionTemplate("Please Select",
-                ["Deposit", "Withdraw", "Transfer", "Close Account"], true);
+                ["Deposit", "Withdraw", "Transfer", "Show Account information", "Close Account"], true);
 
             switch (selection)
             {
@@ -35,11 +33,19 @@ public class Actions
                 }
                 case 4:
                 {
-                    bool success = CloseAccount(bankAccount);
+                   
+                    
+                    bool success = DisplayAccountInformation(bankAccount);
                     if (!success) continue;
                     return;
                 }
                 case 5:
+                {
+                    bool success = CloseAccount(bankAccount);
+                    if (!success) continue;
+                    return;
+                }
+                case 6:
                 {
                     return;
                 }
@@ -96,35 +102,31 @@ public class Actions
             string enter = Program.Enter("amount or 'b' to go back",
                 input => decimal.TryParse(input, out amount) && amount > 0);
             if (enter == "b") continue;
-            
+
             while (true)
             {
                 Bank.Bank? receiverBank = FindBank();
                 if (receiverBank == null) break;
-                
-                string iban = Program.Enter($"receivers IBAN or 'b' to go back {receiverBank.BLZ}- ", input => input.Length == 6 && input.All(char.IsDigit));
+
+                string iban = Program.Enter($"receivers IBAN or 'b' to go back {receiverBank.BLZ}- ",
+                    input => input.Length == 6 && input.All(char.IsDigit));
                 if (iban == "b") continue;
-                
-                (BankAccount? foundBA, bool found) = receiverBank.GetBankAccountTroughIBAN($"{receiverBank.BLZ}-{iban}");
-                
+
+                (BankAccount? foundBA, bool found) =
+                    receiverBank.GetBankAccountTroughIBAN($"{receiverBank.BLZ}-{iban}");
+
                 if (foundBA == null || !found)
                 {
                     Console.WriteLine($"Bank Account [{receiverBank.BLZ}-{iban}] does not exist");
                     Console.WriteLine("Press any key to try again");
                     return false;
                 }
-                
+
                 bool success = account.TransferMoney(foundBA!, pin, amount);
                 if (!success) break;
                 return true;
             }
-            
         }
-
-   
-        
-    
-
     }
 
     private static bool CloseAccount(BankAccount account)
@@ -142,13 +144,14 @@ public class Actions
         }
 
         bool success = account.CloseBankAccount();
-        
-        if(success) // Why can't I if(account.CloseBankAccount())
+
+        if (success) // Why can't I if(account.CloseBankAccount())
         {
             Console.WriteLine("Account deletion complete... Press any key to return...");
             Console.ReadKey();
             return true;
         }
+
         Console.WriteLine("Something went wrong... Press any key to try again...");
         return false;
     }
@@ -159,5 +162,28 @@ public class Actions
         int selection = Program.SelectionTemplate("Select receivers Bank", BankList, true);
         if (selection == BankList.Count + 1) return null;
         return Hub.GetBankByIndex(selection);
+    }
+
+    private static bool DisplayAccountInformation(BankAccount account)
+    {
+        string pin;
+        while (true)
+        {
+            pin = Program.Enter("pin or 'b' to go back",
+                input => input == "b" || input.Length >= 4 && input.All(char.IsDigit));
+            if (pin == "b") return false;
+            break;
+        }
+        
+        (string iban, string owner, decimal balance ) = account.GetBankAccountInformation();
+        Console.Clear();
+        Console.WriteLine("Account Information:");
+        Console.WriteLine($"Account Owner: {owner}");
+        Console.WriteLine($"Account IBAN : {iban}");
+        Console.WriteLine($"Account Balance : {balance}$");
+        Console.WriteLine();
+        Console.WriteLine("Please press enter to continue...");
+        Console.ReadLine();
+        return true;
     }
 }

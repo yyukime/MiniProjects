@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Dynamic;
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
@@ -135,5 +136,10 @@ public class BankAccount
         Console.WriteLine($"You have {balance}$ and tried to withdraw {amount}$");
         Console.WriteLine("Press any key to try again...");
         Console.ReadKey();
+    }
+
+    public (string, string, decimal) GetBankAccountInformation()
+    {
+        return (iban,  owner.GetUserName(),  balance);
     }
 }

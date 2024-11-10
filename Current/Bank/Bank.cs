@@ -10,12 +10,15 @@ public class Bank
     public string Name { get; init; }
     public int BLZ { get; init; }
 
-    internal Dictionary<User, List<BankAccount>> Registered;
+    internal Dictionary<User, List<BankAccount>> Registered; // 11.10 2.09 am .. Added this into constructor otherwise when creating sample data: instance not set to an object error
+    // this is because this list doesnt exist yet when initializing banks and then trying to "add" to them 
+    // ??? there was a reason I didn't do this but I forgor ! 
 
     public Bank(string name, int BLZ) 
     {
         Name = name;
         this.BLZ = BLZ;
+        Registered = new Dictionary<User, List<BankAccount>>();
     }
 
     public static int GenerateBLZ()
@@ -25,7 +28,7 @@ public class Bank
         return BLZ;
     }
 
-    public bool RegisterUserAtBank(User user)
+    public bool RegisterUserAtBank(User user) 
     {
         if (Registered.ContainsKey(user))
         {
