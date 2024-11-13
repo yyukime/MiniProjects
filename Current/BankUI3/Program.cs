@@ -9,46 +9,44 @@ public class Program
     {
         Hub.TEST();
 
-        User user = GetUser.SelectAndHandle();
-
         while (true)
         {
-            
-            Bank.Bank? selBank = GetBank.SelectOrRegister(user);
-            if (selBank == null) break;
-            
-            BankAccount? account = GetBankAccount.CreateOrSelectOrBack(selBank, user);
-            if (account == null) continue;
-            
-            Actions.SelectAndHandle(account);
-            
+            User user = GetUser.SelectAndHandle();
+
+            while (true)
+            {
+                Bank.Bank? selBank = GetBank.SelectOrRegister(user);
+                if (selBank == null) break;
+
+                BankAccount? account = GetBankAccount.CreateOrSelectOrBack(selBank, user);
+                if (account == null) continue;
+
+                Actions.SelectAndHandle(account);
+            }
         }
-        
+
         Console.WriteLine("See you soon!");
         Thread.Sleep(1500);
-        
     }
-    
+
     public static int SelectionTemplate(string title, List<string> options, bool canBack = false)
     {
-        
         while (true)
         {
-            
             Console.Clear();
             Console.WriteLine($"-- {title} --");
             Console.WriteLine();
-            
+
             for (int i = 0; i < options.Count; i++)
             {
                 Console.WriteLine($"[{i + 1}] {options[i]}");
             }
-            
+
             if (canBack)
             {
                 Console.WriteLine($"[{options.Count + 1}] or go back:");
             }
-            
+
             Console.Write("Select an option: ");
             string? input = Console.ReadLine();
             if (!int.TryParse(input, out int result)) continue;
@@ -58,13 +56,11 @@ public class Program
             {
                 boolPatch = 1;
             }
-            
-            if (result > options.Count + boolPatch|| result <= 0) continue;
-            
+
+            if (result > options.Count + boolPatch || result <= 0) continue;
+
             return result;
-            
         }
-        
     }
 
     public static string Enter(string what, Func<string, bool>? condition = null)
@@ -76,6 +72,5 @@ public class Program
             if (!string.IsNullOrWhiteSpace(input) && (condition == null || condition(input))) return input;
             Console.Clear();
         }
-        
     }
 }

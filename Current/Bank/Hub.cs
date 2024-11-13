@@ -38,7 +38,7 @@ public class Hub
 
     public static Bank GetBankByIndex(int index)
     {
-        index += 1; // Console.WriteLine($"[{i + 1}] {options[i]}");
+        index -= 1; // Console.WriteLine($"[{i + 1}] {options[i]}");
         return AllBanks[index];
     }
 

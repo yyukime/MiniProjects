@@ -100,7 +100,7 @@ public class Actions
                 input => input == "b" || input.Length >= 4 && input.All(char.IsDigit));
             if (pin == "b") return false;
             string enter = Program.Enter("amount or 'b' to go back",
-                input => decimal.TryParse(input, out amount) && amount > 0);
+                input => input == "b" || decimal.TryParse(input, out amount) && amount > 0); // fixed not going back because 'input == "b" ||' was missing
             if (enter == "b") continue;
 
             while (true)
@@ -122,8 +122,12 @@ public class Actions
                     return false;
                 }
 
-                bool success = account.TransferMoney(foundBA!, pin, amount);
-                if (!success) break;
+                bool success = account.TransferMoney(foundBA, pin, amount);
+                if (!success) break; // why not return false as everything is handled in method?
+
+                Console.WriteLine($"You succesfully transfered {amount} to {receiverBank.BLZ}{foundBA.GetShortBankAccountIBAN(foundBA)}");
+                Console.WriteLine("Press enter to continue");
+                Console.ReadLine();
                 return true;
             }
         }
