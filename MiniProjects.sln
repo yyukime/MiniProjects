@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankUI3", "Current\BankUI3\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe", "Current\TicTacToe\TicTacToe.csproj", "{7581888B-C7BD-4908-AB41-288FF3AEC7A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeTest", "Current\TicTacToeTest\TicTacToeTest.csproj", "{BD554C06-F5D9-490A-B1CA-C2374F7E1BEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacTest", "Current\TicTacTest\TicTacTest.csproj", "{BD554C06-F5D9-490A-B1CA-C2374F7E1BEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
