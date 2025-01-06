@@ -2,20 +2,20 @@ using System.Security;
 
 namespace Start;
 
-public class WinCon
+public class PlayerScore
 {
     private int _verticalWin;
     private int _horizontalWin;
     private int _diagonalWin ;
     
-    public WinCon()
+    public PlayerScore()
     {
         _verticalWin = 0;
         _horizontalWin = 0;
         _diagonalWin = 0;
     }
 
-    public bool WinAdd(int lane)
+    public bool AddScore(int lane)
     {
         
         if (lane == 1)
@@ -39,5 +39,12 @@ public class WinCon
         }
 
         return false;
+    }
+
+    public void ResetScore()
+    {
+        _verticalWin = 0;
+        _horizontalWin = 0;
+        _diagonalWin = 0;
     }
 }

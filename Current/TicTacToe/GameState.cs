@@ -14,69 +14,61 @@ public class GameState
         ];
     }
 
-    bool CheckVer(WinCon p1, WinCon p2)
+    public Enum CheckVer(PlayerScore p1, PlayerScore p2)
     {
-        int lfI = -1;
+        int col = 0;
 
-        foreach (int[] row in board)
+        do
         {
-            for (int i = 0; i < row.Length; i++)
+            foreach (int[] row in board)
             {
-                if (lfI != -1)
+                
+                if (row[col] == 1)
                 {
-                    if (row[lfI] == 1)
-                    {
-                        if (p1.WinAdd(1)) return true;
-                    }
-
-                    if (row[lfI] == 2)
-                    {
-                        if (p2.WinAdd(1)) return true;
-                    }
+                    if (p1.AddScore(1)) return GameState.Result.WinPlayer1;
                 }
 
-                if (i == lfI) continue;
-
-                if (row[i] == 1)
+                if (row[col] == 2)
                 {
-                    lfI = i;
-                    if (p1.WinAdd(1)) return true;
-                }
-
-                if (row[i] == 2)
-                {
-                    lfI = i;
-                    if (p2.WinAdd(1)) return true;
+                    if (p2.AddScore(2)) return GameState.Result.WinPlayer2;
                 }
             }
-        }
 
-        return false;
+            col += 1;
+            p1.ResetScore();
+            p2.ResetScore();
+            
+        }
+        while (col < board.Length);
+
+        return GameState.Result.NoResult;
     }
 
 
-    bool CheckHor(WinCon p1, WinCon p2)
+    Enum CheckHor(PlayerScore p1, PlayerScore p2)
     {
         foreach (int[] row in board)
         {
-            for (int i = 0; i < row.Length; i++)
+            
+            foreach (int col in row)
             {
-                if (row[i] == 1)
+                if (col == 1)
                 {
-                    if (p1.WinAdd(2)) return true;
+                    if (p1.AddScore(1)) return GameState.Result.WinPlayer1;
                 }
 
-                if (row[i] == 2)
+                if (col == 2)
                 {
-                    if (p2.WinAdd(2)) return true;
+                    if (p2.AddScore(2)) return GameState.Result.WinPlayer2;
                 }
             }
+            p1.ResetScore();
+            p2.ResetScore();
         }
-
-        return false;
+        return GameState.Result.NoResult;
     }
 
-    bool CheckDiag(WinCon p1, WinCon p2)
+    Enum CheckDiag(PlayerScore p1, PlayerScore p2)
     {
         int dIndexer = 0;
 
@@ -84,36 +76,31 @@ public class GameState
         {
             if (row[dIndexer] == 1)
             {
-                if (p1.WinAdd(3)) return true;
+                if (p1.AddScore(3)) return Result.WinPlayer1;
             }
 
             if (row[dIndexer] == 2)
             {
-                if (p2.WinAdd(3)) return true;
+                if (p2.AddScore(3)) return Result.WinPlayer2;
             }
 
             dIndexer++;
         }
 
-        return false;
+        return Result.NoResult;
     }
 
-    public void PrintBoard()
+    public static void PrintBoard()
     {
-        int retard = 1;
-            
-            foreach (int[] row in board)
-            {
-                string s;
-                if (retard == 2 || retard == 3)
-                {
-                    Console.WriteLine("-----");
-                } 
-                
-                s = $"{row[0]} {row[1]} {row[2]}";
-                retard++;
-                Console.WriteLine(s);
-            }
         
     }
+    
+    public enum Result
+    {
+        NoResult,
+        WinPlayer1,
+        WinPlayer2,
+    }
+
+      
 }

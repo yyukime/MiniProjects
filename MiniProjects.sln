@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankUI3", "Current\BankUI3\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe", "Current\TicTacToe\TicTacToe.csproj", "{7581888B-C7BD-4908-AB41-288FF3AEC7A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeTest", "Current\TicTacToeTest\TicTacToeTest.csproj", "{BD554C06-F5D9-490A-B1CA-C2374F7E1BEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,10 @@ Global
 		{7581888B-C7BD-4908-AB41-288FF3AEC7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7581888B-C7BD-4908-AB41-288FF3AEC7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7581888B-C7BD-4908-AB41-288FF3AEC7A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD554C06-F5D9-490A-B1CA-C2374F7E1BEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD554C06-F5D9-490A-B1CA-C2374F7E1BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD554C06-F5D9-490A-B1CA-C2374F7E1BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD554C06-F5D9-490A-B1CA-C2374F7E1BEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +136,7 @@ Global
 		{EDF128FF-F4D7-4570-BC03-632B76505FD0} = {06529C2F-C772-4261-946C-5018E404AA11}
 		{C03D7EB8-24F1-4F69-B35E-74190403B91F} = {06529C2F-C772-4261-946C-5018E404AA11}
 		{7581888B-C7BD-4908-AB41-288FF3AEC7A1} = {F7200F3C-3A1F-4464-9976-E48D963654CB}
+		{BD554C06-F5D9-490A-B1CA-C2374F7E1BEE} = {F7200F3C-3A1F-4464-9976-E48D963654CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB94EDF4-5750-4875-91A4-6FCBD78E655A}
