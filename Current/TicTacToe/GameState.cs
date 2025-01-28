@@ -2,7 +2,7 @@ namespace Start;
 
 public class GameState
 {
-    int[][] _board;
+    private int[][] _board;
 
     public GameState()
     {
@@ -14,7 +14,7 @@ public class GameState
         ];
     }
 
-    public Enum CheckVer(PlayerScore p1, PlayerScore p2)
+    public Enum CheckVer(Player p1, Player p2)
     {
         int col = 0;
 
@@ -41,8 +41,7 @@ public class GameState
         return GameState.Result.NoResult;
     }
 
-
-    Enum CheckHor(PlayerScore p1, PlayerScore p2)
+    Enum CheckHor(Player p1, Player p2)
     {
         foreach (int[] row in _board)
         {
@@ -66,8 +65,7 @@ public class GameState
         return GameState.Result.NoResult;
     }
 
-
-    Enum CheckDiag(PlayerScore p1, PlayerScore p2)
+    Enum CheckDiag(Player p1, Player p2)
     {
         for (int row = 0; row < _board.Length; row++)
         {
@@ -89,12 +87,11 @@ public class GameState
             }
         }
 
-
         return GameState.Result.NoResult;
     }
 
 
-    bool BranchRight(int col, int row, PlayerScore p1, PlayerScore p2)
+    bool BranchRight(int col, int row, Player p1, Player p2)
     {
         while (_board[row][col] == 1 && row < _board.Length - 2 && col < _board[1].Length - 2)
         {
@@ -110,7 +107,7 @@ public class GameState
         return false;
     }
 
-    bool BranchLeft(int col, int row, PlayerScore p1, PlayerScore p2)
+    bool BranchLeft(int col, int row, Player p1, Player p2)
     {
         while (_board[row][col] == 1 && row > 0 && col > 0)
         {
@@ -126,9 +123,109 @@ public class GameState
         return false;
     }
 
-    public static void PrintBoard(int[][] board)
+    public void PrintBoardSelected(int? rowx, int? coly)
     {
-        foreach (int[] row in board)
+        if (rowx != null && coly != null)
+        {
+            for (int row = 0; row < _board.Length; row++)
+            {
+                if (row == rowx)
+                {
+                    for (int col = 0; col < _board[row].Length; col++)
+                    {
+                        if (col == coly)
+                        {
+                            if (_board[row][col] == 1)
+                            {
+                                Console.Write("(1)" + " " + " ");
+                            }
+
+                            if (_board[row][col] == 2)
+                            {
+                                Console.Write("(2)" + " ");
+                            }
+
+                            if (_board[row][col] == 0)
+                            {
+                                Console.Write("(O)" + " ");
+                            }
+                        }
+                        else
+                        {
+                            if (_board[row][col] == 1)
+                            {
+                                Console.Write("1" + " ");
+                            }
+
+                            if (_board[row][col] == 2)
+                            {
+                                Console.Write("2" + " ");
+                            }
+
+                            if (_board[row][col] == 0)
+                            {
+                                Console.Write("O" + " ");
+                            }
+                        }
+
+                       
+                    }
+                    Console.WriteLine();
+                }
+                else
+                {
+                    for (int col = 0; col < _board[row].Length; col++)
+                    {
+                        if (_board[row][col] == 1)
+                        {
+                            Console.Write("1" + " " + " ");
+                        }
+
+                        if (_board[row][col] == 2)
+                        {
+                            Console.Write("2" + " " + " ");
+                        }
+
+                        if (_board[row][col] == 0)
+                        {
+                            Console.Write("O" + " " + " ");
+                        }
+                    }
+
+                    Console.WriteLine();
+                }
+            }
+        }
+        else
+        {
+            for (int row = 0; row < _board.Length; row++)
+            {
+                for (int col = 0; col < _board[row].Length; col++)
+                {
+                    if (_board[row][col] == 1)
+                    {
+                        Console.Write("1" + " " + " ");
+                    }
+
+                    if (_board[row][col] == 2)
+                    {
+                        Console.Write("2" + " " + " ");
+                    }
+
+                    if (_board[row][col] == 0)
+                    {
+                        Console.Write("O" + " " + " ");
+                    }
+                }
+
+                Console.WriteLine();
+            }
+        }
+    }
+
+    void PrintBoard()
+    {
+        foreach (int[] row in _board)
         {
             foreach (int col in row)
             {
@@ -145,14 +242,19 @@ public class GameState
                 if (col == 0)
                 {
                     Console.Write("-" + " " + " ");
-                }   
+                }
             }
-
-            Console.WriteLine();
         }
     }
 
-    
+
+    public bool ExecuteTurn(int row, int col, int value)
+    {
+        if (row > _board.Length - 1 && col > _board[0].Length - 1) return false;
+        if (_board[row][col] != 0) return false;
+        _board[row][col] = value;
+        return true;
+    }
 
     public enum Result
     {

@@ -2,13 +2,13 @@ using System.Security;
 
 namespace Start;
 
-public class PlayerScore
+public class Player
 {
     private int _verticalWin;
     private int _horizontalWin;
     private int _diagonalWin ;
     
-    public PlayerScore()
+    public Player()
     {
         _verticalWin = 0;
         _horizontalWin = 0;
@@ -47,4 +47,5 @@ public class PlayerScore
         _horizontalWin = 0;
         _diagonalWin = 0;
     }
+    
 }

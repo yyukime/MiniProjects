@@ -17,15 +17,15 @@ public class UnitTest1
             [0, 1, 0, 2]
         ];
 
-        PlayerScore p1 = new PlayerScore();
-        PlayerScore p2 = new PlayerScore();
+        Player p1 = new Player();
+        Player p2 = new Player();
 
         Enum ok = CheckDiag(board, p1, p2);
         Assert.Equal(GameState.Result.WinPlayer1, ok);
     }
     
 
-    Enum CheckDiag(int[][] board, PlayerScore p1, PlayerScore p2)
+    Enum CheckDiag(int[][] board, Player p1, Player p2)
     {
         
         for (int row = 0; row < board.Length; row++)
@@ -54,7 +54,7 @@ public class UnitTest1
     }
 
 
-    bool BranchRight(int col, int row, int[][] board, PlayerScore p1, PlayerScore p2)
+    bool BranchRight(int col, int row, int[][] board, Player p1, Player p2)
     {
         while (board[row][col] == 1 && row < board.Length - 2 && col < board[1].Length - 2)
         {
@@ -69,7 +69,7 @@ public class UnitTest1
         return false;
     }
 
-    bool BranchLeft(int col, int row, int[][] board, PlayerScore p1, PlayerScore p2)
+    bool BranchLeft(int col, int row, int[][] board, Player p1, Player p2)
     {
         while (board[row][col] == 1 && row > 0 && col > 0)
         {
