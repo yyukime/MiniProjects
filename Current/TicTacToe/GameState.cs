@@ -14,7 +14,7 @@ public class GameState
         ];
     }
 
-    public Enum CheckVer(Player p1, Player p2)
+    private Enum CheckVer(Player p1, Player p2)
     {
         int col = 0;
 
@@ -41,7 +41,7 @@ public class GameState
         return GameState.Result.NoResult;
     }
 
-    Enum CheckHor(Player p1, Player p2)
+    private Enum CheckHor(Player p1, Player p2)
     {
         foreach (int[] row in _board)
         {
@@ -65,7 +65,7 @@ public class GameState
         return GameState.Result.NoResult;
     }
 
-    Enum CheckDiag(Player p1, Player p2)
+    private Enum CheckDiag(Player p1, Player p2)
     {
         for (int row = 0; row < _board.Length; row++)
         {
@@ -135,36 +135,76 @@ public class GameState
                     {
                         if (col == coly)
                         {
-                            if (_board[row][col] == 1)
+                            if (col == 0)
                             {
-                                Console.Write("(1)" + " " + " ");
+                                if (_board[row][col] == 1)
+                                {
+                                    Console.Write("(1)" + " ");
+                                }
+
+                                if (_board[row][col] == 2)
+                                {
+                                    Console.Write("(2)" + " ");
+                                }
+
+                                if (_board[row][col] == 0)
+                                {
+                                    Console.Write("(O)" + " ");
+                                }
                             }
 
-                            if (_board[row][col] == 2)
+                            if (col > 0 && col < _board[row].Length - 1)
                             {
-                                Console.Write("(2)" + " ");
+                                if (_board[row][col] == 1)
+                                {
+                                    Console.Write("(1)" + " ");
+                                }
+
+                                if (_board[row][col] == 2)
+                                {
+                                    Console.Write("(2)" + " ");
+                                }
+
+                                if (_board[row][col] == 0)
+                                {
+                                    Console.Write("(O)" + " " );
+                                }
                             }
 
-                            if (_board[row][col] == 0)
+                            if (col == _board[0].Length - 1)
                             {
-                                Console.Write("(O)" + " ");
+                                if (_board[row][col] == 1)
+                                {
+                                    Console.Write("(1)" + " ");
+                                }
+
+                                if (_board[row][col] == 2)
+                                {
+                                    Console.Write("(2)" + " ");
+                                }
+
+                                if (_board[row][col] == 0)
+                                {
+                                    Console.Write("(O)" + " " );
+                                }
                             }
+
                         }
                         else
                         {
                             if (_board[row][col] == 1)
                             {
-                                Console.Write("1" + " ");
+                                Console.Write(" " + "1" + " " + " ");
                             }
 
                             if (_board[row][col] == 2)
                             {
-                                Console.Write("2" + " ");
+                                Console.Write(" " + "2" + " " + " ");
                             }
 
                             if (_board[row][col] == 0)
                             {
-                                Console.Write("O" + " ");
+                                Console.Write(" " + "O" + " " + " ");
                             }
                         }
 
@@ -178,17 +218,17 @@ public class GameState
                     {
                         if (_board[row][col] == 1)
                         {
-                            Console.Write("1" + " " + " ");
+                            Console.Write(" " + "1" + " " + " ");
                         }
 
                         if (_board[row][col] == 2)
                         {
-                            Console.Write("2" + " " + " ");
+                            Console.Write(" " + "2" + " " + " ");
                         }
 
                         if (_board[row][col] == 0)
                         {
-                            Console.Write("O" + " " + " ");
+                            Console.Write(" " + "O" + " " + " ");
                         }
                     }
 
@@ -204,17 +244,17 @@ public class GameState
                 {
                     if (_board[row][col] == 1)
                     {
-                        Console.Write("1" + " " + " ");
+                        Console.Write(" " + "1" + " " + " ");
                     }
 
                     if (_board[row][col] == 2)
                     {
-                        Console.Write("2" + " " + " ");
+                        Console.Write(" " + "2" + " " + " ");
                     }
 
                     if (_board[row][col] == 0)
                     {
-                        Console.Write("O" + " " + " ");
+                        Console.Write(" " + "O" + " " + " ");
                     }
                 }
 
@@ -231,17 +271,17 @@ public class GameState
             {
                 if (col == 1)
                 {
-                    Console.Write("X" + " " + " ");
+                    Console.Write(" " + "X" + " " + " ");
                 }
 
                 if (col == 2)
                 {
-                    Console.Write("O" + " " + " ");
+                    Console.Write(" " + "O" + " " + " ");
                 }
 
                 if (col == 0)
                 {
-                    Console.Write("-" + " " + " ");
+                    Console.Write(" " + "-" + " " + " ");
                 }
             }
         }
@@ -254,6 +294,16 @@ public class GameState
         if (_board[row][col] != 0) return false;
         _board[row][col] = value;
         return true;
+    }
+
+    public int ReturnLengthRowMinus1()
+    {
+        return _board.Length - 1;
+    }
+
+    public int ReturnLengthColMinus1()
+    {
+        return _board[0].Length - 1;
     }
 
     public enum Result
