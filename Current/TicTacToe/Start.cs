@@ -6,12 +6,14 @@ public class Start : GameState
 {
     private static void Main()
     {
-        while (true)
+        int MainMenu = SelectionTemplate("Welcome to TicTacToe",
+            ["Start Game", "Rules (How do you not know this already??", "Exit"]);
+
+        GameState board = new();
+        
+        if (MainMenu == 1)
         {
-            int MainMenu = SelectionTemplate("Welcome to TicTacToe",
-                ["Start Game", "Rules (How do you not know this already??", "Exit"]);
-            
-            
+            PlayerTurn(board, 2);
         }
     }
 
@@ -37,40 +39,48 @@ public class Start : GameState
         }
     }
 
-    private static void StartGame(GameState board)
+    private static void StartGame()
     {
-       
+            
+    }
+
+    private static bool PlayerTurn(GameState board, int player)
+    {
         int updatedX = 2;
         int updatedY = 2;
-        
+
         while (true)
         {
             Console.Clear();
+            Console.WriteLine($"Turn: Player {player}");
+            Console.WriteLine();
             board.PrintBoardSelected(updatedX, updatedY);
             Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("Control the Selection with either arrow keys or [WASD] and confirm with [ENTER]");
-            Console.WriteLine("Press [Backspace] to exit.");
+            Console.WriteLine("Press [Backspace] to abort the game.");
             ConsoleKeyInfo key = Console.ReadKey();
 
             switch (key.Key)
             {
                 case ConsoleKey.Enter:
-                    return;
+                    if (board.ExecuteTurn(updatedX, updatedY, player) == false) continue;
+                    return true;
                     break;
                 case ConsoleKey.Backspace:
-                    return;
+                    return false;
                     break;
                 case ConsoleKey.W:
-                    if (updatedX - 1 > 0) updatedX--;
+                    if (updatedX - 1 >= 0) updatedX--;
                     continue;
                 case ConsoleKey.A:
-                    if (updatedY - 1 > 0) updatedY--;
+                    if (updatedY - 1 >= 0) updatedY--;
                     continue;
                 case ConsoleKey.S:
-                    if (updatedX + 1 != board.ReturnLengthRowMinus1()) updatedX++;
+                    if (updatedX + 1 <= board.ReturnLengthRowMinus1()) updatedX++;
                     continue;
                 case ConsoleKey.D:
-                    if (updatedY + 1 != board.ReturnLengthColMinus1()) updatedY++;
+                    if (updatedY + 1 <= board.ReturnLengthColMinus1()) updatedY++;
                     continue;
                 case ConsoleKey.UpArrow:
                     if (updatedX - 1 > 0) updatedX--;
@@ -85,8 +95,6 @@ public class Start : GameState
                     if (updatedY + 1 != board.ReturnLengthColMinus1()) updatedY++;
                     continue;
             }
-            
-            
         }
     }
 
