@@ -306,6 +306,16 @@ public class GameState
         return _board[0].Length - 1;
     }
 
+    public bool AllChecks(Player p1, Player p2)
+    {
+        if (CheckDiag(p1, p1) != (Enum)Result.NoResult) return true;
+        if (CheckHor(p1, p2) != (Enum)Result.NoResult) return true;
+        if (CheckVer(p1, p2) != (Enum)Result.NoResult) return true;
+        return false;
+    }
+    
+     
+
     public enum Result
     {
         NoResult,

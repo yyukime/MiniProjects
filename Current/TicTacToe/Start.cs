@@ -11,10 +11,7 @@ public class Start : GameState
 
         GameState board = new();
         
-        if (MainMenu == 1)
-        {
-            PlayerTurn(board, 2);
-        }
+
     }
 
     private static int SelectionTemplate(string title, List<string> options)
@@ -39,12 +36,24 @@ public class Start : GameState
         }
     }
 
-    private static void StartGame()
+    private static Enum StartGame()
     {
-            
+        GameState board = new();
+        Player player1 = new();
+        Player player2 = new();
+        int rCount = 0;
+        
+        while (rCount < 10)
+        {
+            PlayerTurn(board, player1, 1);
+            if (board.AllChecks(player1, player2)) return GameResult.Win1;
+            PlayerTurn(board, player2, 2);
+            if (board.AllChecks(player1, player2)) return GameResult.Win2;
+        }
+        return GameResult.Tie; 
     }
 
-    private static bool PlayerTurn(GameState board, int player)
+    private static bool  PlayerTurn(GameState board, Player player, int playerNumber)
     {
         int updatedX = 2;
         int updatedY = 2;
@@ -52,7 +61,7 @@ public class Start : GameState
         while (true)
         {
             Console.Clear();
-            Console.WriteLine($"Turn: Player {player}");
+            Console.WriteLine($"Turn: Player {playerNumber}");
             Console.WriteLine();
             board.PrintBoardSelected(updatedX, updatedY);
             Console.WriteLine();
@@ -64,7 +73,7 @@ public class Start : GameState
             switch (key.Key)
             {
                 case ConsoleKey.Enter:
-                    if (board.ExecuteTurn(updatedX, updatedY, player) == false) continue;
+                    if (board.ExecuteTurn(updatedX, updatedY, playerNumber) == false) continue;
                     return true;
                     break;
                 case ConsoleKey.Backspace:
@@ -97,6 +106,16 @@ public class Start : GameState
             }
         }
     }
+
+    private enum GameResult
+    {
+        Win1,
+        Win2,
+        Tie,
+    }
+
+ 
+    
 
 
     private static void Turn(GameState board, Player p)
