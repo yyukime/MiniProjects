@@ -6,11 +6,13 @@ public class Start : GameState
 {
     private static void Main()
     {
+        
+        
         int MainMenu = SelectionTemplate("Welcome to TicTacToe",
             ["Start Game", "Rules (How do you not know this already??", "Exit"]);
-
-        GameState board = new();
+        StartGame();
         
+
 
     }
 
@@ -38,17 +40,19 @@ public class Start : GameState
 
     private static Enum StartGame()
     {
+        Console.Clear();
         GameState board = new();
         Player player1 = new();
         Player player2 = new();
         int rCount = 0;
         
-        while (rCount < 10)
+        while (true)
         {
             PlayerTurn(board, player1, 1);
             if (board.AllChecks(player1, player2)) return GameResult.Win1;
             PlayerTurn(board, player2, 2);
             if (board.AllChecks(player1, player2)) return GameResult.Win2;
+          
         }
         return GameResult.Tie; 
     }
@@ -62,10 +66,8 @@ public class Start : GameState
         {
             Console.Clear();
             Console.WriteLine($"Turn: Player {playerNumber}");
-            Console.WriteLine();
             board.PrintBoardSelected(updatedX, updatedY);
-            Console.WriteLine();
-            Console.WriteLine();
+
             Console.WriteLine("Control the Selection with either arrow keys or [WASD] and confirm with [ENTER]");
             Console.WriteLine("Press [Backspace] to abort the game.");
             ConsoleKeyInfo key = Console.ReadKey();
@@ -73,7 +75,8 @@ public class Start : GameState
             switch (key.Key)
             {
                 case ConsoleKey.Enter:
-                    if (board.ExecuteTurn(updatedX, updatedY, playerNumber) == false) continue;
+                    if (!board.ExecuteTurn(updatedX, updatedY, playerNumber)) continue;
+                    board.PrintBoardSelected(updatedX, updatedY);
                     return true;
                     break;
                 case ConsoleKey.Backspace:

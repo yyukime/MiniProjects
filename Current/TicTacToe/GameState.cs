@@ -73,14 +73,13 @@ public class GameState
             {
                 if (_board[row][col] == 1)
                 {
-                    if (p1.AddScore(3)) return GameState.Result.WinPlayer1;
                     if (BranchRight(col, row, p1, p2)) return GameState.Result.WinPlayer1;
                     if (BranchLeft(col, row, p1, p2)) return GameState.Result.WinPlayer1;
                 }
 
                 if (_board[row][col] == 2)
                 {
-                    if (p2.AddScore(3)) return GameState.Result.WinPlayer2;
+
                     if (BranchRight(col, row, p1, p2)) return GameState.Result.WinPlayer2;
                     if (BranchLeft(col, row, p1, p2)) return GameState.Result.WinPlayer2;
                 }
@@ -149,7 +148,7 @@ public class GameState
 
                                 if (_board[row][col] == 0)
                                 {
-                                    Console.Write("(O)" + " ");
+                                    Console.Write("(-)" + " ");
                                 }
                             }
 
@@ -157,17 +156,17 @@ public class GameState
                             {
                                 if (_board[row][col] == 1)
                                 {
-                                    Console.Write("(1)" + " ");
+                                    Console.Write("(X)" + " ");
                                 }
 
                                 if (_board[row][col] == 2)
                                 {
-                                    Console.Write("(2)" + " ");
+                                    Console.Write("(O)" + " ");
                                 }
 
                                 if (_board[row][col] == 0)
                                 {
-                                    Console.Write("(O)" + " " );
+                                    Console.Write("(-)" + " " );
                                 }
                             }
 
@@ -175,17 +174,17 @@ public class GameState
                             {
                                 if (_board[row][col] == 1)
                                 {
-                                    Console.Write("(1)" + " ");
+                                    Console.Write("(X)" + " ");
                                 }
 
                                 if (_board[row][col] == 2)
                                 {
-                                    Console.Write("(2)" + " ");
+                                    Console.Write("(O)" + " ");
                                 }
 
                                 if (_board[row][col] == 0)
                                 {
-                                    Console.Write("(O)" + " " );
+                                    Console.Write("(-)" + " " );
                                 }
                             }
 
@@ -194,17 +193,17 @@ public class GameState
                         {
                             if (_board[row][col] == 1)
                             {
-                                Console.Write(" " + "1" + " " + " ");
+                                Console.Write(" " + "X" + " " + " ");
                             }
 
                             if (_board[row][col] == 2)
                             {
-                                Console.Write(" " + "2" + " " + " ");
+                                Console.Write(" " + "O" + " " + " ");
                             }
 
                             if (_board[row][col] == 0)
                             {
-                                Console.Write(" " + "O" + " " + " ");
+                                Console.Write(" " + "-" + " " + " ");
                             }
                         }
 
@@ -218,17 +217,17 @@ public class GameState
                     {
                         if (_board[row][col] == 1)
                         {
-                            Console.Write(" " + "1" + " " + " ");
+                            Console.Write(" " + "X" + " " + " ");
                         }
 
                         if (_board[row][col] == 2)
                         {
-                            Console.Write(" " + "2" + " " + " ");
+                            Console.Write(" " + "O" + " " + " ");
                         }
 
                         if (_board[row][col] == 0)
                         {
-                            Console.Write(" " + "O" + " " + " ");
+                            Console.Write(" " + "-" + " " + " ");
                         }
                     }
 
@@ -244,17 +243,17 @@ public class GameState
                 {
                     if (_board[row][col] == 1)
                     {
-                        Console.Write(" " + "1" + " " + " ");
+                        Console.Write(" " + "X" + " " + " ");
                     }
 
                     if (_board[row][col] == 2)
                     {
-                        Console.Write(" " + "2" + " " + " ");
+                        Console.Write(" " + "O" + " " + " ");
                     }
 
                     if (_board[row][col] == 0)
                     {
-                        Console.Write(" " + "O" + " " + " ");
+                        Console.Write(" " + "-" + " " + " ");
                     }
                 }
 
@@ -308,9 +307,10 @@ public class GameState
 
     public bool AllChecks(Player p1, Player p2)
     {
-        if (CheckDiag(p1, p1) != (Enum)Result.NoResult) return true;
-        if (CheckHor(p1, p2) != (Enum)Result.NoResult) return true;
-        if (CheckVer(p1, p2) != (Enum)Result.NoResult) return true;
+        if (!Equals(CheckDiag(p1, p1), (Enum)Result.NoResult)) return true;
+        if (!Equals(CheckHor(p1, p2), (Enum)Result.NoResult)) return true;
+        if (!Equals(CheckVer(p1, p2), (Enum)Result.NoResult)) return true;
+        
         return false;
     }
     
