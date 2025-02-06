@@ -1,4 +1,5 @@
-using static System.ConsoleKey;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Start;
 
@@ -6,15 +7,58 @@ public class Start : GameState
 {
     private static void Main()
     {
-        
-        
-        int MainMenu = SelectionTemplate("Welcome to TicTacToe",
-            ["Start Game", "Rules (How do you not know this already??", "Exit"]);
-        StartGame();
-        
-
-
+        while (true)
+        {
+            Console.Clear();
+            int mainMenu = SelectionTemplate("Welcome to TicTacToe",
+                ["Start Game", "Rules (How do you not know this already??", "Exit"]);
+            
+            if (mainMenu == 1)
+            {
+                Enum result = StartGame();
+                
+                switch (result)
+                {
+                    case GameResult.Win1:
+                        if (GameResultTemplate("has a Winner!!", "Player1 (X)")) continue;
+                        return;
+                    case GameResult.Win2:
+                        if (GameResultTemplate("has a Winner!!", "Player2 (O)")) continue;
+                        return;
+                    case GameResult.Tie:
+                        if (GameResultTemplate("is a Tie!!", "no one!")) continue;
+                        return;
+                    case GameResult.Backspace:
+                        continue;
+                }
+            }
+            
+            if (mainMenu == 2)
+            {
+                Console.Clear();
+                Console.WriteLine("you are weird!!");
+            }
+            break;
+        }
     }
+
+
+    private static bool GameResultTemplate(string formattedResult, string who)
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine($" >> The game {formattedResult} <<");
+            Console.WriteLine($" >> Congratulations to {who}");
+            Console.WriteLine();
+            Console.Write("Do you want to play again? (y/n): ");
+            string? input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input)) continue;
+            if (input.Equals("y", StringComparison.CurrentCultureIgnoreCase)) return true;
+            if (input.Equals("n", StringComparison.CurrentCultureIgnoreCase)) return false;
+        }
+    }
+
 
     private static int SelectionTemplate(string title, List<string> options)
     {
@@ -45,19 +89,24 @@ public class Start : GameState
         Player player1 = new();
         Player player2 = new();
         int rCount = 0;
-        
+
         while (true)
         {
-            PlayerTurn(board, player1, 1);
+            bool selTurn1 = PlayerTurn(board, player1, 1);
+            if (!selTurn1) return GameResult.Backspace;
             if (board.AllChecks(player1, player2)) return GameResult.Win1;
-            PlayerTurn(board, player2, 2);
+            rCount++;
+            if (rCount == 9) break;
+            bool selTurn2 = PlayerTurn(board, player2, 2);
+            if (!selTurn2) return GameResult.Backspace;
             if (board.AllChecks(player1, player2)) return GameResult.Win2;
-          
+            rCount++;
         }
-        return GameResult.Tie; 
+
+        return GameResult.Tie;
     }
 
-    private static bool  PlayerTurn(GameState board, Player player, int playerNumber)
+    private static bool PlayerTurn(GameState board, Player player, int playerNumber)
     {
         int updatedX = 2;
         int updatedY = 2;
@@ -115,10 +164,8 @@ public class Start : GameState
         Win1,
         Win2,
         Tie,
+        Backspace,
     }
-
- 
-    
 
 
     private static void Turn(GameState board, Player p)
