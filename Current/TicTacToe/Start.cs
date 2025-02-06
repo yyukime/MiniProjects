@@ -9,12 +9,14 @@ public class Start : GameState
     {
         while (true)
         {
+            
             Console.Clear();
             int mainMenu = SelectionTemplate("Welcome to TicTacToe",
                 ["Start Game", "Rules (How do you not know this already??", "Exit"]);
             
             if (mainMenu == 1)
             {
+                
                 Enum result = StartGame();
                 
                 switch (result)
@@ -31,6 +33,7 @@ public class Start : GameState
                     case GameResult.Backspace:
                         continue;
                 }
+                
             }
             
             if (mainMenu == 2)
