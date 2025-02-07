@@ -147,16 +147,16 @@ public class Start : GameState
                     if (updatedY + 1 <= board.ReturnLengthColMinus1()) updatedY++;
                     continue;
                 case ConsoleKey.UpArrow:
-                    if (updatedX - 1 > 0) updatedX--;
+                    if (updatedX - 1 >= 0) updatedX--;
                     continue;
                 case ConsoleKey.DownArrow:
-                    if (updatedX + 1 != board.ReturnLengthRowMinus1()) updatedY++;
+                    if (updatedX + 1 <= board.ReturnLengthRowMinus1()) updatedX++;
                     continue;
                 case ConsoleKey.LeftArrow:
-                    if (updatedY - 1 > 0) updatedY--;
+                    if (updatedY - 1 >= 0) updatedY--;
                     continue;
                 case ConsoleKey.RightArrow:
-                    if (updatedY + 1 != board.ReturnLengthColMinus1()) updatedY++;
+                    if (updatedY + 1 <= board.ReturnLengthColMinus1()) updatedY++;
                     continue;
             }
         }
